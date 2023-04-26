@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.wrapper{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: #ededed;
+    box-sizing: border-box;
+}
+.container{
+    width: 50%;
+    background: #ededed;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+table,td{
+    border-collapse: collapse;
+}
+td{
+    height: 80px;
+    padding: 10px 30px;
+}
+.outer-tab{
+    margin: 0;  
+}
+.inner-tab{
+    margin: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.button{
+    border-top: 1px solid #ededed;
+}
+button{
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: none;
+    margin: 10px;
+    font-size: 15px;
+    background: #2f3640;
+    color: #fff;
+}
+button:hover{
+    cursor: pointer;
+    background: #fcc800;
+    transition: .4s;
+}
+input[type="file"]{
+    width: 190px;
+}
+input[type="text"],input[type="number"]{
+    padding: 5px;
+    width: 300px;
+    font-size: 15px;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 2px solid #191919;
+}
+input[type="text"]:hover,input[type="number"]:hover{
+    border: 2px solid #fcc800;
+}
+table .spacer{
+    height: 30px;
+    background: #ededed;
+    opacity: .1;
+    border: none;
+}
+.header{
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+    background: #fff;
+}

@@ -1,9 +1,9 @@
-#!C:/Users/Reden Longcop/AppData/Local/Programs/Python/Python310/python.exe
+#!C:\Users\hp\AppData\Local\Programs\Python\Python311\python.exe
 print("Content-Type: text/php\n\n")
 import warnings
 
 import sys
-sys.path.append("C:\\Users\\Reden Longcop\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages")
+sys.path.append("C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages")
 import pymysql
 import json
 import codecs

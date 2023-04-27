@@ -55,12 +55,12 @@ if(isset($_GET['logout'])){
                     console.log(json_result.Recommended);
                     htmlstring+="<tr>";
                     for(let i = 1; i < json_result.Recommended.length; i++) {
-                     let PHPeso = new Intl.NumberFormat('en-US', {
-                           style: 'currency',
-                           currency: 'PHP',
-                        });
+                     let PHpeso = new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'PHP',
+                     }); 
 
-                         htmlstring+="<td class='recommended-art-inner-box'><img src=\""+ json_result.Recommended[i].image_url+"\" onclick='getReco("+json_result.Recommended[i].id+")'/><br><h5>"+json_result.Recommended[i].name+"</h5><br><p>"+PHPeso.format(json_result.Recommended[i].price)+"</p></td>";
+                         htmlstring+="<td class='recommended-art-inner-box'><img src=\""+ json_result.Recommended[i].image_url+"\" onclick='getReco("+json_result.Recommended[i].id+")' /> <br><h5>"+json_result.Recommended[i].name+"</h5> <br><p>"+PHpeso.format(json_result.Recommended[i].price)+"</p></td>";
 
                         if (i%3==0 && i!=0) {
                            htmlstring+="</tr><tr>";
@@ -86,8 +86,8 @@ if(isset($_GET['logout'])){
       <?php
       
       //$select_products = mysqli_query($conn, "SELECT * FROM `sining_artworks` WHERE artid ='". $_GET['archiveid']."'");
-      $select_products = mysqli_query($conn, "SELECT * FROM sining_artists INNER JOIN sining_artworks 
-      ON sining_artists.artistId = sining_artworks.artistId WHERE sining_artworks.artId = '$artid'") or die('query failed');  
+      $select_products = mysqli_query($conn, "SELECT * FROM sining_artists INNER JOIN sining_artworks1 
+      ON sining_artists.artistId = sining_artworks1.artistId WHERE sining_artworks1.artId = '$artid'") or die('query failed');  
       
       
       if(mysqli_num_rows($select_products) > 0){
@@ -116,7 +116,11 @@ if(isset($_GET['logout'])){
             <?php echo $email; ?>
             <a href="artistProfile.php"><h2><?php echo $artist;?></h2></a>
             <hr>
+<<<<<<< HEAD
+            <div class="price">PH₱ <?php echo number_format($price, 2); ?></div>
+=======
             <div class="price">PH₱ <?php echo number_format($price, 2);; ?></div>
+>>>>>>> tony
             <div class="genre"><?php echo $genres; ?></div>
             <div class="tags"><?php echo $tags;?></div>
 
@@ -133,9 +137,9 @@ if(isset($_GET['logout'])){
 
 <?php
       $i = 1; 
-      $rows = mysqli_query($conn, "SELECT * FROM sining_artists INNER JOIN sining_artworks 
-      ON sining_artists.artistId = sining_artworks.artistid WHERE sining_artworks.artistid ='$artistid' 
-      AND sining_artworks.artId <> '$artid' ");  
+      $rows = mysqli_query($conn, "SELECT * FROM sining_artists INNER JOIN sining_artworks1 
+      ON sining_artists.artistId = sining_artworks1.artistid WHERE sining_artworks1.artistid ='$artistid' 
+      AND sining_artworks1.artId <> '$artid' ");  
 ?>
       <tr>
       <?php 
@@ -158,7 +162,7 @@ if(isset($_GET['logout'])){
         <p style="margin-left:5px;">
         <?php 
         $formattedNum = number_format($prices, 2);
-        echo "₱".$formattedNum;
+        echo "PH₱ ".$formattedNum;
       if ($i > 3) break;?></p>
       </td><td style="width: 100px;"></td>
    

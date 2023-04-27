@@ -2,18 +2,20 @@
 <header id="navbar">
 <a href="home.php" id="logo" class="head-navbar"><h1 id="logo">Sining</h1></a>
     <ul>
-        <a href="#" class="nav-links">
-            <li class="nav-item">Artworks</li>
-        </a>
-        <a href="ValidateSeller.php" class="nav-links">
-            <li class="nav-item">Sell</li>
-        </a>
-        <a href="#" class="nav-links">
-            <li class="nav-item">Newsfeed</li>
-        </a>
-        <a href="#" class="nav-links">
-            <li class="nav-item">Artists</li>
-        </a>
+        <div class="nav-con">
+            <a href="#" class="nav-links">
+                <li class="nav-item">Artworks</li>
+            </a>
+            <a href="ValidateSeller.php" class="nav-links">
+                <li class="nav-item">Sell</li>
+            </a>
+            <a href="#" class="nav-links">
+                <li class="nav-item">Newsfeed</li>
+            </a>
+            <a href="#" class="nav-links">
+                <li class="nav-item">Artists</li>
+            </a>
+        </div>
     </ul>
 <!--     
     <div class="search-box1">

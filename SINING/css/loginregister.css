@@ -1,3 +1,11 @@
+*,
+*::after,
+*::before{
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 0;
+	/* border: 1px solid red; */
+}
 body{
 	 background-size: cover;
 	 background-repeat: no-repeat;
@@ -16,7 +24,7 @@ body{
 }
 
 .reg{
-		background-attachment: fixed;
+	background-attachment: fixed;
 	background-color: white;
 	margin: auto;
 	max-width: 100%;
@@ -37,7 +45,8 @@ h3{
 }
 p{
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	margin-top: 2	%;
+	margin-top: 4%;
+	text-align: center;
 }
 a{
 	color: #ffc800;
@@ -61,7 +70,10 @@ input[type=password], [type=email], [type=text]  {
 	color: black; } 
 
 .btn {
-	margin-left: 30%;
+	margin-top: 4%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 	transition-duration: 0.4s; 
 	color: white; 
 	border:none; 

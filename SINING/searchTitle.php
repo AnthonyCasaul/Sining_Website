@@ -9,8 +9,8 @@ $count = 0;
 $tick = 0;
 if ($select->num_rows > 0) {
     echo ("<div class=search-result><h2 class=search-head>Results for: </h2><h3 class=search-head>&nbsp".$search."</h3></div>");
-    echo ("<div class=art-box-wrapper>");
-    echo ("<div class=art-box-con>");
+    // echo ("<div class=art-box-wrapper>");
+    // echo ("<div class=art-box-con>");
     // output data of each row
     while($row = $select->fetch_assoc()) {
         echo '
@@ -18,17 +18,15 @@ if ($select->num_rows > 0) {
                 <table class="art-box">
                     <tr>
                         <td class="art-img">
-                            <img src="'.$row['artImage'].'" onclick="getId('.$row['artId'].')">
+                            <img src="'.$row['artImage'].'" onclick="getId('.$row['artId'].')"><br>
+                            <h4 class="art-title">'.$row['artTitle'].'</h4>
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="art-title">'.$row['artTitle'].'</td>
                     </tr>
                 </table><br><br>
         ';
     }
 } else {
-    echo "0 results"."</div></div>";
+    echo "0 results"."";
 }
 ?>
 <script>

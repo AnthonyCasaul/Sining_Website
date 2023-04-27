@@ -10,8 +10,8 @@ include('condb.php')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sining Homepage</title>
-
+    <title>Sining | Homepage</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -167,13 +167,13 @@ $(document).ready(function(){
     const searchResults = document.getElementById('searchResults');
     console.log(searchInput);
 
-        $.ajax({
-    type: "POST",
-    url: "searchTitle.php",
-    data: {"search": searchInput},
-    success: function(result){
-    console.log(result);
-    $('.filter_data').html(result);
+    $.ajax({
+        type: "POST",
+        url: "searchTitle.php",
+        data: {"search": searchInput},
+        success: function(result){
+        console.log(result);
+        $('.filter_data').html(result);
     }
 });	
 }

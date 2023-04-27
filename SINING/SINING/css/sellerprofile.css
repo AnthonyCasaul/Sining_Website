@@ -1,0 +1,306 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.wrapper{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ededed;
+}
+.inner-wrapper{
+    width: 60%;
+    background: #ededed;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.upper-con{
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.lower-con{
+    margin-top: 10px;
+    /* background: #fff; */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+}
+.setting-btn{
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #212529;
+    margin-top: -5px;
+}
+.setting-btn:hover>.setting-img{
+    transform: scale(.8);
+    transition: .4s;
+}
+.container1 .setting-btn .setting-img{
+    width: 100%;
+    height: 100%;
+}
+.inner-con{
+    margin-top: -100px;
+}
+
+a:link {
+text-decoration: none;
+}
+.container1{
+    min-height: 30vh;
+    height: 400px;
+    background-color: var(--light-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+    background: #212529;
+    background-position: top;
+    background-size: 100% 60%;
+    border-radius: 0px 0px 10px 10px;
+    padding-bottom: 30px;
+}
+
+.container1 .profile{
+    padding: 5px;
+    /* background-color: var(--white); */
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%; 
+    margin-top: 200px;
+    color: #fff;
+}
+
+.container1 .profile img{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+/* .p1{
+    position: absolute;
+    top: 21%;
+    left: 23%;
+}*/
+.seller-name{
+    margin-top: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #fff;
+    font-size: 20px;
+} 
+td{
+    background: #fff;
+    width: 100%;
+    padding: 10px;
+}
+table{
+    width: 450px;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+button{
+    width: 200px;
+    height: 40px;
+}
+button[type="submit"]{
+    width: auto;
+    height: auto;
+}
+.table1{
+    margin-top: 50px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.table2{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.table2 .image{
+    /* border: 1px solid; */
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.search-col{
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.table1 .gray-box{
+    border-top: 1px solid #969696;
+}
+.table1 .add{
+    border-radius: 0px 0px 0px 10px;
+    box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.table1 .arc{
+    border-radius: 0px 0px 10px 0px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.table2 .gray-box{
+    border-top: 1px solid #969696;
+    margin-bottom: 10px;
+}
+.table2 .add{
+    border-radius: 0px 0px 0px 10px;
+    box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.table2 .arc{
+    border-radius: 0px 0px 10px 0px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+table .space{
+    opacity: .1;
+    height: 50px;
+    border: none;
+    background: #ededed;
+}
+table .space-top{
+    height: 0;
+    border: none;
+    background: #ededed;
+}
+button{
+    background: #2f3640;
+    color: #fff;
+    border: none;
+}
+button:hover{
+    cursor: pointer;
+    background: #fcc800;
+    transition: .4s;
+}
+img[src="../assets/img/edit-btn.png"],img[src="../assets/img/arc2-btn.png"]{
+    width: 15px;
+    margin-right: 10px;
+}
+.table1 img[src="../assets/img/add-btn.png"],.table1 img[src="../assets/img/arc-btn.png"]{
+    width: 20px;
+    float: left;
+    margin-left: 20px;
+}
+.table-top{
+    margin-top: 20px;
+}
+.search-btn{
+    margin-left: 5px;
+    border-radius: 50%;
+}
+.search-btn img[src="../assets/img/search1.png"]{
+    width: 40px;
+    padding: 2px;
+}
+.search-btn:hover> img[src="../assets/img/search1.png"]{
+    transform: scale(.8);
+}
+.search-bar{
+    border-radius: 50px;
+    border-style: none;
+    border: 1px solid #969696;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 300px;
+}
+.search-box{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.gray-box{
+    background: #fafafa;
+}
+.table2 .image{
+    border-top: 1px solid #969696;
+}
+/* .title-box{
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+} */
+.title-con1{
+    border-radius: 10px 0px 0px 0px;
+}
+.title-con2{
+    border-radius: 0px 10px 0px 0px;
+}
+.title-con2, .title-con1{
+    box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.loc-con2, .loc-con1{
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.price-con1, .price-con2{
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar{
+    width: 20px;
+}
+::-webkit-scrollbar-track{
+    background: #dddddd;
+}
+::-webkit-scrollbar-thumb{
+    background: #212529;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #fcc800;
+    border-radius: 10px;
+}
+.container2{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.table3{
+    margin-top: 50px;
+}
+.table3 td{
+    width: 100px;
+}
+.table3 .header{
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.table3 .image img{
+    width: 300px;
+}
+.table3 .image{
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid #969696;
+    border-bottom: 1px solid #969696;
+}
+.table3 .spacer{
+    height: 50px;
+    background: #ededed;
+    opacity: .1;
+}
+.table3 .show-box{
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.table3 .title{
+    border-radius: 10px 0px 0px 0px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.table3 .title1{
+    border-radius: 0px 10px 0px 0px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.location,.location1{
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.price, .price1{
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.arc-back-btn{
+    margin-top: -100px;
+    margin-bottom: 50px;
+}

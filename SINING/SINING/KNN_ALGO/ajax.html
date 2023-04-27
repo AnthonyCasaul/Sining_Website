@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+    $(document)
+          .ajaxStart(function () {
+            $( "#loading" ).show();
+          })
+          .ajaxStop(function () {
+            $( "#loading" ).hide();
+          });
+        $( document ).ready(function() {
+                $.ajax({
+                type: "GET",
+                url: "newpy.py",
+                success: function(result){
+                    let json_result = JSON.parse(result);
+                    //console.log(json_result.Recommended.length);
+                    for(let i = 0; i < json_result.Recommended.length; i++) {
+                        $( "#container" ).append( "<p>Name:</p>"+ json_result.Recommended[i].name);
+                        $( "#container" ).append( "<p>Url:</p>"+ json_result.Recommended[i].image_url);
+                        $( "#container" ).append( "<p>Tags:</p>"+ json_result.Recommended[i].tags);
+                    }
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+<h1>RECOMMENDED ARTWORKS:</h1>
+<div id="loading"><img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"/></div>
+<div id="container"></div>
+</body>
+</html>

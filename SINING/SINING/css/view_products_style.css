@@ -1,0 +1,88 @@
+.prodview img{
+	width: 85%;
+	/*border: 1px solid #ebecf0;
+	padding: 5px;
+	order-radius: 10px;*/
+}
+
+.prodview h3{
+	margin-top: 5%;
+	font-size: 45px;
+}
+
+.prodview a{
+	text-decoration: none;
+	color: #1c1c1c;
+}
+
+.prodview a:hover{
+	color: #ffc800;
+   transition: 1s;
+}
+.prodview h2{
+	margin-top: 5%;
+	font-size: 32px;
+}
+
+.prodview .price{
+	font-size: 23px;
+	font-style: italic;
+	color: #bebab7;
+}
+
+input[type=submit]{
+	margin-top: 1%;
+	font-size: 16px;
+	border: 1px solid #1c1c1c;
+	color: #1c1c1c;
+	width: 100%;
+	border-radius: 16px;
+}
+input[type=submit]:hover{
+	background-color: #ffc800;
+	color: white;
+}
+
+.cat{
+	margin-top: 10px;
+	color: #1c1c1c;
+	background-color: white;
+	/*border: 1px solid #1c1c1c;*/
+	border-bottom: 1px solid #1c1c1c;
+	padding: 5px 10px;
+	text-align: center;
+	width: 20%;
+	font-size: 14px;
+}
+table{
+	display: flex;
+  flex-wrap: no-wrap;
+  overflow-x: auto;
+  /*background-color: #1c1c1c;*/
+	width: 100%;
+}
+
+table img{
+	border: none;
+	flex: 0 0 auto;
+  width: 350px;
+  height: auto;
+  margin-left: 45px;
+  
+}
+table img:hover{
+	transition: 0.5s;
+	transform: scale(0.9);
+	cursor: pointer;
+}
+table h3{
+	color: #1c1c1c;
+	font-size: 20px;
+	margin-left: -20%;
+	background-color: white;
+}
+table p{
+	color: #1c1c1c;
+	margin-left: -20%;
+	font-size: 18px;
+}

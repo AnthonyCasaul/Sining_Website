@@ -436,12 +436,6 @@ iframe{
       left: 50%;
       transform: translateX(-50%);
     }
-    .art-box-wrapper{
-      columns: 1;
-      /* border: 1px solid blue; */
-      position: relative;
-      left: 0;
-    }
     .filter_data{
         columns: 1;
         /* border: 1px solid red; */

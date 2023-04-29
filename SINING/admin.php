@@ -8,12 +8,12 @@
 <body>
 
 <div class="tab">
-<a href="home.php" id="logo" class="head-navbar"><h1 id="logo" class="head-navbar-inner">Sining</h1></a>
-  <button class="tablinks active" onclick="openCity(event, 'seller-approval-list')">Seller Approval List</button>
-  <button class="tablinks" onclick="openCity(event, 'approval-list')">Art Approval List</button>
-  <button class="tablinks" onclick="openCity(event, 'user-list')">User List</button>
-  <button class="tablinks" onclick="openCity(event, 'seller-list')">Seller List</button>
-  <button class="tablinks" onclick="openCity(event, 'artwork-list')">Artwork List</button>
+<a href="home.php" id="logo" class="head-navbar"><h1 id="logo" class="head-navbar-inner">Sining</h1><img src="assets/img/logo.jpg"></a>
+  <button class="tablinks active" onclick="openCity(event, 'seller-approval-list')"><h4>Seller Approval List</h4><img src="assets/img/avatar.png"> <img class="approve-img" src="assets/img/approve.png"></button>
+  <button class="tablinks" onclick="openCity(event, 'approval-list')"><h4>Art Approval List</h4><img src="assets/img/frame.png"> <img class="approve-img" src="assets/img/approve.png"></button>
+  <button class="tablinks" onclick="openCity(event, 'user-list')"><h4>User List</h4><img src="assets/img/avatar.png"></button>
+  <button class="tablinks" onclick="openCity(event, 'seller-list')"><h4>Seller List</h4><img src="assets/img/seller.png"></button>
+  <button class="tablinks" onclick="openCity(event, 'artwork-list')"><h4>Artwork List</h4><img src="assets/img/frame.png"></button>
 
 </div>
 

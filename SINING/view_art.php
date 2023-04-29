@@ -53,20 +53,21 @@ if(isset($_GET['logout'])){
                 success: function(result){
                     let json_result = JSON.parse(result);
                     console.log(json_result.Recommended);
-                    htmlstring+="<tr>";
+                    htmlstring+="<table class='recommended-art-table'><tr>";
                     for(let i = 1; i < json_result.Recommended.length; i++) {
                      let PHPeso = new Intl.NumberFormat('en-US', {
                            style: 'currency',
                            currency: 'PHP',
                         });
 
-                         htmlstring+="<td class='recommended-art-inner-box'><img src=\""+ json_result.Recommended[i].image_url+"\" onclick='getReco("+json_result.Recommended[i].id+")'/><br><h5>"+json_result.Recommended[i].name+"</h5><br><p>"+PHPeso.format(json_result.Recommended[i].price)+"</p></td>";
+                         htmlstring+="<td class='recommended-art-inner-box' style='margin-left: 100px;'><img src=\""+ json_result.Recommended[i].image_url+"\" onclick='getReco("+json_result.Recommended[i].id+")'/><br><h5>"+json_result.Recommended[i].name+"</h5><p>"+PHPeso.format(json_result.Recommended[i].price)+"</p></td></tr>";
 
-                        if (i%3==0 && i!=0) {
-                           htmlstring+="</tr><tr>";
-                         }
+                        // if (i%3==0 && i!=0) {
+                        //    htmlstring+="</tr><tr>";
+                        //  }
                     }
                     $("#recommended_arts").append(htmlstring);
+                    htmlstring+="</table>";
                 }
             });
         });
@@ -151,11 +152,11 @@ if(isset($_GET['logout'])){
       </div>
       </div>
 
-      <td class="other-art-inner-box" ><img src="<?php echo $row["artImage"];?>" onclick = "getArt(<?php echo $row['artId']; ?>)" width = 100>
-      <h3 style="margin-left:5px;">
+      <td class="other-art-inner-box" ><img src="<?php echo $row["artImage"];?>" onclick = "getArt(<?php echo $row['artId']; ?>)">
+      <h5>
          <?php echo $row["artTitle"]; ?>            
-      </h3>
-        <p style="margin-left:5px;">
+      </h5>
+        <p>
         <?php 
         $formattedNum = number_format($prices, 2);
         echo "₱".$formattedNum;
@@ -184,11 +185,6 @@ if(isset($_GET['logout'])){
 </div>
 <!-- custom js file link  -->
 <script src="js/scripts.js"></script>
-<style>
-   header{
-      background-color: #212529;
-   }
-</style>
 <script>
    function addTocart() {
        const productId = $('#product_id').val();

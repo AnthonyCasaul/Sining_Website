@@ -264,31 +264,26 @@ h3{
 .img-con .img-con-inner .image-box .text-box table .there{
     padding-right: 10px;
 }
-.art-box-con *{
-    /* border: 1px solid red; */
-    width: 0;
-}
-
 .art-img{
   display: flex;
+  /* overflow-x: hidden; */
+  /* border: 1px solid red; */
 }
 .art-img:hover img{
-  filter: blur(4px);
+  /* filter: blur(2px) brightness(70%); */
   cursor: pointer;
 }
 .art-img:hover h4{
   display: block;
 }
 .art-img h4{
+  transition: ease-in .2s;
   display: none;
-  /* border: 1px solid red; */
   width: 200px;
   height: fit-content;
   position: absolute;
-  border: 1px solid #ffc800;
   color: #ffc800;
   margin-left: 28px;
-  padding: 10px;
 }
 .art-box img {
   /* border: 1px solid green; */
@@ -296,24 +291,18 @@ h3{
   margin-left: 5px;
   /* transform: translateX(-50%); */
 }
-
-
 .art-title{
     color: #fff;
 }
 .art-box{
-    
     /* border: 1px solid yellow; */
     background-color: var(--mid-black);
     padding: 20px;
+    margin-bottom: 20px;
     width: 300px;
     height: 2rem;
     box-shadow: 5px 10px 5px rgba(0, 0, 0, .3);
     text-align: center;
-}
-.art-box img{
-    /* border: 1px solid green; */
-    width: 250px;
 }
 .search-result{
     /* border: 1px solid red; */
@@ -405,6 +394,9 @@ iframe{
     padding: 0;
     height: 300px;
 }
+td,table,tr{
+    break-inside: avoid;
+}
 @media only screen and (max-width: 1799px){
     .filter_data{
         columns: 3;
@@ -422,35 +414,42 @@ iframe{
     .list-group .checkbox{
         font-size: smaller;
     }
-    /* .art-box-wrapper{
-        columns: 4;
-    } */
 }
 @media only screen and (max-width: 700px){
-    *{
-        /* border: 1px solid red; */
-    }
-    .art-box{
-      /* border: 1px solid blue; */
+  *{
+      /* border: 1px solid red; */
+  }
+  .art-box{
+    width: fit-content;
+  }
+  .filter_data{
+      columns: 1;
+      border: 1px solid red;
+      width: 100%;
       position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .filter_data{
-        columns: 1;
-        /* border: 1px solid red; */
-        width: 100%;
-        position: relative;
-        left: 0;
-        /* transform: translateX(-50%); */
-    }
-    .ano-to{
-        /* border: 1px solid red; */
-        width: 100%;
-        padding: 20px;
-        height: 70%;
-        margin-top: 20px;
-        margin-left: 0;
-        margin-bottom: 30px;
-    }
+      left: 0;
+      /* transform: translateX(-50%); */
+  }
+  .art-box > *{
+    border: 1px solid red;
+  }
+  .ano-to{
+      /* border: 1px solid red; */
+      width: 100%;
+      padding: 20px;
+      height: 70%;
+      margin-top: 20px;
+      margin-left: 0;
+      margin-bottom: 30px;
+  }
+  .art-img h4{
+    width: 100%;
+    left: 50%;
+    bottom: 2%;
+    transform: translateX(-50%);
+    margin: 0;
+    display: block;
+    background-color: #2d2d2d;
+    color: #fff;
+  }
 }

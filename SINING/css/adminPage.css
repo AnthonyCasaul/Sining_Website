@@ -7,6 +7,8 @@
     box-sizing: border-box;
     color: #fff;
     /* border: 1px solid red; */
+    margin: 0 auto;
+    padding: 0;
 }
 
 body{
@@ -37,7 +39,7 @@ table, th, td, tr{
 }
 
 table{
-    width: 98%;
+    width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px;
     border-left: #2d2d2d;
@@ -181,3 +183,22 @@ a:nth-child(3){
     left: 100%;
     border-color: #ffc800;
 } */
+@media only screen and (max-width: 700px){
+    *{
+        /* border: 1px solid red; */
+        font-size: 10px;
+        padding: 0;
+        margin: 0 auto;
+    }
+    .content-table{
+        display: block;
+    }
+    td{
+        break-inside: avoid;
+        /* width: fit-content; */
+    }
+    button img{
+        width: 20px;
+        height: 20px;
+    }
+}

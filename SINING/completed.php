@@ -3,7 +3,7 @@ include 'condb.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
-$ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$user_id' AND product_status = 'To be approved'");
+$Completed = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$user_id' AND product_status = 'Completed'");
 ?>
 
 <!DOCTYPE html>
@@ -33,13 +33,11 @@ $ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_i
               <th class="head">BUYER NAME</th>
               <th class="head">BUYER LOCATION</th>
               <th class="head">ORDER STATUS</th>
-              <th class="head"></th>
-              <th class="head"></th>
             </tr>
           </thead>
 <?php
-      if(mysqli_num_rows($ToBeApproved) > 0){
-			    while($row = mysqli_fetch_assoc($ToBeApproved)){
+      if(mysqli_num_rows($Completed) > 0){
+			    while($row = mysqli_fetch_assoc($Completed)){
                 $orderid = $row['product_id'];
                 $artid = $row['product_id'];
                 $artTitle = $row['product_name'];
@@ -60,18 +58,6 @@ $ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_i
               <th>'.$fullname.'</th>
               <th>'.$location.'</th>
               <th>'.$orderStat.'</th>
-              <th>
-              <form method="post" action="insertNewSeller.php">
-                  <input type="hidden" name="id" value="'.$orderid.'">
-                  <button type="submit" class="showact_button">APPROVE</button>
-                  </form>
-                </th>
-              <th>
-              <form method="post" action="insertNewSeller.php">
-                  <input type="hidden" name="id" value="'.$orderid.'">
-                  <button type="submit" class="showact_button">DECLINE</button>
-                  </form>
-                </th>
             </tr>
           </thead>';
     ?>

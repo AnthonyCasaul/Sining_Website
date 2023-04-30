@@ -15,7 +15,7 @@
 	}
 </style>
 <div class="img-con">
-<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="home.css">
 <?php
 include ('condb.php');
 include('database_connection.php');

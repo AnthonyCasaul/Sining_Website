@@ -103,8 +103,12 @@ if(isset($_GET['logout'])){
    <?php
    if (isset($_GET['myAction']) && $_GET['myAction'] == 'doSomething') {
       $stat = "To be approved";
-      $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image, product_quantity)
-                                       SELECT artId, name, price, image, quantity FROM `cart` WHERE artistId='$user_id' AND ifChecked=1");
+      $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image, product_quantity, seller_id)
+                                       SELECT a.artId, a.name, a.price, a.image, a.quantity, b.artistId 
+                                       FROM `cart` AS a
+                                       LEFT JOIN `sining_artworks1` AS b 
+                                       ON a.artId = b.artId
+                                       WHERE a.artistId='$user_id' AND a.ifChecked=1");
       $sql = mysqli_query($conn, "UPDATE `product_status` SET `product_status` = '$stat', `buyer_id` = '$user_id' WHERE `product_status` = '' AND `buyer_id` = '0'");
       $cart_delete = mysqli_query($conn, "DELETE FROM `cart` WHERE artistId='$user_id'");
       ?>

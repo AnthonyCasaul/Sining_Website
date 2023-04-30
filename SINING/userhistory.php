@@ -18,9 +18,10 @@ if(isset($_GET['logout'])){
    header('location:index.php');
 }
 
-if(isset($_GET['remove'])){
-   $remove_id = $_GET['remove'];
-   mysqli_query($conn, "DELETE FROM `artist_history` WHERE id = '$remove_id'");
+if(isset($_GET['update'])){
+   $stat = "Cancelled";
+   $remove_id = $_GET['update'];
+   mysqli_query($conn, "UPDATE `product_status` SET `product_status` = '$stat' WHERE `product_id` = '$remove_id'");
    header('location:userhistory.php');
 };
 ?>
@@ -57,12 +58,12 @@ if(isset($_GET['remove'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
  		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';
-    echo '<a href="userhistory.php?remove='.$fetch_artist['product_id'].'" class="dlt" onclick="myFunction()">Cancel Order</a>';
+    	echo '<a href="userhistory.php?update='.$fetch_artist['product_id'].'" class="dlt" onclick="myFunction()">Cancel Order</a>';
  		echo '<hr>';    
  		}
  	}
@@ -77,7 +78,7 @@ if(isset($_GET['remove'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
@@ -94,7 +95,7 @@ if(isset($_GET['remove'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
@@ -111,7 +112,7 @@ if(isset($_GET['remove'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
@@ -128,7 +129,7 @@ if(isset($_GET['remove'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';

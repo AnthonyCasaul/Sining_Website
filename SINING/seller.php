@@ -22,7 +22,7 @@
 </div>
 
 <div id="dashboard" style="display:block;" class="tabcontent">
-    <h3>no content</h3>
+    <iframe src="seller_dashboard.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
 <div id="sold-artworks" class="tabcontent">
@@ -34,19 +34,19 @@
 </div>
 
 <div id="to-ship" class="tabcontent">
-    <h3>no content</h3>
+    <iframe src="toship.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
 <div id="to-receive" class="tabcontent">
-    <h3>no content</h3>
+    <iframe src="toReceive.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
 <div id="completed" class="tabcontent">
-    <h3>no content</h3>
+    <iframe src="completed.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
 <div id="cancelled" class="tabcontent">
-    <h3>no content</h3>
+   <iframe src="cancelled.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
 <script>

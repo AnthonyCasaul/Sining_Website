@@ -424,7 +424,7 @@ td,table,tr{
   }
   .filter_data{
       columns: 1;
-      border: 1px solid red;
+      /* border: 1px solid red; */
       width: 100%;
       position: relative;
       left: 0;

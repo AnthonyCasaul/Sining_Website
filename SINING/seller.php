@@ -11,13 +11,13 @@
     <a href="home.php" class="seller-home"><img src="assets/img/return.png"></a>
 <iframe src="seller_profile.php" frameborder="0" width="100%" height="5%"></iframe>
 
-  <button class="tablinks active" onclick="openCity(event, 'dashboard')">Dashboard</button>
-  <button class="tablinks" onclick="openCity(event, 'approval-list')">To Be Approve</button>
-  <button class="tablinks" onclick="openCity(event, 'to-ship')">To Ship</button>
-  <button class="tablinks" onclick="openCity(event, 'to-receive')">To Receive</button>
-  <button class="tablinks" onclick="openCity(event, 'completed')">Completed</button>
-  <button class="tablinks" onclick="openCity(event, 'cancelled')">Cancelled</button>
-  <button class="tablinks" onclick="openCity(event, 'sold-artworks')">Sold Artworks</button>
+  <button class="seller-btn tablinks active" onclick="openCity(event, 'dashboard')">Dashboard</button>
+  <button class="seller-btn tablinks" onclick="openCity(event, 'approval-list')">To Be Approve</button>
+  <button class="seller-btn tablinks" onclick="openCity(event, 'to-ship')">To Ship</button>
+  <button class="seller-btn tablinks" onclick="openCity(event, 'to-receive')">To Receive</button>
+  <button class="seller-btn tablinks" onclick="openCity(event, 'completed')">Completed</button>
+  <button class="seller-btn tablinks" onclick="openCity(event, 'cancelled')">Cancelled</button>
+  <button class="seller-btn tablinks" onclick="openCity(event, 'sold-artworks')">Sold Artworks</button>
 
 </div>
 

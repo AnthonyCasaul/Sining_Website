@@ -2,15 +2,13 @@
 <?php
 include 'condb.php';
 $search = $_POST['search'];
-echo ("<link rel=stylesheet href=homepagev2.css>");
+echo ("<link rel=stylesheet href=home.css>");
 
 $select = mysqli_query($conn, "SELECT * FROM sining_artworks1 WHERE artTitle LIKE '%$search%' OR artGenre LIKE '%$search%' OR artTags LIKE '%$search%' OR artYear LIKE '%$search%'");
 $count = 0;
 $tick = 0;
 if ($select->num_rows > 0) {
     echo ("<div class=search-result><h2 class=search-head>Results for: </h2><h3 class=search-head>&nbsp".$search."</h3></div>");
-    // echo ("<div class=art-box-wrapper>");
-    // echo ("<div class=art-box-con>");
     // output data of each row
     while($row = $select->fetch_assoc()) {
         echo '
@@ -19,10 +17,19 @@ if ($select->num_rows > 0) {
                     <tr>
                         <td class="art-img">
                             <img src="'.$row['artImage'].'" onclick="getId('.$row['artId'].')"><br>
-                            <h4 class="art-title">'.$row['artTitle'].'</h4>
                         </td>
                     </tr>
-                </table><br><br>
+                    <tr>
+                        <td class="art-title">
+                            <h4>'.$row['artTitle'].'</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="art-title">
+                            <h4>₱'.$row['artPrice'].'</h4>
+                        </td>
+                    </tr>
+                </table>
         ';
     }
 } else {

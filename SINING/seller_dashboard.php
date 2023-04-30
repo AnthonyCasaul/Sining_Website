@@ -26,45 +26,43 @@ $count5 = mysqli_num_rows($Cancelled);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
-<style>
-    *{
-        color: white;
-    }
-
-</style>
 <body>
+<div class="header">
+  <h1>SELLER PAGE</h1>
+  <h3>DASHBOARD</h3>
+</div>
     <div>
-        <h2>Artwork Status</h2>
         <table>
           <thead>
             <tr>
-                <th><?php echo $count1; ?></th>
-                <th><?php echo $count2; ?></th>
-                <th><?php echo $count3; ?></th>
-            </tr>
-            <tr>
-                <th>To Be Approved</th>
-                <th>To Ship</th>
-                <th>To Receive</th>
+                <th><p><?php echo $count1; ?></p><br>To Be Approved</th>
+                <th><p><?php echo $count2; ?></p><br>To Ship</th>
+                <th><p><?php echo $count3; ?></p><br>To Receive</th>
             </tr>
           </thead>
           <thead>
             <tr>
-                <th><?php echo $count4; ?></th>
-                <th><?php echo $count5; ?></th>
-                <th>0</th>
-            </tr>
-            <tr>
-                <th>Completed</th>
-                <th>Cancelled</th>
-                <th>Sold Artworks</th>
+                <th><p><?php echo $count4; ?></p><br>Completed</th>
+                <th><p><?php echo $count5; ?></p><br>Cancelled</th>
+                <th><p>0</p><br>Sold Artworks</th>
             </tr>
           </thead>
         </table>
     </div>
-    <div>
+    <div class="header">
         <h3>POSTED ARTWORKS</h3>
+        <table>
+            <tr>
+                <th><p> 0 </p><br> dummy</th>
+                <th><p> 0 </p><br> dummy</th>
+                <th><p> 0 </p><br> dummy</th></tr><tr>
+                <th><p> 0 </p><br> dummy</th>
+                <th><p> 0 </p><br> dummy</th>
+                <th><p> 0 </p><br> dummy</th>
+            </tr>
+        </table>
     </div>
 </body>
 </html>

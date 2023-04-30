@@ -35,12 +35,12 @@ $approval = mysqli_query($conn, "SELECT a.product_id, a.seller_id, a.product_nam
 </head>
 <body>
 <div>
-  <img src="seller_file/profile/<?php echo $seller_profile; ?>" width=20% height=20%/>
+  <img class="seller-profile" src="seller_file/profile/<?php echo $seller_profile; ?>" width=20% height=20%/>
   <h1><?php echo $seller_username;?></h1>
   <h3><?php echo $seller_name;?></h3>
 
 
-    <button id="example-btn"><img src="assets/img/upload.png">Sell</button>
+    <button id="example-btn"><img src="assets/img/upload.png"><h4>Sell</h4></button>
 </div>
 <script>
     const exampleBtn = document.getElementById('example-btn');

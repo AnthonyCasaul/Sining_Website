@@ -22,6 +22,8 @@ body {
   position: absolute;
   top: 0%;
   left: 0%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 /* Style the buttons inside the tab */
@@ -39,9 +41,6 @@ body {
   font-weight: bold;
   color: #fff;
   background-color: #191919;
-}
-.seller-btn{
-  padding: 20px;
 }
 
 /* Change background color of buttons on hover */
@@ -161,13 +160,13 @@ iframe[src="seller_profile.php"]{
   iframe{
     /* border: 1px solid red; */
   }
+  iframe[src="seller_profile.php"]{
+    height: 300px;
+  }
 }
 @media only screen and (max-height: 850px){
-  *{
-    /* border: 1px solid red; */
-    overflow-x: scroll;
-    overflow-y: hidden;
-    margin: 0 auto;
-    padding: 0;
+ 
+  .tablinks{
+    padding: 10px;
   }
 }

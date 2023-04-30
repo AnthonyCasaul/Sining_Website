@@ -3,7 +3,7 @@ include 'condb.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
-$ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$user_id' AND product_status = 'To be approved'");
+$ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$user_id' AND product_status = 'To be approve'");
 ?>
 
 <!DOCTYPE html>
@@ -14,12 +14,13 @@ $ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_i
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller</title>
     <link rel="stylesheet" href="css/adminPage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
-
 <div class="header">
   <h1>SELLER PAGE</h1>
   <h3>PAYMENT APPROVAL</h2>
+  <button onclick="toReload()" class="showact_button">APPROVE</button>
 </div>
 <div class="rcrdPage">
         <table class="content-table">
@@ -61,16 +62,13 @@ $ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_i
               <th>'.$location.'</th>
               <th>'.$orderStat.'</th>
               <th>
-              <form method="post" action="insertNewSeller.php">
-                  <input type="hidden" name="id" value="'.$orderid.'">
-                  <button type="submit" class="showact_button">APPROVE</button>
-                  </form>
+              
+                  <input type="hidden" name="approve" id="approve" value="'.$orderid.'">
+                  <button type="submit" onclick="toApprove()" class="showact_button">APPROVE</button>
                 </th>
               <th>
-              <form method="post" action="insertNewSeller.php">
-                  <input type="hidden" name="id" value="'.$orderid.'">
-                  <button type="submit" class="showact_button">DECLINE</button>
-                  </form>
+                  <input type="hidden" name="decline" id="decline" value="'.$orderid.'">
+                  <button type="submit" onclick="toDecline()" class="showact_button">DECLINE</button>
                 </th>
             </tr>
           </thead>';
@@ -85,5 +83,39 @@ $ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_i
   ?>
   </table>
   <div></div>
+<script>
+  function toReload() {
+    console.log("reload");
+  window.location.reload();
+  }
+  function toApprove(){
+    const approve = $('#approve').val();
+    console.log(approve);
+
+    $.ajax({
+    type: "POST",
+    url: "update_status.php",
+    data: {"approve": approve},
+    success: function(result){
+      alert("Order Approved");
+      window.location.reload();
+    }
+});
+  }
+  function toDecline(){
+    const decline = $('#decline').val();
+    console.log(decline);
+
+    $.ajax({
+    type: "POST",
+    url: "update_status.php",
+    data: {"decline": decline},
+    success: function(result){
+      alert("Order Declined");
+      window.location.reload();
+    }
+});
+  }
+</script>
 </body>
 </html>

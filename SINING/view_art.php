@@ -60,12 +60,8 @@ if(isset($_GET['logout'])){
                         currency: 'PHP',
                      }); 
 
+                         htmlstring+="<td class='recommended-art-inner-box' style='margin-left: 100px;'><img src=\""+ json_result.Recommended[i].image_url+"\" onclick='getReco("+json_result.Recommended[i].id+")'/><br><h5>"+json_result.Recommended[i].name+"</h5><p>"+PHpeso.format(json_result.Recommended[i].price)+"</p></td></tr>";
 
-                         htmlstring+="<td class='recommended-art-inner-box' style='margin-left: 100px;'><img src=\""+ json_result.Recommended[i].image_url+"\" onclick='getReco("+json_result.Recommended[i].id+")'/><br><h5>"+json_result.Recommended[i].name+"</h5><p>"+PHPeso.format(json_result.Recommended[i].price)+"</p></td></tr>";
-
-                        // if (i%3==0 && i!=0) {
-                        //    htmlstring+="</tr><tr>";
-                        //  }
                     }
                     $("#recommended_arts").append(htmlstring);
                     htmlstring+="</table>";

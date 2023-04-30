@@ -70,7 +70,7 @@ include('condb.php')
                     {
                     ?>
                     <div class="list-group-item checkbox">
-                        <label><input type="checkbox" class="common_selector category" value="<?php echo $row['artGenre']; ?>"  > <?php echo $row['artGenre']; ?></label>
+                        <label><input type="checkbox" class="common_selector category" value="<?php echo $row['artGenre']; ?>"/> <?php echo $row['artGenre']; ?></label>
                     </div>
                     <?php
                     }

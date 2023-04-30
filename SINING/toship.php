@@ -14,6 +14,7 @@ $ToShip = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller</title>
     <link rel="stylesheet" href="css/adminPage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
 
@@ -60,10 +61,8 @@ $ToShip = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$
               <th>'.$location.'</th>
               <th>'.$orderStat.'</th>
               <th>
-              <form method="post" action="insertNewSeller.php">
-                  <input type="hidden" name="id" value="'.$orderid.'">
-                  <button type="submit" class="showact_button">SHIP</button>
-                  </form>
+                  <input type="hidden" name="id" id="ship" value="'.$orderid.'">
+                  <button type="submit" onclick="toShip()" class="showact_button">SHIP</button>
                 </th>
             </tr>
           </thead>';
@@ -78,5 +77,21 @@ $ToShip = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$
   ?>
   </table>
   <div></div>
+<script>
+  function toShip(){
+    const ship = $('#ship').val();
+    console.log(ship);
+
+    $.ajax({
+    type: "POST",
+    url: "update_status.php",
+    data: {"ship": ship},
+    success: function(result){
+      alert("Product Has Been Shipped");
+      window.location.reload();
+    }
+});
+  }
+</script>
 </body>
 </html>

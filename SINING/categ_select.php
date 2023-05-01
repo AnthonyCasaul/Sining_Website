@@ -6,107 +6,26 @@ $select = mysqli_query($conn, "SELECT * FROM `sining_artists` WHERE artistId = '
       $row = mysqli_fetch_assoc($select);
       $catecheck = $row['isFirstTimeUser'];
       if($catecheck == 1 ){
-         header('location:homepage.php');
+         header('location:home.php');
       }
    }
-?>
-<html>
-   <!-- <link rel="stylesheet" href="categ_select.css">   -->
-<body>
-   <form action="categ_select.php" method="post" enctype="multipart/form-data">  
-   <div>  
-      <div class="container">
-         <ul class="ks-cboxtags">
-            <li><input type="checkbox" id="checkboxOne" name="cate[]" value="religious painting"></td>
-            <label for="checkboxOne">religious painting</label></li>
 
-            <li><input type="checkbox" id="checkboxTwo" name="cate[]" value="animal painting"></td>
-            <label for="checkboxTwo">animal painting</label></li>
+   $sql = "SELECT DISTINCT artGenre FROM sining_artworks1";
+   $result = $conn->query($sql);
 
-            <li><input type="checkbox" id="checkboxThree" name="cate[]" value="ornament"></td>
-            <label for="checkboxThree">ornament</label></li>
-
-            <li><input type="checkbox" id="checkboxFour" name="cate[]" value="mythological painting"></td>
-            <label for="checkboxFour">mythological painting</label></li>
-
-            <li><input type="checkbox" id="checkboxFive" name="cate[]" value="portrait"></td>
-            <label for="checkboxFive">portrait</label></li>
-
-            <li><input type="checkbox" id="checkboxSix" name="cate[]" value="landscape"></td>
-            <label for="checkboxSix">landscape</label></li>
-
-            <!-- <li><input type="checkbox" id="checkboxSeven" name="cate[]" value="icon"></td>
-            <label for="checkboxSeven">icon</label></li> -->
-
-            <li><input type="checkbox" id="checkboxEight" name="cate[]" value="miniature"></td>
-            <label for="checkboxEight">miniature</label></li>
-
-            <li><input type="checkbox" id="checkboxNine" name="cate[]" value="architecture"></td>
-            <label for="checkboxNine">architecture</label></li>
-
-            <li><input type="checkbox" id="checkboxTen" name="cate[]" value="sculpture"></td>
-            <label for="checkboxTen">sculpture</label></li>
-         </ul>
-
-      </div><!-- container -->
-      
-<!-- <table border="1">  
-   <tr>  
-      <td colspan="2">Select Tags:</td>  
-   </tr>  
-   <tr>  
-      <td>Holyplaces</td>  
-      <td><input type="checkbox" name="tags[]" value="Holyplaces"></td>  
-   </tr>  
-   <tr>  
-      <td>Prophet</td>  
-      <td><input type="checkbox" name="tags[]" value="Prophet"></td>  
-   </tr>  
-   <tr>  
-      <td>Middleages</td>  
-      <td><input type="checkbox" name="tags[]" value="Middleages"></td>  
-   </tr>  
-   <tr>  
-      <td>History</td>  
-      <td><input type="checkbox" name="tags[]" value="History"></td>  
-   </tr>  
-   <tr>
-   <tr>  
-      <td>Brown</td>  
-      <td><input type="checkbox" name="tags[]" value="Brown"></td>  
-   </tr>
-   <tr>  
-      <td>Byzantinearchitecture</td>  
-      <td><input type="checkbox" name="tags[]" value="Byzantinearchitecture"></td>  
-   </tr><tr>  
-      <td>Dome</td>  
-      <td><input type="checkbox" name="tags[]" value="Dome"></td>  
-   </tr>  
-   <tr>  
-      <td>Textile</td>  
-      <td><input type="checkbox" name="tags[]" value="Textile"></td>  
-   </tr>
-   <tr>  
-      <td>Carpet</td>  
-      <td><input type="checkbox" name="tags[]" value="Carpet"></td>  
-   </tr> 
-   <tr>  
-      <td>Bird</td>  
-      <td><input type="checkbox" name="cate[]" value="Bird"></td>  
-   </tr>
-   <tr>  
-      <td>Pattern</td>  
-      <td><input type="checkbox" name="tags[]" value="Pattern"></td>  
-   </tr>
-   <tr>  
-      <td colspan="2" align="center"><input type="submit" value="submit" name="sub"></td>  
-   </tr>  
-</table>  -->
-</div>  
-   <center><input type="submit" value="submit" name="sub"></center>
-</form>  
+   if ($result->num_rows > 0) {
+      echo "<form method='post' action=''>";
+      while($row = $result->fetch_assoc()) {
+        echo "<input type='checkbox' name='cate[]' value='" . $row["artGenre"] . "'>" . $row["artGenre"] . "<br>";
+      }
+      echo "<input type='submit' name='submit' value='Submit'>";
+      echo "</form>";
+    } else {
+      echo "No results found.";
+    }
+?> 
 <?php
-if(isset($_POST['sub']))  
+if(isset($_POST['submit']))  
 {  
 
 $checkbox1=$_POST['cate'];
@@ -118,15 +37,15 @@ foreach($checkbox1 as $chk1)
    {  
       $chk .= $chk1.",";  
    }
-foreach($checkbox as $chktags1)  
-   {  
-      $chktags .= $chktags1.",";  
-   } 
+// foreach($checkbox as $chktags1)  
+//    {  
+//       $chktags .= $chktags1.",";  
+//    } 
 
          $insert = mysqli_query($conn, "UPDATE sining_artists SET artistTarget = '$chk' WHERE artistId = '$user_id'") or die('query failed');
          //$insert1 = mysqli_query($conn, "UPDATE sining_artists SET artistSearch = '$chktags' WHERE artistId = '$user_id'") or die('query failed');
          $insert = mysqli_query($conn, "UPDATE sining_artists SET isFirstTimeUser = 1 WHERE artistId = '$user_id'") or die('query failed');
-         header('location:homepage.php');
+         header('location:home.php');
 }
 
 ?>  

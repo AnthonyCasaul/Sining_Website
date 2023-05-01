@@ -14,6 +14,7 @@ hr{
 	margin-left: 10%;
 }
 
+
 .cont{
 	/* border: 1px solid red; */
 	color: #fff;
@@ -38,9 +39,6 @@ hr{
 	text-align: right;
 	color: #c1c1c1;
 }
-.opts{
-	overflow: hidden;
-}
 
 .tablinks{
 	border: none;
@@ -63,7 +61,7 @@ hr{
 	border: 1px solid #4d4d4d; 
 	/* background-color: #4d4d4d;	 */
 	padding: 20px;
-	max-height: 780px;
+	max-height: 750px;
 	overflow-y: scroll;
 	mask-image: linear-gradient(to top, transparent, black),
 		linear-gradient(to left, transparent 17px, black 17px);
@@ -102,4 +100,50 @@ hr{
 	border: white;
 	transition: .2s;
 	padding: 10px 35px;
+}
+
+@media screen and (max-width: 1024px) {
+	.cont{
+		margin-top: 80px;
+	}	
+}
+
+@media screen and (max-width: 536px) {
+	.tablinks{
+		padding: 10px 5px;
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 426px) {
+	.tablinks{
+
+		font-size: 13px;
+	}
+}
+@media screen and (max-width: 475px) {
+	.opts{
+		overflow-x: scroll;
+	}
+
+	.tablinks{
+		font-size: 13px;
+	}
+}
+
+@media screen and (max-width: 376px) {
+	.tablinks{
+		font-size: 11px;
+	}
+}
+
+@media screen and (max-width: 321px) {
+	.dlt{
+		padding: 10px 10px;
+		font-size: 11px;
+	}
+
+	.tablinks{
+		font-size: 9px;
+	}
 }

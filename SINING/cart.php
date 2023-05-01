@@ -74,6 +74,8 @@ if(isset($_GET['delete_all'])){
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="viewportchecker.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
    <link rel="stylesheet" href="cart_style.css">
    <?php
       include("navbar.php");
@@ -93,9 +95,10 @@ if(isset($_GET['delete_all'])){
 <section class="shopping-cart">
 
 <h1 class="heading">Your cart</h1>
-<div class="row">
+<div class="row headingText">
+            <div class="col-sm-1"></div>
             <div class="col-sm-2"><p class=" hidden-xs">Product</div>
-            <div class="col-sm-3"></div>
+            <div class="col-sm-2"></div>
             <div class="col-sm-2"><p>Price</p></div>
             <div class="col-sm-2"><p>Quantity</p></div>
             <div class="col-sm-1"><p>Total</p></div>
@@ -106,7 +109,7 @@ if(isset($_GET['delete_all'])){
          $grand_total = 0;
 
          if(mysqli_num_rows($select_cart) < 1){
-            echo "<h4>Your cart is empty. You can shop in <a href='home.php'>here</a> or check your <a href='userhistory.php'>pendings</a>!</h4>";
+            echo "<h4>Your cart is empty. You can continue shopping in <a href='home.php' class='aLink'>here</a> or check your <a href='userhistory.php' class='aLink'>pendings</a>!</h4>";
          } 
 
          else if(mysqli_num_rows($select_cart) > 0){
@@ -118,7 +121,7 @@ if(isset($_GET['delete_all'])){
             <div class="col-sm-2"><h2><?php echo $fetch_cart['name']; ?></h2></div>
             <div class="col-sm-2"><h2>₱<?php echo number_format($fetch_cart['price'],2); ?></h2></div>
             <div class="col-sm-2">
-               <form action="checkout.php" method="post">
+               <form action="" method="post">
                   <input type="hidden" name="update_quantity_id"  value="<?php echo $fetch_cart['id']; ?>" >
                   <input type="text" name="artId"  value="<?php echo $fetch_cart['artId']; ?>" hidden = "" >
                   <div class="quan">
@@ -127,11 +130,12 @@ if(isset($_GET['delete_all'])){
                   <input type="submit" name="inc" value="+">
                   <!--<input type="submit" value="Update" name="update_update_btn">-->
                </div>
+               </form>
             </div>
 
             <div class="col-sm-2"><h2>₱<?php echo $sub = number_format($fetch_cart['price'] * $fetch_cart['quantity'],2); ?></h2></div>
             <?php $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>
-            <div class="col-sm-1"><a href="cart.php?remove=<?php echo $fetch_cart['id']; ?>" onclick="return confirm('remove item from cart?')" class="delete-btn"> <i class="fas fa-trash"></i></a></div>
+            <div class="col-sm-1"><a href="cart.php?remove=<?php echo $fetch_cart['id']; ?>" onclick="return confirm('Remove artwork(s) from cart?')" class="delete-btn"> <i class='fas'>&#xf2ed;</i></a></div>
             <hr>
          </div>
          
@@ -140,18 +144,10 @@ if(isset($_GET['delete_all'])){
            $grand_total= $grand_total+ $sub_total;  
             };
          };
-         ?>
-         <div class="tot">
-            <h3>Total: ₱<?php echo number_format($grand_total,2); 
-               
-            ?></h3>
-            <!--<td><a href="cart.php?delete_all" onclick="return confirm('are you sure you want to delete all?');" class="delete-btn"> <i class="fas fa-trash"></i> delete all </a></td>-->
-            
-         </div>
+         ?>        
          <div class="ch">
-         <a href="checkout.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">Checkout</a>         
+         <a href="checkout.php" class="btn">Checkout</a>         
          </div>
-      </form>
 </section>
 
 </div>

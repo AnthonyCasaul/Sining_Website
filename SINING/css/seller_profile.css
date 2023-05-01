@@ -1,6 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap");
-
-
 *,
 *::after,
 *::before{
@@ -9,6 +7,9 @@
     padding: 0;
     color: #fff;
     font-family: "Poppins", sans-serif;   
+}
+body{
+    background-color: #191919;
 }
 div{
     padding-top: 50px;
@@ -37,6 +38,10 @@ div button{
     transition: ease-in .2s;
 }
 
+h4{
+    display: inline-block;
+}
+
 div button:hover{
     transition: ease-out .2s;
     cursor: pointer;
@@ -55,4 +60,31 @@ div button img{
 
 div h3{
     text-transform: capitalize;
+}
+h3, h1{
+    display: block;
+}
+@media only screen and (max-width: 300px){
+    *{
+        /* border: 1px solid red; */
+    }
+    h1, h3, h4{
+        display: none;
+    }
+    div button{
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+    }
+    div img{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .seller-profile{
+        width: 60px;
+        height: 60px;
+        /* border: 1px solid red; */
+        margin-left: -20px;
+    }
 }

@@ -64,7 +64,7 @@ include('condb.php')
                     <div style="height: 100%; overflow-y: auto; overflow-x: hidden;">
 					<?php
 
-                    $query = $conn->query("SELECT DISTINCT(artGenre) FROM sining_artworks WHERE purchased = '1' ORDER BY artId DESC");
+                    $query = $conn->query("SELECT DISTINCT(artGenre) FROM sining_artworks1 WHERE purchased = '1' ORDER BY artId DESC");
                     
                     foreach($query as $row)
                     {

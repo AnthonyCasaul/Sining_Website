@@ -49,6 +49,43 @@
 
                     ?>
                     </div>
+
+                    <h3>Year</h3>
+                    <div style="height: 100%; overflow-y: auto; overflow-x: hidden;">
+					<?php
+
+                    $query = $conn->query("SELECT DISTINCT(artYear) FROM sining_artworks1 WHERE purchased = '1'");
+                    
+                    foreach($query as $row)
+                    {
+                    ?>
+                    <div class="list-group-item checkbox">
+                        <label><input type="checkbox" class="common_selector artyear" value="<?php echo $row['artYear']; ?>"  > <?php echo $row['artYear']; ?></label>
+                    </div>
+                    <?php
+                    }
+
+                    ?>
+                    </div>
+
+                    <h3>Artist</h3>
+                    <div style="height: 100%; overflow-y: auto; overflow-x: hidden;">
+					<?php
+
+                    $query = $conn->query("SELECT DISTINCT(artistName) FROM sining_artworks1 WHERE purchased = '1'");
+                    
+                    foreach($query as $row)
+                    {
+                    ?>
+                    <div class="list-group-item checkbox">
+                        <label><input type="checkbox" class="common_selector artist" value="<?php echo $row['artistName']; ?>"  > <?php echo $row['artistName']; ?></label>
+                    </div>
+                    <?php
+                    }
+
+                    ?>
+                    </div>
+
                 </div>
         </div>
         <div class="col-md-9">
@@ -68,11 +105,13 @@ $(document).ready(function(){
         var minimum_price = $('#hidden_minimum_price').val();
         var maximum_price = $('#hidden_maximum_price').val();
         var category = get_filter('category');
+        var artYear = get_year('artyear');
+        var artistname = get_artist('artist');
         console.log(category);
         $.ajax({
             url:"fetch_fiter.php",
             method:"POST",
-            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price}, category:category,
+            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, category:category, artYear:artYear, artistName:artistname},
             success:function(data){
                 // console.log(data);
                 $('.filter_data').html(data);
@@ -83,6 +122,22 @@ $(document).ready(function(){
     {
         var filter = [];
         $('.'+categ+':checked').each(function(){
+            filter.push($(this).val());
+        });
+        return filter;
+    }
+    function get_year(year)
+    {
+        var filter = [];
+        $('.'+year+':checked').each(function(){
+            filter.push($(this).val());
+        });
+        return filter;
+    }
+    function get_artist(artist)
+    {
+        var filter = [];
+        $('.'+artist+':checked').each(function(){
             filter.push($(this).val());
         });
         return filter;

@@ -71,7 +71,7 @@ if(isset($_POST["action"]))
 	{
 		$category_filter = implode("','", $_POST["category"]);
 		$query .= ("
-		 AND artTags IN('".$category_filter."')
+		 AND artGenre IN('".$category_filter."')
 		");
 	}
 	$statement = $connect->prepare($query);

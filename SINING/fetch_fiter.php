@@ -3,20 +3,28 @@ include('condb.php');
 
 if(isset($_POST["action"]))
 {
-    $query = "SELECT * FROM sining_artworks1 WHERE purchased = '1'";
-    if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
-    {
-        $query .= ("
-		 AND artPrice BETWEEN '".$_POST["minimum_price"]."' AND '".$_POST["maximum_price"]."'
-		");
-    }
-    if(isset( $_POST["category"]))
-	{
-        $category_filter = implode("','", $_POST["category"]);
-		$query .= ("
-		 AND artGenre IN '$category_filter'
-		");
-	}
+    $query = "SELECT * FROM sining_artworks1 WHERE 1+1";
+
+if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
+{
+    $query .= " AND artPrice BETWEEN '".$_POST["minimum_price"]."' AND '".$_POST["maximum_price"]."'";
+}
+
+if(isset($_POST["category"]) && !empty($_POST["category"]))
+{
+    $category_filter = implode("','", $_POST["category"]);
+    $query .= " AND artGenre IN ('$category_filter')";
+}
+if(isset($_POST["artYear"]) && !empty($_POST["artYear"]))
+{
+    $category_year = implode("','", $_POST["artYear"]);
+    $query .= " AND artYear IN ('$category_year')";
+}
+if(isset($_POST["artistName"]) && !empty($_POST["artistName"]))
+{
+    $category_artist = implode("','", $_POST["artistName"]);
+    $query .= " AND artistName IN ('$category_artist')";
+}
     
     $result = $conn->query($query);
     $total_row = mysqli_num_rows($result);

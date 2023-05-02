@@ -7,7 +7,6 @@ $user_id = $_SESSION['user_id'];
 $artist = $_SESSION['artistid'];
 $artid = $_SESSION['artid'];
 
-
 if(!isset($user_id)){
    header('location:index.php');
 };
@@ -18,12 +17,18 @@ if(isset($_GET['logout'])){
    header('location:index.php');
 }
 
-if(isset($_GET['update'])){
-   $stat = "Cancelled";
-   $remove_id = $_GET['update'];
-   mysqli_query($conn, "UPDATE `product_status` SET `product_status` = '$stat' WHERE `product_id` = '$remove_id'");
-   header('location:userhistory.php');
-};
+if(isset($_POST['selectedOption'])) {
+  $selectedOption = $_POST['selectedOption'];
+  $stmt = $conn->prepare("INSERT INTO `product_status` (payment_method) VALUES ('$selectedOption')");
+  $stmt->bind_param("s", $selectedOption);
+}
+
+  if(isset($_GET['remove'])){
+     $remove_id = $_GET['remove'];
+     mysqli_query($conn, "DELETE FROM `artist_history` WHERE id = '$remove_id'");
+     //mysqli_query($conn, "UPDATE `product_status` SET `product_status`='Cancelled' WHERE id = '$remove_id'");
+     header('location:userhistory.php');
+  };
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +46,8 @@ if(isset($_GET['update'])){
 	?>
 </head>
 <body>
+
+
 <div class="container cont">
 	<div class="opts">
   	<button class="tablinks" onclick="openCity(event, 'toPay')" id="defaultOpen">To be Approved</button>
@@ -58,12 +65,12 @@ if(isset($_GET['update'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
  		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';
-    	echo '<a href="userhistory.php?update='.$fetch_artist['product_id'].'" class="dlt" onclick="myFunction()">Cancel Order</a>';
+    echo '<a href="userhistory.php?remove='.$fetch_artist['product_id'].'" class="dlt" onclick="myFunction()">Cancel Order</a>';
  		echo '<hr>';    
  		}
  	}
@@ -78,7 +85,7 @@ if(isset($_GET['update'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
@@ -95,7 +102,7 @@ if(isset($_GET['update'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
@@ -112,7 +119,7 @@ if(isset($_GET['update'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
@@ -129,7 +136,7 @@ if(isset($_GET['update'])){
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_cart['image'].'alt="Product image">';
+ 		echo '<img src="uploaded_img/'.$fetch_cart['image'].'alt="Product image">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';

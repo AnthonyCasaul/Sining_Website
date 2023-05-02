@@ -64,13 +64,13 @@ include('condb.php')
                     <div style="height: 100%; overflow-y: auto; overflow-x: hidden;">
 					<?php
 
-                    $query = $conn->query("SELECT DISTINCT(artGenre) FROM sining_artworks WHERE purchased = '1' ORDER BY artId DESC");
+                    $query = $conn->query("SELECT DISTINCT(artGenre) FROM sining_artworks1 WHERE purchased = '1' ORDER BY artId DESC");
                     
                     foreach($query as $row)
                     {
                     ?>
                     <div class="list-group-item checkbox">
-                        <label><input type="checkbox" class="common_selector category" value="<?php echo $row['artGenre']; ?>"  > <?php echo $row['artGenre']; ?></label>
+                        <label><input type="checkbox" class="common_selector category" value="<?php echo $row['artGenre']; ?>"/> <?php echo $row['artGenre']; ?></label>
                     </div>
                     <?php
                     }

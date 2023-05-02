@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
                         $_SESSION['user_id'] = $row['artistId'];
                         echo '<script>
                         alert('.$row['artistId'].')
-                        window.location.href = "home.php"
+                        window.location.href = "categ_select.php"
                         </script>';
                      }
 

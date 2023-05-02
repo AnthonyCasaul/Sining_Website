@@ -58,3 +58,17 @@
 .btn:hover{
 	background-color: #ffc800;
 }
+
+@media screen and (max-width: 585px) {
+	.head{
+		visibility: hidden;
+	}
+
+	.deets{
+		margin-top: 80px;
+	}
+
+	.orderDeets{
+		margin-top: -160px;
+	}
+}

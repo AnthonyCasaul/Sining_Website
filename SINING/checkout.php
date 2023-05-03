@@ -52,6 +52,13 @@ if(isset($_GET['logout'])){
  		}
  	}
    ?>
+   <span>Payment Method: </span>
+   <label>
+   <input type="radio" name="paymentMethod" id="bankTransfer" value="Bank Transfer"> Bank Transfer 
+   </label>
+   <label>  
+   <input type="radio" name="paymentMethod" id="pickUp" value="Pick-up"> Pick-up
+   </label>
  	</div>
 
 
@@ -67,19 +74,18 @@ if(isset($_GET['logout'])){
          $grand_total = 0;
 
          if(mysqli_num_rows($select_cart) < 1){
-            echo "<h4>no records</h4>";
+            echo "<h4>There are no records for a moment!</h4>";
          }
 
          else if(mysqli_num_rows($select_cart) > 0){
             while($fetch_cart = mysqli_fetch_assoc($select_cart)){
    ?>
 
-         <div class="row">
-            <div class="col-sm-1"><img src="<?php echo $fetch_cart['image']; ?>" height="100" alt="Product image"></div>
-            <div class="col-sm-5"><h2><?php echo $fetch_cart['name']; ?></h2></div>
+         <div class="row orderDeets">
+            <div class="col-sm-2"><img src="<?php echo $fetch_cart['image']; ?>" height="100" alt="Product image"></div>
+            <div class="col-sm-4"><h2><?php echo $fetch_cart['name']; ?></h2></div>
             <div class="col-sm-2"><h2>₱<?php echo number_format($fetch_cart['price'],2); ?></h2></div>
             <div class="col-sm-2"><h2><?php echo $fetch_cart['quantity']; ?></h2></div>
-            <div class="col-sm-2"><h2><?php echo $fetch_cart['artId']; ?></h2></div>
             <div class="col-sm-1"><h2>₱<?php echo $sub = number_format($fetch_cart['price'] * $fetch_cart['quantity'],2); ?></h2></div>
             
             <?php $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); 
@@ -96,7 +102,7 @@ if(isset($_GET['logout'])){
     </div>
     <!-- CONFIMARTION -->
    <div class="ch">
-	<a href="?myAction=doSomething" class="btn" onclick="myFunction()">Confirm</a>
+	<a href="?myAction=doSomething" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" onclick="myFunction()">Confirm</a>
    </div>
 
    <!-- WHEN CLICKED, THE CART BASED ON THE USER SHOULD SHOULD BE DELETED THEN INSERTED TO artist_history TABLE -->
@@ -111,12 +117,8 @@ if(isset($_GET['logout'])){
                                        WHERE a.artistId='$user_id' AND a.ifChecked=1");
       $sql = mysqli_query($conn, "UPDATE `product_status` SET `product_status` = '$stat', `buyer_id` = '$user_id' WHERE `product_status` = '' AND `buyer_id` = '0'");
       $cart_delete = mysqli_query($conn, "DELETE FROM `cart` WHERE artistId='$user_id'");
-      ?>
-
-      <?php
-      header('Location: userhistory.php');
-   }
-   echo "";
+      header('location:userhistory.php');
+  }
    ?>
 
 </div>
@@ -124,6 +126,24 @@ if(isset($_GET['logout'])){
 <script>
 function myFunction() {
   confirm("Are you sure you want to proceed?");
+
+$(document).ready(function() {
+  $('input[name=paymentMethod]').change(function() {
+    var selectedValue = $('input[name=paymentMethod]:checked').val();
+    $.ajax({
+      type: 'POST',
+      url: 'payment_method.php',
+      data: {paymentMethod:selectedValue},
+      success: function(response) {
+        console.log('Payment method saved successfully.',selectedValue);
+      },
+      error: function() {
+        console.log('Error saving payment method.',selectedValue);
+      }
+    });
+  });
+});
+console.log(selectedValue);
 }
 </script>
 <style>

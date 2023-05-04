@@ -42,7 +42,7 @@
                 <h3>Price</h3>
                 <input type="hidden" id="hidden_minimum_price" value="0" />
                 <input type="hidden" id="hidden_maximum_price" value="100000" />
-                <p id="price_show">0 - 100000</p><br>
+                <p id="price_show">1000 - 100000</p>
                 <div id="price_range"></div>
             </div> 
            <div class="list-group">
@@ -163,10 +163,10 @@ $(document).ready(function(){
     });
     $('#price_range').slider({
         range:true,
-        min:0,
+        min:1000,
         max:100000,
-        values:[0, 100000],
-        step:50,
+        values:[1000, 100000],
+        step:500,
         stop:function(event, ui)
         {
             $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);

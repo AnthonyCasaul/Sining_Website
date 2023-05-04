@@ -7,12 +7,12 @@
     height: 100vh;
     margin: 0;
     padding: 0;
-    background: #ededed;
+    background: #2d2d2d;
     box-sizing: border-box;
 }
 .container{
     width: 50%;
-    background: #ededed;
+    background: none;
     position: relative;
     top: 50%;
     left: 50%;
@@ -33,12 +33,10 @@ td{
 }
 .inner-tab{
     margin: 10px;
-    background: #fff;
+    background: #212529;
+    color: #fff;
     border-radius: 10px;
     box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
-}
-.button{
-    border-top: 1px solid #ededed;
 }
 button{
     width: 200px;
@@ -68,15 +66,4 @@ input[type="text"],input[type="number"]{
 }
 input[type="text"]:hover,input[type="number"]:hover{
     border: 2px solid #fcc800;
-}
-table .spacer{
-    height: 30px;
-    background: #ededed;
-    opacity: .1;
-    border: none;
-}
-.header{
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
-    background: #fff;
 }

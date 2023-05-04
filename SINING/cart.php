@@ -136,9 +136,10 @@ if(isset($_GET['delete_all'])){
             <div class="col-sm-2"><h2>₱<?php echo $sub = number_format($fetch_cart['price'] * $fetch_cart['quantity'],2); ?></h2></div>
             <?php $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>
             <div class="col-sm-1"><a href="cart.php?remove=<?php echo $fetch_cart['id']; ?>" onclick="return confirm('Remove artwork(s) from cart?')" class="delete-btn"> <i class='fas'>&#xf2ed;</i></a></div>
+            <?php $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); 
+            ?>
             <hr>
          </div>
-         
          
          <?php
            $grand_total= $grand_total+ $sub_total;  
@@ -146,7 +147,7 @@ if(isset($_GET['delete_all'])){
          };
          ?>        
          <div class="ch">
-         <a href="checkout.php" class="btn">Checkout</a>         
+         <a href="checkout.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">Checkout</a>         
          </div>
 </section>
 
@@ -166,7 +167,7 @@ if(isset($_GET['delete_all'])){
    $.ajax({
     type: "POST",
     url: "eh.php",
-    data: {"id": checked},
+    data: {id: checked},
     success: function(result){
     console.log(result);
     $('#searchResults').html(result);

@@ -3,8 +3,8 @@
 <a href="home.php" id="logo" class="head-navbar"><h1 id="logo">Sining</h1></a>
     <ul>
         <div class="nav-con">
-            <a href="#" class="nav-links">
-                <li class="nav-item">Artworks</li>
+            <a href="filterHome.php" class="nav-links">
+                <li class="nav-item">Buy</li>
             </a>
             <a href="ValidateSeller.php" class="nav-links">
                 <li class="nav-item">Sell</li>
@@ -28,8 +28,8 @@
         <div class="drop-down-btn">
             <img id="drop-down" src="assets/img/arrow.png" onclick="openDiv()">
             <div class="hidden" id="myDiv">
-                <a href="#" class="nav-links">
-                    <li class="nav-item">Artworks</li>
+                <a href="filterHome.php" class="nav-links">
+                    <li class="nav-item">Buy</li><br>
                 </a>
                 <a href="ValidateSeller.php" class="nav-links">
                     <li class="nav-item">Sell</li>

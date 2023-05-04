@@ -11,24 +11,38 @@
 <html>
 <head>
 <title>FILTER PAGE</title>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href = "css/jquery-ui.css" rel = "stylesheet">
+<link rel="stylesheet" href="home.css">
 </head>
 <body>
-<div class="container">
+<div class="wrapper">
+<?php
+    include("navbar.php");
+?>
+    <h1 class="some-txt" style="z-index: 2;">
+    <iframe src="header.php" frameborder="0" width="500" height="100%"></iframe>
+    <br><button><a href="home.php">Browse</a></button></h1>
+<section class="bg-image" id="new-bg-image"></section>
+<div id="searchResults" class="container art-categ-con">
     <div class="row">
     <br />
-    <h2 align="center">FILTER PAGE</h2>
+    <!-- <h2 align="center">FILTER PAGE</h2> -->
     <br />
-        <div class="col-md-3">                                
+        <div class="col-md-3 ano-to">                                
             <div class="list-group">
                 <h3>Price</h3>
                 <input type="hidden" id="hidden_minimum_price" value="0" />
                 <input type="hidden" id="hidden_maximum_price" value="100000" />
-                <p id="price_show">0 - 100000</p>
+                <p id="price_show">0 - 100000</p><br>
                 <div id="price_range"></div>
             </div> 
            <div class="list-group">
@@ -48,7 +62,7 @@
                     }
 
                     ?>
-                    </div>
+                    </div><br>
 
                     <h3>Year</h3>
                     <div style="height: 100%; overflow-y: auto; overflow-x: hidden;">
@@ -66,7 +80,7 @@
                     }
 
                     ?>
-                    </div>
+                    </div><br>
 
                     <h3>Artist</h3>
                     <div style="height: 100%; overflow-y: auto; overflow-x: hidden;">
@@ -90,9 +104,10 @@
         </div>
         <div class="col-md-9">
             <br />
-           <div class="row filter_data">
+           <div class="row filter_data container art-categ-con">
         </div>
     </div>
+</div>
 </div>
 
 <script>

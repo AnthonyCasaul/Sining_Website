@@ -102,7 +102,7 @@ section#new-bg-image{
 }
 
 .filter_data{
-  /* border: 1px solid red; */
+  border: 1px solid red;
   float: right;
   width: 70%;
   columns: 4;
@@ -187,7 +187,7 @@ h3{
 	background: url('loader.gif') no-repeat center; 
 	height: 150px;
 }
-.category{
+.category,.artyear,.artist{
     margin-top: 20px;
     margin-right: 10px;
     -moz-appearance:none;
@@ -201,7 +201,7 @@ h3{
     border-radius: 25px;
     transform: translateY(-0.075em);
 }
-.category:checked{
+.category:checked,.artyear:checked,.artist:checked{
     background-color: #ffc800;
 }
 
@@ -398,6 +398,9 @@ td,table,tr{
     break-inside: avoid;
 }
 @media only screen and (max-width: 1799px){
+    *{
+        /* border: 1px solid red; */
+    }
     .filter_data{
         columns: 3;
     }
@@ -405,7 +408,6 @@ td,table,tr{
         position: relative;
         top: -350%;
         left: 10%;
-        /* border: 1px solid red; */
         width: 50px;
         height: 50px;
         transform: translateY(-50%);
@@ -417,30 +419,24 @@ td,table,tr{
 }
 @media only screen and (max-width: 700px){
   *{
-      /* border: 1px solid red; */
+      border: 1px solid red;
   }
   .art-box{
     width: fit-content;
   }
   .filter_data{
-      columns: 1;
-      /* border: 1px solid red; */
-      width: 100%;
-      position: relative;
-      left: 0;
-      /* transform: translateX(-50%); */
-  }
-  .art-box > *{
-    border: 1px solid red;
+    columns: 1;
+    width: 100%;
+    position: relative;
+    left: 0;
   }
   .ano-to{
-      /* border: 1px solid red; */
-      width: 100%;
-      padding: 20px;
-      height: 70%;
-      margin-top: 20px;
-      margin-left: 0;
-      margin-bottom: 30px;
+    width: 100%;
+    padding: 20px;
+    height: 70%;
+    margin-top: 20px;
+    margin-left: 0;
+    margin-bottom: 30px;
   }
   .art-img h4{
     width: 100%;

@@ -1,3 +1,21 @@
+<style>
+	.image-box img{
+		width: 100%;
+		height: auto;
+	}
+	.image-box .text-danger{
+		color: #000;
+	}
+	.image-box a{
+		text-decoration: none;
+		font-size: larger;
+	}
+	h4{
+		color: #000;
+	}
+</style>
+<div class="img-con">
+<link rel="stylesheet" href="home.css">
 <?php
 include('condb.php');
 
@@ -35,12 +53,38 @@ if(isset($_POST["artistName"]) && !empty($_POST["artistName"]))
 			$url = $sam;
      		$image = base64_encode(file_get_contents('assets/img/sample_image.png'));
             $output .= '
-            <div class="col-sm-4 col-lg-3 col-md-3">
-                <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:320px;">
-                    <img src="data:image/jpeg;base64,'. $image .'" alt="" class="img-responsive" >
-                    <p align="center"><strong><a href="#">'. $row->artTitle .'</a></strong></p>
-                    <h4 style="text-align:center;" class="text-danger" >'. $row->artPrice .'</h4>
-                    <h2 style="text-align:center;" class="text-danger" >'. $row->artGenre .'</h2>
+            <div class="img-con-inner col-sm-4 col-lg-3 col-md-3">
+                <div class=image-box style="
+                    border:none; 
+                    border-radius:5px; 
+                    padding:20px; 
+                    margin-bottom:16px;
+                    width: 300px;
+                    position: relative;
+                    left: 50%;
+                    transform: translateX(-50%);
+                ">
+                
+                    <img src="data:image/jpeg;base64,'.$image.'" alt="" class="img-responsive">
+                <br><br>
+
+                    <p class="text art-title" align="center">'. $row->artTitle .'</p>
+                    <div class="text-box">
+                    <table>
+                        <tr>
+                            <td class="there">Artist</td>
+							<td class="here">'.$row->artistName .'</td>
+                        </tr>
+                        <tr>
+                            <td class="there">Price</td>
+							<td class="here">'.$row->artPrice .'</td>
+                        </tr>
+                        <tr>
+                            <td class="there">Genre</td>
+							<td class="here">'.$row->artGenre .'</td>
+                        </tr>
+                    </table>
+                    </div>
                 </div>
             </div>';
         }
@@ -50,3 +94,4 @@ if(isset($_POST["artistName"]) && !empty($_POST["artistName"]))
     echo $output;
 }
 ?>
+</div>

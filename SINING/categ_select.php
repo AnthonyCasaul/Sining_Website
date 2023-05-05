@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="css/categ_select.css">
-
 <?php session_start();
 include 'condb.php';
 $user_id = $_SESSION['user_id'];
@@ -17,11 +15,10 @@ $select = mysqli_query($conn, "SELECT * FROM `sining_artists` WHERE artistId = '
 
    if ($result->num_rows > 0) {
       echo "<form method='post' action=''>";
-      echo "<h2>What are you interested in?</h2><p>This will customize your new home feed</p>";
       while($row = $result->fetch_assoc()) {
-        echo "<div class='container'><div><label><input type='checkbox' name='cate[]' value='".$row["artGenre"]."'><span>".$row["artGenre"]."</span></label></div></div>";
+        echo "<input type='checkbox' name='cate[]' value='" . $row["artGenre"] . "'>" . $row["artGenre"] . "<br>";
       }
-      echo "<br><input type='submit' name='submit' value=''>";
+      echo "<input type='submit' name='submit' value='Submit'>";
       echo "</form>";
     } else {
       echo "No results found.";
@@ -53,4 +50,5 @@ foreach($checkbox1 as $chk1)
 
 ?>  
 </body> 
+
 </html>

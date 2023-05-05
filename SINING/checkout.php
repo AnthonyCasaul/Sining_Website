@@ -19,6 +19,14 @@ if(isset($_GET['logout'])){
    header('location:index.php');
 }
 
+   use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    require 'phpmailer/src/Exception.php';
+    require 'phpmailer/src/PHPMailer.php';
+    require 'phpmailer/src/SMTP.php';
+
+        
+
 if(isset($_POST['con'])){
    $stat = "To be approved";
       $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image, product_quantity,                              payment_method, buyer_address, seller_id)
@@ -29,7 +37,32 @@ if(isset($_POST['con'])){
                                        WHERE a.artistId='$user_id' AND a.ifChecked=1");
       $sql = mysqli_query($conn, "UPDATE `product_status` SET `product_status` = '$stat', `buyer_id` = '$user_id' WHERE `product_status` = '' AND `buyer_id` = '0'");
       $cart_delete = mysqli_query($conn, "DELETE FROM `cart` WHERE artistId='$user_id' AND ifChecked=1");
-      header('location:userhistory.php');
+      
+
+      $mail = new PHPMailer(true);
+
+        $mail -> isSMTP();
+        $mail -> Host = 'smtp.gmail.com';
+        $mail -> SMTPAuth = true;
+        $mail -> Username = 'sugaxxminyoongixxagustd@gmail.com';
+        $mail -> Password = 'ubagorbqalazafob';
+        $mail -> SMTPSecure = 'ssl';
+        $mail -> Port = 465;
+
+        $mail -> setFrom('sugaxxminyoongixxagustd@gmail.com');
+
+        $mail -> addAddress($_POST["email"]);
+
+        $mail -> isHTML(true);
+
+        $mail -> Subject = $_POST["subject"];
+        $message = $_POST["message"];
+        $signature = "<html><body><br><img src='https://drive.google.com/file/d/1Z04n5puTC7HZPR8a2GZ_Ut5Sq1GLngxC/view?usp=sharing'></body></html>";
+         $mail->Body = "<p>$message</p>$signature";
+
+        $mail -> send();
+
+        header('location:userhistory.php');
 }
 ?>
 <!DOCTYPE html>
@@ -60,7 +93,7 @@ if(isset($_POST['con'])){
                                  FROM `sining_artists` AS a LEFT JOIN
                                  `cart` AS b ON a.artistId = b.artistId
                                  WHERE a.artistId='$user_id'");
-  
+      
    if($user_info === false) {
         // Handle the error here
         echo "Error executing query: " . mysqli_error($conn);
@@ -70,6 +103,10 @@ if(isset($_POST['con'])){
             echo '<h3>Email: '.$fetch_artist['artistEmail'].'</h3>';
             echo '<h3>Address: '.$fetch_artist['buyer_address'].'</h3>';
             echo '<h3>Payment Method: '.$fetch_artist['payment_method'].'</h3>';
+
+            $toemail = $fetch_artist['artistEmail'];
+            $toadd = $fetch_artist['buyer_address'];
+            $toname = $fetch_artist['artistName'];
         }
     }
 
@@ -104,6 +141,10 @@ if(isset($_POST['con'])){
             <div class="col-sm-1"><h2>₱<?php echo $sub = number_format($fetch_cart['price'] * $fetch_cart['quantity'],2); ?></h2></div>
             
             <?php $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); 
+
+                  $ordername = $fetch_cart['name'];
+                  $orderprice = $fetch_cart['price'];
+                  $orderquantity = $fetch_cart['quantity'];
             ?>
             <hr>
          </div>
@@ -117,12 +158,42 @@ if(isset($_POST['con'])){
     </div>
     <!-- CONFIMARTION -->
    <div class="ch">
-   <form action="" method="POST" enctype="multipart/form-data">   
+   <form action="" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="email" value="<?php echo $toemail;?>"><br>
+      <input type="hidden" name="subject" value="Thank you for your order!"><br>
+      <input type="hidden" name="message" value="<pre>
+      Dear <?php echo $toname;?>,
+
+      Thank you for placing an order with SINING. We are thrilled to have you as our customer and are grateful for your business.
+
+      We are writing to let you know that your order has been confirmed and is being processed.
+
+      As a reminder, here are the details of your order:
+
+      Product(s): <?php echo $ordername;?><br>
+
+      Quantity: <?php echo $orderquantity;?><br>
+
+      Price: <?php echo $orderprice;?><br>
+
+      Shipping Address: <?php echo $toadd;?><br>
+
+      If you have any questions about your order, please feel free to reply to this email, and we will get back to you as soon as possible.
+
+      Thank you again for choosing SINING. We appreciate your business and look forward to serving you again in the future.
+
+      Best regards,
+
+      JCRA Studio
+      SINING Team.
+      </pre>"><br>
 	<input type="submit" name="con" value="Confirm" class="btn" />
    </form>
    </div>
 
 </div>
+
+
 
 <script>
 function myFunction() {

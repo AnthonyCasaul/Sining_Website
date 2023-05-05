@@ -116,13 +116,12 @@ if(isset($_GET['delete_all'])){
             while($fetch_cart = mysqli_fetch_assoc($select_cart)){
          ?>
          <div class="row deets">
-            <div class="col-sm-1"><input type="checkbox" id="myCheckbox" value="<?php echo $fetch_cart['id']; ?>"></div>            
+            <div class="col-sm-1"><input type="checkbox" name="myCheckbox[]" value="<?php echo $fetch_cart['id']; ?>"></div>            
             <div class="col-sm-2"><img src="<?php echo $fetch_cart['image']; ?>" height="100" alt=""></div>
             <div class="col-sm-2"><h2><?php echo $fetch_cart['name']; ?></h2></div>
             <div class="col-sm-2"><h2>₱<?php echo number_format($fetch_cart['price'],2); ?></h2></div>
             <div class="col-sm-2">
                <form action="" method="post">
-                  <input type="hidden" name="update_quantity_id"  value="<?php echo $fetch_cart['id']; ?>" >
                   <input type="text" name="artId"  value="<?php echo $fetch_cart['artId']; ?>" hidden = "" >
                   <div class="quan">
                   <input type="submit" name="dec" value="-">
@@ -147,7 +146,7 @@ if(isset($_GET['delete_all'])){
          };
          ?>        
          <div class="ch">
-         <a href="checkout.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">Checkout</a>         
+         <a href="payment_method.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">Checkout</a>         
          </div>
 </section>
 
@@ -158,38 +157,39 @@ if(isset($_GET['delete_all'])){
    }
 </style>
 <script type="text/javascript">
-   const myCheckbox = document.getElementById('myCheckbox');
+const myCheckboxes = document.querySelectorAll('input[name="myCheckbox[]"]');
 
-   myCheckbox.addEventListener('change', function() {
-  if (this.checked) {
-   var checked = $('#myCheckbox').val();
-   console.log("checked");
-   $.ajax({
-    type: "POST",
-    url: "eh.php",
-    data: {id: checked},
-    success: function(result){
-    console.log(result);
-    $('#searchResults').html(result);
-    }
-});   
-
-  } else {
-    // Checkbox is not checked
-    // Do something else
-    console.log("not checked");
-    var checked = $('#myCheckbox').val();
-   $.ajax({
-    type: "POST",
-    url: "uncheck.php",
-    data: {"id": checked},
-    success: function(result){
-    console.log(result);
-    $('#searchResults').html(result);
-    }
-   }); 
-  }
+myCheckboxes.forEach(function(myCheckbox) {
+  myCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        var checked = this.value; // Get the value of the clicked checkbox
+        console.log("checked");
+        $.ajax({
+          type: "POST",
+          url: "eh.php",
+          data: {id: checked},
+          success: function(result){
+            console.log(result);
+            $('#searchResults').html(result);
+          }
+        });   
+      } 
+      else {
+        console.log("not checked");
+        var unchecked = this.value;
+        $.ajax({
+          type: "POST",
+          url: "uncheck.php",
+          data: {id: unchecked},
+          success: function(result){
+            console.log(result);
+            $('#searchResults').html(result);
+          }
+        }); 
+      }
+  });
 });
+
 
 </script>
 </body>

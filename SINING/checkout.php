@@ -18,6 +18,19 @@ if(isset($_GET['logout'])){
    session_destroy();
    header('location:index.php');
 }
+
+if(isset($_POST['con'])){
+   $stat = "To be approved";
+      $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image, product_quantity,                              payment_method, buyer_address, seller_id)
+                                       SELECT a.artId, a.name, a.price, a.image, a.quantity, a.payment_method, a.buyer_address, b.artistId 
+                                       FROM `cart` AS a
+                                       LEFT JOIN `sining_artworks1` AS b 
+                                       ON a.artId = b.artId
+                                       WHERE a.artistId='$user_id' AND a.ifChecked=1");
+      $sql = mysqli_query($conn, "UPDATE `product_status` SET `product_status` = '$stat', `buyer_id` = '$user_id' WHERE `product_status` = '' AND `buyer_id` = '0'");
+      $cart_delete = mysqli_query($conn, "DELETE FROM `cart` WHERE artistId='$user_id' AND ifChecked=1");
+      header('location:userhistory.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,22 +56,24 @@ if(isset($_GET['logout'])){
  	<div class="user_info">
  		<h2>User Information</h2>
  		<?php
- 		$user_info = mysqli_query($conn, "SELECT * FROM `sining_artists` WHERE artistId='$user_id'");
- 		if(mysqli_num_rows($user_info) > 0){
-            while($fetch_artist = mysqli_fetch_assoc($user_info)){
- 		echo '<h3>Name: '.$fetch_artist['artistName'].'</h3>';
- 		echo '<h3>Email: '.$fetch_artist['artistEmail'].'</h3>';
- 		echo '<h3>Address: '.$fetch_artist['artistLocation'].'</h3>';
- 		}
- 	}
-   ?>
-   <span>Payment Method: </span>
-   <label>
-   <input type="radio" name="paymentMethod" id="bankTransfer" value="Bank Transfer"> Bank Transfer 
-   </label>
-   <label>  
-   <input type="radio" name="paymentMethod" id="pickUp" value="Pick-up"> Pick-up
-   </label>
+ 		$user_info = mysqli_query($conn, "SELECT DISTINCT a.artistName, a.artistEmail, b.payment_method, b.buyer_address 
+                                 FROM `sining_artists` AS a LEFT JOIN
+                                 `cart` AS b ON a.artistId = b.artistId
+                                 WHERE a.artistId='$user_id'");
+  
+   if($user_info === false) {
+        // Handle the error here
+        echo "Error executing query: " . mysqli_error($conn);
+    } else if(mysqli_num_rows($user_info) > 0){
+        while($fetch_artist = mysqli_fetch_assoc($user_info)){
+            echo '<h3>Name: '.$fetch_artist['artistName'].'</h3>';
+            echo '<h3>Email: '.$fetch_artist['artistEmail'].'</h3>';
+            echo '<h3>Address: '.$fetch_artist['buyer_address'].'</h3>';
+            echo '<h3>Payment Method: '.$fetch_artist['payment_method'].'</h3>';
+        }
+    }
+
+   ?>   
  	</div>
 
 
@@ -74,7 +89,7 @@ if(isset($_GET['logout'])){
          $grand_total = 0;
 
          if(mysqli_num_rows($select_cart) < 1){
-            echo "<h4>There are no records for a moment!</h4>";
+            echo "<h4>There are no records for the moment!</h4>";
          }
 
          else if(mysqli_num_rows($select_cart) > 0){
@@ -102,31 +117,17 @@ if(isset($_GET['logout'])){
     </div>
     <!-- CONFIMARTION -->
    <div class="ch">
-	<a href="?myAction=doSomething" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>" onclick="myFunction()">Confirm</a>
+   <form action="" method="POST" enctype="multipart/form-data">   
+	<input type="submit" name="con" value="Confirm" class="btn" />
+   </form>
    </div>
-
-   <!-- WHEN CLICKED, THE CART BASED ON THE USER SHOULD SHOULD BE DELETED THEN INSERTED TO artist_history TABLE -->
-   <?php
-   if (isset($_GET['myAction']) && $_GET['myAction'] == 'doSomething') {
-      $stat = "To be approved";
-      $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image, product_quantity, seller_id)
-                                       SELECT a.artId, a.name, a.price, a.image, a.quantity, b.artistId 
-                                       FROM `cart` AS a
-                                       LEFT JOIN `sining_artworks1` AS b 
-                                       ON a.artId = b.artId
-                                       WHERE a.artistId='$user_id' AND a.ifChecked=1");
-      $sql = mysqli_query($conn, "UPDATE `product_status` SET `product_status` = '$stat', `buyer_id` = '$user_id' WHERE `product_status` = '' AND `buyer_id` = '0'");
-      $cart_delete = mysqli_query($conn, "DELETE FROM `cart` WHERE artistId='$user_id'");
-      header('location:userhistory.php');
-  }
-   ?>
 
 </div>
 
 <script>
 function myFunction() {
   confirm("Are you sure you want to proceed?");
-
+  windows.location.href="userhistory.php";
 $(document).ready(function() {
   $('input[name=paymentMethod]').change(function() {
     var selectedValue = $('input[name=paymentMethod]:checked').val();

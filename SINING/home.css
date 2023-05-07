@@ -108,8 +108,13 @@ section#new-bg-image {
   /* border: 1px solid red; */
 }
 
+<<<<<<< HEAD
 .filter_data {
   /* border: 1px solid red; */
+=======
+.filter_data{
+  border: 1px solid red;
+>>>>>>> parent of aee37e7 (redesigned categ_select and seller_upload)
   float: right;
   width: 70%;
   columns: 4;

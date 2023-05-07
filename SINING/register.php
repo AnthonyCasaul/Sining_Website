@@ -50,7 +50,7 @@ if(isset($_POST['submit'])){
    <title>SINING Register</title>
    <link rel="stylesheet" href="css/loginregister.css">
 </head>
-<body background="loginbg.jpg">
+<body background="assets/img/loginbg.jpg">
    
 <div class="container reg">
 

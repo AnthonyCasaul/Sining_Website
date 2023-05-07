@@ -71,8 +71,10 @@ input[type="submit"]{
 	font-size: 30px;
 }
 
-img{
-	margin-bottom: 15%;
+.deets .cartImg{
+	height: 160px;
+	width: auto;
+	margin-bottom: 10px;
 }
 
 .tot{
@@ -110,9 +112,3 @@ img{
   }
 }
 
-@media screen and (max-width: 768px) {
-	.deets h2{
-		font-size: 18px;
-	}
-	
-}

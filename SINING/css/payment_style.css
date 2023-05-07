@@ -4,11 +4,6 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-header{
-    background-color: #212529;
-}
-
-
 .cont{
 	margin-top: 180px;
 	width: 50%;
@@ -18,10 +13,16 @@ header{
     border-radius: 10px;
 	box-shadow: 5px 10px 5px rgba(0, 0, 0, .3);
 	color: white;
-	overflow-x: hidden;
+
+   	overflow-x: hidden;
 }
 
-button{
+input{
+      margin-bottom: 13px;
+      margin-right: 15px;
+}
+
+input[type=submit]{
     width: 20%;
     color: white;
     left: 50%;
@@ -33,16 +34,21 @@ button{
     border-radius: 10px;
 }
 
-button:hover{
+input[type=submit]:hover{
     background-color: #ffc800;
     color: black;
     font-weight: bold;
 }
 
-input[type=text]{
-	width: 100%;
+input[type=radio]{
+   	width: 5%;
 }
 
+input[type=text]{
+   	width: 100%;
+   	font-weight: bold;
+   	border-radius: 10px;
+}
 
 /* MEDIA SCREENS */
 @media screen and (max-width: 376px) {
@@ -55,17 +61,22 @@ input[type=text]{
    	width: 80%;
 }
 
-button{
+input[type=submit]{
 	width: 50%;
 }
 }
 
-@media screen and (max-width: 326px) {
-input[type=text]{
-   	width: 50%;
+@media screen and (max-width: 325px) {
+.cont{
+   	width: 100%;
+   	font-size: 16px;
 }
 
-button{
+input[type=text]{
+   	width: 290px;
+}
+
+input[type=submit]{
 	width: 30%;
 }
 }
@@ -80,7 +91,7 @@ input[type=text]{
    	width: 390px;
 }
 
-button{
+input[type=submit]{
 	width: 50%;
 }
 }

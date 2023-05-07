@@ -80,7 +80,12 @@ if(isset($_GET['delete_all'])){
    <?php
       include("navbar.php");
    ?>
-   
+   <style>
+   header{
+      background-color: #212529;
+   }
+   </style>
+
 </head>
 <script type="text/javascript">
    function zoom() {
@@ -88,8 +93,7 @@ if(isset($_GET['delete_all'])){
    }
 </script>
 
-    <body onload="zoom()">
-
+<body onload="zoom()">
 <div class="container">
 
 <section class="shopping-cart">
@@ -116,18 +120,18 @@ if(isset($_GET['delete_all'])){
             while($fetch_cart = mysqli_fetch_assoc($select_cart)){
          ?>
          <div class="row deets">
-            <div class="col-sm-1"><input type="checkbox" name="myCheckbox[]" value="<?php echo $fetch_cart['id']; ?>"></div>            
-            <div class="col-sm-2"><img src="<?php echo $fetch_cart['image']; ?>" height="100" alt=""></div>
+            <div class="col-sm-1 col-2"><input type="checkbox" name="myCheckbox[]" value="<?php echo $fetch_cart['id']; ?>" required></div>            
+            <div class="col-sm-2 col-10"><img src="<?php echo $fetch_cart['image']; ?>" height="100" alt="" class="img-fluid cartImg"></div>
             <div class="col-sm-2"><h2><?php echo $fetch_cart['name']; ?></h2></div>
             <div class="col-sm-2"><h2>₱<?php echo number_format($fetch_cart['price'],2); ?></h2></div>
             <div class="col-sm-2">
                <form action="" method="post">
                   <input type="text" name="artId"  value="<?php echo $fetch_cart['artId']; ?>" hidden = "" >
                   <div class="quan">
-                  <input type="submit" name="dec" value="-">
+                  <!-- <input type="submit" name="dec" value="-"> -->
                   <input type="number" name="update_quantity" value="<?php echo $fetch_cart['quantity']; ?>" placeholder="1" readonly>
-                  <input type="submit" name="inc" value="+">
-                  <!--<input type="submit" value="Update" name="update_update_btn">-->
+                  <!-- <input type="submit" name="inc" value="+"> -->
+                  <!-- <input type="submit" value="Update" name="update_update_btn"> -->
                </div>
                </form>
             </div>
@@ -146,18 +150,36 @@ if(isset($_GET['delete_all'])){
          };
          ?>        
          <div class="ch">
-         <a href="payment_method.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">Checkout</a>         
+         <?php 
+         if(mysqli_num_rows($select_cart) < 1){
+         echo "<a class='btn' disabled>Checkout</a>";
+         } 
+         else {
+         echo "<a href='payment_method.php' class='btn' onclick='return validateCheckboxes();'>Checkout</a>";
+         }
+         ?> 
          </div>
 </section>
 
 </div>
-<style>
-   header{
-      background-color: #212529;
-   }
-</style>
+
 <script type="text/javascript">
 const myCheckboxes = document.querySelectorAll('input[name="myCheckbox[]"]');
+
+ function validateCheckboxes() {
+    const checkboxes = document.querySelectorAll('input[name="myCheckbox[]"]');
+    let isChecked = false;
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        isChecked = true;
+      }
+    });
+    if (!isChecked) {
+      alert('Select at least one artwork before proceeding to checkout.');
+      return false;
+    }
+    return true;
+  }
 
 myCheckboxes.forEach(function(myCheckbox) {
   myCheckbox.addEventListener('change', function() {
@@ -189,8 +211,6 @@ myCheckboxes.forEach(function(myCheckbox) {
       }
   });
 });
-
-
 </script>
 </body>
 </html>

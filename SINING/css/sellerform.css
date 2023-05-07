@@ -60,3 +60,9 @@ button:hover{
     background-color: #ffc800;
     color: #000;
 }
+
+@media screen and (max-width: 321px){
+    input[type=text] {   
+        width: 20%;
+    }
+}

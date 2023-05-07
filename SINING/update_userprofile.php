@@ -60,7 +60,7 @@ if(isset($_POST['update_profile'])){
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-   <link rel="stylesheet" href=" css/sellerform.css">
+   <link rel="stylesheet" type="text/css" href="css/updateprofile.css">
    <?php
         include("navbar.php");
     ?>
@@ -82,7 +82,7 @@ if(isset($_POST['update_profile'])){
 
 <body>
    
-<div class="seller-con">
+<div class="container cont">
 
    <?php
       $select = mysqli_query($conn, "SELECT * FROM `sining_artists` WHERE artistId = '$user_id'") or die('query failed');
@@ -92,13 +92,12 @@ if(isset($_POST['update_profile'])){
    ?>
 
    <br>
-   <table>
    <form action="" method="post" enctype="multipart/form-data">
       <?php
          if($fetch['artistProfile'] == ''){
             echo '<img src="images/default-avatar.png">';
          }else{
-            echo '<img src=" img/'.$fetch['artistProfile'].'">';
+            echo '<img src="'.$fetch['artistProfile'].'">';
          }
          if(isset($message)){
             foreach($message as $message){
@@ -106,32 +105,20 @@ if(isset($_POST['update_profile'])){
             }
          }
       ?>
-            <tr>
-            <td><label>Profile Picture :</label></td>
-            <td><input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box"></td>
-            </tr>
+            <label>Profile Picture :</label>
+            <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box"><br>
            <!-- <span>Cover Photo :</span><br>
             <input type="file" name="update_cover" accept="image/jpg, image/jpeg, image/png" class="box"><br><br><br>-->
-            <tr>
-            <td><label>Username :</label></td>
-            <td><input type="text" name="update_name" value="<?php echo $fetch['artistName']; ?>" class="box"></td>
-            </tr>
-            <tr>
-            <td><label>Contact :</label></td>
-            <td><input type="text" name="update_contact" value="<?php echo $fetch['artistContact']; ?>" class="box"></td>
-            </tr>
-            <tr>
-            <td><label>Location :</label></td>
-            <td><input type="text" name="update_location" value="<?php echo $fetch['artistLocation']; ?>" class="box"></td>
-            </tr>
-            <tr>
-            <td><label>Bio :</label></td>
-            <td><input type="text" name="update_bio" value="<?php echo $fetch['artistBio']; ?>" class="box"></td>
-            </tr>
-            <tr>
-            <td colspan="2"><button type="submit">Confirm</button></td>
-            </tr>
-            </table>
+            <label>Username :</label><br>
+            <input type="text" name="update_name" value="<?php echo $fetch['artistName']; ?>" class="box">
+            
+            <label>Contact :</label>
+            <input type="text" name="update_contact" value="<?php echo $fetch['artistContact']; ?>" class="box">
+            
+            <label>Location :</label>
+            <input type="text" name="update_location" value="<?php echo $fetch['artistLocation']; ?>" class="box">
+            <label>Bio :</label><input type="text" name="update_bio" value="<?php echo $fetch['artistBio']; ?>" class="box">
+            <button type="submit">Confirm</button>
          
          <!--<a href="userprofile.php" class="btn">BACK</a>-->
    </form>

@@ -18,6 +18,8 @@ if(isset($_GET['logout'])){
    header('location:index.php');
 }
 
+$query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
+
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +122,11 @@ if(isset($_GET['logout'])){
             <div class="tags"><?php echo $tags;?></div>
 
             <input type="hidden" id="product_id" name="product_id" value="<?php echo $ID; ?>">
-            <button onclick="addTocart()" class="cart_btn">ADD TO CART</button>
+            <?php 
+            if(mysqli_num_rows($query) == 0){
+            echo '<button onclick="addTocart()" class="cart_btn">ADD TO CART</button>';
+            }
+            ?>
             <button onclick="buyNow()" class="cart_btn">BUY NOW</button>
          </div></div></div>
             <br><br>
@@ -185,21 +191,16 @@ if(isset($_GET['logout'])){
 <script src="js/scripts.js"></script>
 <script>
    function addTocart() {
+      confirm("Product added to cart!");
        const productId = $('#product_id').val();
        console.log(productId);
+
 
        $.ajax({
     type: "POST",
     url: "add_Tocart.php",
     data: {"product_id": productId},
     success: function(result){
-    Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  title: 'Added to Cart',
-  showConfirmButton: false,
-  timer: 1500
-})
     }
 });	
 

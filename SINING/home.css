@@ -45,24 +45,29 @@ h1 {
   height: 100px;
   z-index: -1;
 }
-h1 > button {
+h1 > a > button {
   color: #fff;
   padding: 20px 30px 20px 30px;
   text-align: center;
   justify-content: center;
   align-items: center;
-  border: 1px solid #fff;
-  background: none;
+  border: none;
+  background: #ffc800;
+  border-radius: 25px;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-h1 > button:hover {
+h1 > a > button:hover {
   cursor: pointer;
   border: #ffc800;
-  color: #ffc800;
+  color: #fff;
   box-shadow: 0 0px 15px rgb(255, 200, 000);
+}
+
+h1 > a{
+  text-decoration: none;
 }
 /* 
 img[src="assets/img/bg-org.jpg"]{
@@ -108,16 +113,12 @@ section#new-bg-image {
   /* border: 1px solid red; */
 }
 
-<<<<<<< HEAD
 .filter_data {
   /* border: 1px solid red; */
-=======
-.filter_data{
-  border: 1px solid red;
->>>>>>> parent of aee37e7 (redesigned categ_select and seller_upload)
   float: right;
   width: 70%;
   columns: 4;
+  margin-right: 20px;
   text-align: center;
   align-items: center;
   /* margin-right: 50px; */

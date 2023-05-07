@@ -1,5 +1,4 @@
 *{
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -8,13 +7,24 @@
     height: 100vh;
     margin: 0;
     padding: 0;
-    background: #2d2d2d;
+    background: #ededed;
     box-sizing: border-box;
 }
-.inner-tab, .inner-tab td{
+.container{
+    width: 50%;
+    background: #ededed;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+table,td{
     border-collapse: collapse;
 }
-.inner-tab td{
+td{
     height: 80px;
     padding: 10px 30px;
 }
@@ -22,21 +32,15 @@
     margin: 0;  
 }
 .inner-tab{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
     margin: 10px;
-    background: #212529;
-    color: #fff;
+    background: #fff;
     border-radius: 10px;
     box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
-    /* border: 1px solid red; */
 }
 .button{
     border-top: 1px solid #ededed;
 }
-button[type="submit"],.cancel{
+button{
     width: 200px;
     padding: 10px;
     border-radius: 10px;
@@ -46,7 +50,7 @@ button[type="submit"],.cancel{
     background: #2f3640;
     color: #fff;
 }
-button[type="submit"]:hover,.cancel:hover{
+button:hover{
     cursor: pointer;
     background: #fcc800;
     transition: .4s;
@@ -64,4 +68,15 @@ input[type="text"],input[type="number"]{
 }
 input[type="text"]:hover,input[type="number"]:hover{
     border: 2px solid #fcc800;
+}
+table .spacer{
+    height: 30px;
+    background: #ededed;
+    opacity: .1;
+    border: none;
+}
+.header{
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+    background: #fff;
 }

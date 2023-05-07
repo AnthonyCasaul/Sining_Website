@@ -84,69 +84,55 @@ if(isset($_POST["submit"])){
   <form class="" action="" method="post" autocomplete="off" enctype="multipart/form-data">
 
   <div class="wrapper">
-   <div class="container">
-   <table class="outer-tab">
-      <tr>
-         <td colspan="2" class="header"><h1>Add Products</h1></td>
-      </tr>
-      <tr>
-         <td colspan="2" class="spacer"></td>
-      </tr>
-      <td>
-
-            <table class="inner-tab">
-            <tr>
-         <td>
-            <label for="title">Title : </label>
-         </td>
-         <td>
-            <input type="text" name="title" id = "title" required value="">
-         </td>
+      <table class="inner-tab">
+         <tr>
+            <td>
+               <label for="title">Title : </label>
+            </td>
+            <td>
+               <input type="text" name="title" id = "title" required value="">
+            </td>
          </tr>
-      <tr>
-         <td> 
-            <label for="genre">genre : </label>
-         </td>
-         <td>
-            <input type="text" name="genre" id = "genre" required value="">
-         </td>
+         <tr>
+            <td> 
+               <label for="genre">genre : </label>
+            </td>
+            <td>
+               <input type="text" name="genre" id = "genre" required value="">
+            </td>
+            </tr>
+         <tr>
+            <td>
+               <label for="price">Price: </label>
+            </td>
+            <td>
+               <input type="number" name="price" id = "price" required value="">
+            </td>
          </tr>
-      <tr>
-         <td>
-            <label for="price">Price: </label>
-         </td>
-         <td>
-            <input type="number" name="price" id = "price" required value="">
-         </td>
+         <tr>
+            <td>
+               <label for="image">Image : </label>
+            </td>
+            <td>
+               <input type="file" name="image" id ="image" accept=".jpg, .jpeg, .png" value="">
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <label for="tags">Tags: </label>
+            </td>
+            <td>
+               <input name="tags" id="tags" />
+            </td>
+         </tr>
+         <tr>
+            <td colspan="2" class="button">
+               <button type="submit" name ="submit">Submit</button>
+               </form>
+               <a href="sellerprofile.php"><button class="cancel">Cancel</button></a>
+            </td>
       </tr>
-      <tr>
-         <td>
-            <label for="image">Image : </label>
-         </td>
-         <td>
-            <input type="file" name="image" id ="image" accept=".jpg, .jpeg, .png" value="">
-         </td>
-      </tr>
-      <tr>
-         <td>
-            <label for="tags">Tags: </label>
-         </td>
-         <td>
-            <input name="tags" id="tags" />
-         </td>
-      </tr>
-      <tr>
-         <td colspan="2" class="button">
-            <button type = "submit" name = "submit">Submit</button>
-            </form>
-            <a href="sellerprofile.php"><button>Cancel</button></a>
-         </td>
-      </tr>
-            </table>
-         </td>
-   </table>
-   </tr>
-   </div>
+      </table>
   </div>
   <!-- Tags -->
   <script src="js/tagsinput.js"></script>  

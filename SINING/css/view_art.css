@@ -76,9 +76,6 @@ table{
 	/* border: 1px solid red; */
 	border-collapse: separate;
 	border-spacing: 0 20px;
-	/* position: relative;
-	left: 50%;
-	transform: translateX(); */
 }
 ::-webkit-scrollbar {
     width: 5px;
@@ -98,11 +95,9 @@ table{
 }
 .container{
 	background-color: #212529;
-	/* width: 1100px; */
 	width: 100%;
-	/* border: 1px solid red; */
 	padding: 0;
-	margin: 0 auto;
+	/* margin: 0 auto; */
 	margin-top: 100px;
 	border-radius: 25px;
 	box-shadow: 5px 10px 5px rgba(0, 0, 0, .3);
@@ -119,21 +114,23 @@ table{
 	/* border: 1px solid red; */
 	width: 100%;
 	padding: 0;
-	margin: 0;
+	margin: 0 auto;
 	columns: 4;
 }
 .recommended-art-inner-box{
-	width: 100%;
+	width: 250px !important;
 	background-color: #212529;
-	padding: 20px;
+	/* padding: 20px; */
 	box-shadow: 5px 10px 5px rgba(0, 0, 0, .3);
 	/* border: 1px solid red; */
+	padding-top: 20px;
 }
 .recommended-art-table{
 	width: fit-content;
-	position: relative;
+	/* border: 1px solid red; */
+	/* position: relative;
 	left: 50%;
-	transform: translateX(-50%);
+	transform: translateX(-50%); */
 }
 h5, p{
 	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -141,7 +138,7 @@ h5, p{
 }
 
 .recommended-art-inner-box img{
-	width: 350px;
+	width: 250px !important;
 	height: auto;
 	padding: 0;
 	padding-bottom: 10px;
@@ -170,6 +167,7 @@ h5, p{
 	height: auto;
 	background-color: #212529;
 	box-shadow: 5px 10px 5px rgba(0, 0, 0, .3);
+	/* border: 1px solid red; */
 
 }
 .other-art-box{
@@ -196,7 +194,34 @@ td{
 img:hover{
 	cursor: pointer;
 }
-@media only screen and (max-width: 700px) {
+iframe[src="footer.php"]{
+	margin-top: 50px;
+	height: 80px;
+	display: block;
+	line-height: 0px;
+}
+.artist-name-btn:hover{
+	cursor: pointer;
+	color: #ffc800;
+}
+@media only screen and (max-width: 1799px){
+	#recommended_arts{
+		/* border: 1px solid red; */
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		columns: 3;
+	}
+}
+@media only screen and (max-width: 1300px){
+	*{
+		/* border: 1px solid red; */
+	}
+	#recommended_arts{
+		columns: 2;
+	}
+}
+@media only screen and (max-width: 1000px) {
 	#recommended_arts{
 		columns: 1;
 	}

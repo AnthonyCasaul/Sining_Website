@@ -53,6 +53,7 @@ button[type="submit"]:hover,.cancel:hover{
 }
 input[type="file"]{
     width: 190px;
+    color: #fff;
 }
 input[type="text"],input[type="number"]{
     padding: 5px;

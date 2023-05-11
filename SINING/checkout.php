@@ -29,17 +29,27 @@ if(isset($_GET['logout'])){
 
 if(isset($_POST['con'])){
    $stat = "To be approved";
-      $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image, product_quantity, payment_method, buyer_address, seller_id)
-                                       SELECT a.artId, a.name, a.price, a.image, a.quantity, a.payment_method, a.buyer_address, b.artistId 
+
+      $selectNotification = mysqli_query($conn, "SELECT a.*, c.seller_name, c.seller_email, c.seller_id FROM `cart` AS a
+                                   LEFT JOIN `sining_artworks1` AS b ON a.artId = b.artId
+                                   LEFT JOIN `sining_sellers` AS c ON b.seller_id = c.seller_id
+                                   WHERE a.artistId='$user_id' AND a.ifChecked= 1");
+
+             while($fetch = mysqli_fetch_assoc($selectNotification)){
+                  $sellerID = $fetch["seller_id"];
+
+               
+             }
+
+      $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image,product_quantity, payment_method, buyer_address, buyer_name, seller_id)
+                                       SELECT a.artId, a.name, a.price, a.image, a.quantity, a.payment_method, a.buyer_address, 
+                                       a.buyer_name, b.seller_id                                       
                                        FROM `cart` AS a
                                        LEFT JOIN `sining_artworks1` AS b 
                                        ON a.artId = b.artId
-                                       WHERE a.artistId='$user_id' AND a.ifChecked=1");
-      $sql = mysqli_query($conn, "UPDATE `product_status` SET `product_status` = '$stat', `buyer_id` = '$user_id' WHERE `product_status` = '' AND `buyer_id` = '0'");
-      
+                                       WHERE a.artistId='$user_id' AND a.ifChecked=1");      
       $cart_delete = mysqli_query($conn, "DELETE FROM `cart` WHERE artistId='$user_id' AND ifChecked=1");
       
-
       $mail = new PHPMailer(true);
 
         $mail -> isSMTP();
@@ -88,10 +98,13 @@ if(isset($_POST['con'])){
 
         $mail -> send();
 
-        $sql1 = $sql = mysqli_query($conn, "UPDATE `sining_artworks1` SET `purchased` = '0' WHERE `artId` = '$orderId'");
-        $result1 = mysqli_query($conn, $sql);
+      $artid = $_POST['orderID'];
 
-      header('location:userhistory.php');
+      $sql1 = mysqli_query($conn, "UPDATE `sining_artworks1` SET purchased = '0' WHERE artId = '$artid'");
+      $sql2 = mysqli_query($conn, "UPDATE `sining_artworks` SET purchased = '0' WHERE artId = '$artid'");
+      //   $result1 = mysqli_query($conn, $sql1);
+
+      header('location:userhistory.php'); 
 }
 ?>
 <!DOCTYPE html>
@@ -121,7 +134,7 @@ if(isset($_POST['con'])){
  		$user_info = mysqli_query($conn, "SELECT DISTINCT a.artistName, a.artistEmail, b.payment_method, b.buyer_address 
                                  FROM `sining_artists` AS a LEFT JOIN
                                  `cart` AS b ON a.artistId = b.artistId
-                                 WHERE a.artistId='$user_id'");
+                                 WHERE a.artistId='$user_id' AND ifChecked=1");
       
    if($user_info === false) {
         // Handle the error here
@@ -153,38 +166,58 @@ if(isset($_POST['con'])){
             <div class="col-sm-5"></div>
             <div class="col-sm-2"><p>Price</p></div>
             <div class="col-sm-2"><p>Quantity</p></div>
-            <div class="col-sm-1"><p>Total</p></div>
+            <div class="col-sm-1"><p>Seller</p></div>
 	</div>
  	<?php          
-        // $select_cart = mysqli_query($conn, "SELECT a.*, b.*, c.* FROM `cart` AS a
-        //                            LEFT JOIN `sining_artworks1` AS b ON a.artId = b.artId
-        //                            LEFT JOIN `sining_sellers` AS c ON b.seller_id = c.seller_id
-        //                            WHERE a.artistId='$user_id' AND a.ifChecked= 1");
+        $select_cart = mysqli_query($conn, "SELECT a.*, c.seller_name, c.seller_email, c.seller_id FROM `cart` AS a
+                                   LEFT JOIN `sining_artworks1` AS b ON a.artId = b.artId
+                                   LEFT JOIN `sining_sellers` AS c ON b.seller_id = c.seller_id
+                                   WHERE a.artistId='$user_id' AND a.ifChecked= 1");
 
-        $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE artistId='$user_id' AND ifChecked= 1");
+        //$select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE artistId='$user_id' AND ifChecked= 1");
         $grand_total = 0;
+        $ordernametot = "";
+        $orderpricetot = 0;
+        $orderqtytot = 0;
+        $ordersellertot = "";
 
          if(mysqli_num_rows($select_cart) < 1){
             echo "<h4>There are no records at the moment!</h4>";
          }
-
+                  
          else if(mysqli_num_rows($select_cart) > 0){
             while($fetch_cart = mysqli_fetch_assoc($select_cart)){
+               
    ?>
 
          <div class="row orderDeets">
-            <div class="col-sm-2"><img src="<?php echo $fetch_cart['image']; ?>" height="100" alt="Product image"></div>
+            <div class="col-sm-2"><img src="seller_file/artworks/seller_<?php echo $fetch_cart['seller_id']; ?>/<?php echo $fetch_cart['image']; ?>" height="100" alt="Product image"></div>
             <div class="col-sm-4"><h2><?php echo $fetch_cart['name']; ?></h2></div>
             <div class="col-sm-2"><h2>₱<?php echo number_format($fetch_cart['price'],2); ?></h2></div>
             <div class="col-sm-2"><h2><?php echo $fetch_cart['quantity']; ?></h2></div>
-            <div class="col-sm-1"><h2>₱<?php echo $sub = number_format($fetch_cart['price'] * $fetch_cart['quantity'],2); ?></h2></div>
+            <div class="col-sm-1"><h2><?php echo $fetch_cart['seller_name']; ?></h2></div>
             
             <?php $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); 
 
                   $ordername = $fetch_cart['name'];
+                  
+                  if($ordernametot == ""){
+                     $ordernametot = $ordername;
+                  }else{
+                     $ordernametot = $ordernametot . ", " . $ordername;
+                  }
                   $orderprice = $fetch_cart['price'];
+                  $orderpricetot = $orderpricetot + $orderprice;
                   $orderquantity = $fetch_cart['quantity'];
+                  $orderqtytot = $orderqtytot + $orderquantity;
                   $orderseller = $fetch_cart['seller_name'];
+                  if($ordersellertot != $orderseller){
+                     if($ordersellertot == ""){
+                        $ordersellertot = $orderseller;
+                     }else{
+                        $ordersellertot = $ordersellertot . ", " . $orderseller;
+                     }
+                  }
                   $orderselleremail = $fetch_cart['seller_email'];
                   $orderId = $fetch_cart['artId'];
 
@@ -202,6 +235,7 @@ if(isset($_POST['con'])){
     <!-- CONFIMARTION -->
    <div class="ch">
    <form action="" method="POST" enctype="multipart/form-data">
+   <input type="hidden" name="orderID" value="<?php echo $orderId;?>"><br>
       <input type="hidden" name="email" value="<?php echo $toemail;?>"><br>
       <input type="hidden" name="subject" value="Thank you for your order!"><br>
       <input type="hidden" name="message" value="<pre>
@@ -213,11 +247,11 @@ if(isset($_POST['con'])){
 
       As a reminder, here are the details of your order from <?php echo $orderseller;?>:
 
-      Product(s): <?php echo $ordername;?><br>
+      Product(s): <?php echo $ordernametot;?><br>
 
-      Quantity: <?php echo $orderquantity;?><br>
+      Quantity: <?php echo $orderqtytot;?><br>
 
-      Price: <?php echo $orderprice;?><br>
+      Price: <?php echo $orderpricetot;?><br>
 
       Shipping Address: <?php echo $toadd;?><br>
 

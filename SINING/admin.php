@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/admin.css">
+<link rel="icon" type="image/x-icon" href="assets/logo.ico" />
 <title>SINING | ADMIN</title>
 </head>
 <body>

@@ -10,7 +10,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>FILTER PAGE</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sining | Buy</title>
+<link rel="icon" type="image/x-icon" href="assets/logo.ico" />
 <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -22,27 +26,28 @@
 <script src="js/bootstrap.min.js"></script>
 <link href = "css/jquery-ui.css" rel = "stylesheet">
 <link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="filterHome.css">
 </head>
 <body>
 <div class="wrapper">
 <?php
     include("navbar.php");
 ?>
-    <h1 class="some-txt" style="z-index: 2;">
-    <iframe src="header.php" frameborder="0" width="500" height="100%"></iframe>
-    <br><button><a href="home.php">Browse</a></button></h1>
+    <h1 class="some-txt" style="z-index:2;">
+    <!-- <iframe src="header.php" frameborder="0" width="500" height="100%"></iframe> -->
+    <!-- <br><a href="home.php"><button>Get Started</button></a> -->
+</h1>
 <section class="bg-image" id="new-bg-image"></section>
 <div id="searchResults" class="container art-categ-con">
     <div class="row">
     <br />
-    <!-- <h2 align="center">FILTER PAGE</h2> -->
     <br />
         <div class="col-md-3 ano-to">                                
             <div class="list-group">
                 <h3>Price</h3>
                 <input type="hidden" id="hidden_minimum_price" value="0" />
                 <input type="hidden" id="hidden_maximum_price" value="100000" />
-                <p id="price_show">1000 - 100000</p>
+                <p id="price_show">100 - 100,000</p><br>
                 <div id="price_range"></div>
             </div> 
            <div class="list-group">
@@ -104,10 +109,9 @@
         </div>
         <div class="col-md-9">
             <br />
-           <div class="row filter_data container art-categ-con">
+           <div id="filter_data" class="row filter_data container art-categ-con">
         </div>
     </div>
-</div>
 </div>
 
 <script>
@@ -177,5 +181,6 @@ $(document).ready(function(){
     });
 });
 </script>
+<iframe src="footer.php" frameborder="0" width="100%"></iframe>
 </body>
 </html>

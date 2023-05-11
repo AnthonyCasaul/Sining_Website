@@ -17,11 +17,12 @@ body{
 .rcrdPage{
     height: max-content;
     /* border: 1px solid green; */
-    width: 100%;
+    width: 95%;
     position: absolute;
     top: 0%;
     /* right: 0%; */
     left: 0%;
+    margin-left: 20px;
     font-family: 'Poppins', sans-serif;
 }
 

@@ -71,6 +71,11 @@ input[type="submit"]{
 	font-size: 30px;
 }
 
+input[type="checkbox"]{
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
 .deets .cartImg{
 	height: 160px;
 	width: auto;

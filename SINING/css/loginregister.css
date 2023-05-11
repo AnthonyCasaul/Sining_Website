@@ -14,7 +14,7 @@ body{
 }
 .log{
 	background-attachment: fixed;
-	background-color: white;
+	background-color: #2d2d2d;
 	margin: auto;
 	max-width: 100%;
 	width: 460px;
@@ -25,28 +25,37 @@ body{
 
 .reg{
 	background-attachment: fixed;
-	background-color: white;
+	background-color: #2d2d2d;
 	margin: auto;
 	max-width: 100%;
 	width: 460px;
 	padding: 50px 50px;
 	margin-top: 0.5%;
 	border-radius: 25px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
 }
 .logo{
 	width: 30%;
 	margin-left: 35%;
+	/* border: 1px solid red; */
+	border-radius: 50%;
+	filter: invert(1);
 }
 h3{
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	font-size: 45px;
 	text-align: center;
-	color: rgb(78,78,86);
+	/* color: rgb(78,78,86); */
+	color: #ffc800;
 }
 p{
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	margin-top: 4%;
 	text-align: center;
+	color: #fff;
 }
 a{
 	color: #ffc800;
@@ -66,8 +75,8 @@ input[type=password], [type=email], [type=text]  {
 	box-sizing: border-box; 
 	border: none; 
 	border-bottom-style: inset;
-	background-color: white;
-	color: black; } 
+	background-color: #2d2d2d;
+	color: #fff; } 
 
 .btn {
 	margin-top: 4%;
@@ -88,4 +97,20 @@ input[type=password], [type=email], [type=text]  {
 .btn:hover {
   background-color: #ffc800;
   color: white;
+}
+@media only screen and (max-width: 1000px){
+	.log{
+		/* border: 1px solid red; */
+		position: absolute;
+		top: 50%;
+		transform: translateY(-60%);
+		background-color: rgba(41, 41, 41, .8);
+		border-radius: 0;
+	}
+	input[type=password], [type=email], [type=text]{
+		background-color: rgba(41, 41, 41, .5);
+	}
+	h3{
+		color: #fff;
+	}
 }

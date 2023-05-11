@@ -32,7 +32,7 @@ include 'similarity.php';
 	$sql = $conn -> query("SELECT * FROM sining_artists WHERE artistId= '$user_id' ORDER BY artistId DESC");
 
 	$conn1 = new Mysqli($host, $user, $pass, $dbname);
-	$sql1 = $conn1 -> query('SELECT * FROM sining_artworks1 ORDER BY artId ASC');
+	$sql1 = $conn1 -> query('SELECT a.*, b.seller_name FROM sining_artworks1 AS a LEFT JOIN sining_sellers AS b ON a.seller_id = b.seller_id ORDER BY random ASC');
 	$count = $sql1 -> num_rows;
 
 	while($post = mysqli_fetch_assoc($sql)){
@@ -100,11 +100,11 @@ if(isset($_POST["action"]))
 				foreach ($try as $sort_row) {
 					foreach($result as $row ){
 							if($sort[$sort_row]!=0){
-								if($sort_row==$row['artTitle']){	
-								$sam = $row['artImage'];
+								if($sort_row==$row['artTitle']){
 								$id = $row['artId'];
-								$url = $sam;
-     							$image = base64_encode(file_get_contents('assets/img/sample_image.png'));
+								$seller = $row['seller_id'];	
+								$img = $row['artImage'];
+     							$image = base64_encode(file_get_contents('seller_file/artworks/seller_'.$seller.'/'.$img));
 								$output .= '
 			<form action="view_art.php" method=post>
 			<div class="img-con-inner col-sm-4 col-lg-3 col-md-3">
@@ -126,10 +126,10 @@ if(isset($_POST["action"]))
 				</p>
 					<div class="text-box">
 					<table>
-						<tr>
+						<!--<tr>
 							<td class="there">Artist</td>
-							<td class="here">'.$row['artistName'] .'</td>
-						</tr>
+							<td class="here">'.$row['seller_id'] .'</td>
+						</tr>-->
 						<tr>
 							<td class="there">Price</td>
 							<td class="here">'.$row['artPrice'] .'</td>

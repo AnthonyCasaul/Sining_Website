@@ -13,17 +13,8 @@ body{
 }
 
 .seller-con{
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    /* border: 1px solid red; */
-    width: fit-content;
-    background-color: #212529;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
-    /* padding: 20px; */
-    border-radius: 10px;
-	box-shadow: 5px 10px 5px rgba(0, 0, 0, .3);
 }
 input{
     font-size: 20px;
@@ -38,9 +29,21 @@ input{
 input[type="file"]{
     color: #fff;
 }
+table{
+    border-radius: 10px;
+    box-shadow: 5px 10px 5px rgba(0, 0, 0, .3);
+    background-color: #212529;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+td{
+    /* width: 100px; */
+}
 table,td{
     border-spacing: 20px;
-    border-style: none;
+    /* border-style: none; */
     /* border: 1px solid red; */
 }
 td:last-child{
@@ -60,9 +63,53 @@ button:hover{
     background-color: #ffc800;
     color: #000;
 }
-
+form{
+    border: 1px solid red !important;
+}
+td:first-child div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* border: 1px solid red; */
+    /* width: 1000px; */
+}
+div hr:first-child{
+    width: 50px;
+    border-color: #9c9c9c;
+}
+div hr:last-child{
+    /* border: 1px solid red; */
+    width: 100%;
+    border-color: #9c9c9c;
+}
+td:first-child div h2{
+    /* border: 1px solid red; */
+    width: 300px;
+    padding: 0 10px;
+    color: #9c9c9c;
+}
 @media screen and (max-width: 321px){
     input[type=text] {   
         width: 20%;
+    }
+}
+@media only screen and (max-width: 1000px){
+    *{
+        /* border: 1px solid red; */
+    }
+    table{
+        width: 100%;
+        /* background: none; */
+        box-shadow: none;
+        border-radius: 0;
+    }
+    input{
+        width: 100%;
+    }
+    label{
+        font-size: smaller;
+    }
+    td:first-child div h2{
+        font-size: smaller;
     }
 }

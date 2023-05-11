@@ -11,19 +11,21 @@
 
 body {
   background-color: #2d2d2d;
+  /* border: 1px solid red; */
 }
 
 .tab {
   /* overflow: hidden; */
   /* border: 1px solid #ccc; */
+  /* border: 1px solid red; */
   background-color: #191919;
-  height: 100vh;
+  height: 100%;
   width: 20%;
   position: absolute;
   top: 0%;
   left: 0%;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  /* overflow-y: scroll;
+  overflow-x: hidden; */
 }
 
 /* Style the buttons inside the tab */
@@ -37,7 +39,7 @@ body {
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   width: 100%;
-  padding-left: 30px;
+  /* padding-left: 30px; */
   font-weight: bold;
   color: #fff;
   background-color: #191919;
@@ -54,7 +56,11 @@ body {
   background-color: #2d2d2d;
   color: #ffc800;
   border-radius: 75px 0 0 75px;
-  margin-left: 10px;
+  margin-left: 50px;
+}
+.tablinks{
+  text-align: left;
+  padding: 20px 0 20px 100px;
 }
 .tablinks:active .tabcontent {
   display: unset;
@@ -68,14 +74,17 @@ body {
   border-top: none;
   height: max-content;
   /* border: 1px solid green; */
-  width: 80%;
+  width: 82%;
   position: absolute;
   top: 0%;
   right: 0%;
 }
 iframe {
-  height: 95vh;
+  height: 100vh;
   overflow-y: scroll;
+  position: fixed;
+  width: 83% !important;
+  top: 0;
 }
 
 /* iframe:hover {
@@ -165,8 +174,13 @@ iframe[src="seller_profile.php"]{
   }
 }
 @media only screen and (max-height: 850px){
- 
+  *{
+    /* border: 1px solid red; */
+  }
   .tablinks{
     padding: 10px;
+  }
+  .tab{
+    overflow-y: auto;
   }
 }

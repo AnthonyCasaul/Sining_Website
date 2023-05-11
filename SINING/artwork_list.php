@@ -41,11 +41,12 @@ $artwork_list = mysqli_query($conn, "SELECT * FROM sining_artworks1");
                 $artwork_price= $row['artPrice'];
                 $artwork_genre = $row['artGenre'];
                 $artwork_year = $row['artYear'];
+                $artwork_sellerId = $row['seller_id'];
                 echo '
         <thead>
             <tr>
               <th>'.$artwork_id.'</th>
-              <th class=artwork-img-col><img id=artwork-img class=artwork-img src="'.$artwork_image.'" /></th>
+              <th class=artwork-img-col><img src="seller_file/artworks/seller_'.$artwork_sellerId.'/'.$artwork_image.'" alt="" width=300 class="img-fluid"></th>
               <th>'.$artwork_title.'</th>
               <th>'.$artwork_artist.'</th>
               <th>'.$artwork_price.'</th>

@@ -3,7 +3,11 @@ include 'condb.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
-$ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$user_id' AND product_status = 'To be approve'");
+$getsellerId = mysqli_query($conn, "SELECT * FROM sining_sellers WHERE artistId = '$user_id'");
+$row = mysqli_fetch_assoc($getsellerId);
+$seller_id = $row['seller_id'];
+
+$ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$seller_id' AND product_status = 'To be approved'");
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +24,7 @@ $ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_i
 <div class="header">
   <h1>SELLER PAGE</h1>
   <h3>PAYMENT APPROVAL</h2>
-  <button onclick="toReload()" class="showact_button">APPROVE</button>
+  
 </div>
 <div class="rcrdPage">
         <table class="content-table">
@@ -64,11 +68,11 @@ $ToBeApproved = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_i
               <th>
               
                   <input type="hidden" name="approve" id="approve" value="'.$orderid.'">
-                  <button type="submit" onclick="toApprove()" class="showact_button">APPROVE</button>
+                  <button type="submit" onclick="toApprove()" class="showact_button"><img class="buttons" src="assets/img/check.png"></button>
                 </th>
               <th>
                   <input type="hidden" name="decline" id="decline" value="'.$orderid.'">
-                  <button type="submit" onclick="toDecline()" class="showact_button">DECLINE</button>
+                  <button type="submit" onclick="toDecline()" class="showact_button"><img class="buttons" src="assets/img/remove.png"></button>
                 </th>
             </tr>
           </thead>';

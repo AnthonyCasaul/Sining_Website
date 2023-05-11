@@ -9,7 +9,7 @@
             <a href="ValidateSeller.php" class="nav-links">
                 <li class="nav-item">Sell</li>
             </a>
-            <a href="#" class="nav-links">
+            <a href="newsfeed.php" class="nav-links">
                 <li class="nav-item">Newsfeed</li>
             </a>
             <a href="#" class="nav-links">
@@ -34,18 +34,18 @@
                 <a href="ValidateSeller.php" class="nav-links">
                     <li class="nav-item">Sell</li>
                 </a>
-                <a href="#" class="nav-links">
+                <a href="newsfeed.php" class="nav-links">
                     <li class="nav-item">Newsfeed</li>
                 </a>
-                <a href="#" class="nav-links">
-                    <li class="nav-item">Artists</li>
+                <a href="about.php" class="nav-links">
+                    <li class="nav-item">About</li>
                 </a>
             </div>
         </div>
         <div class="account-btn">
             <img src="assets/img/account.png" onclick="openSubmenu()">
             <div class="submenu" id="submenu">
-            <a href="userprofile.php" id="account-lbl">Manage Account</a><br><br>
+            <a href="manageprofile.php" id="account-lbl">Manage Account</a><br><br>
             <a href="userhistory.php" id="account-lbl">Purchased</a><br><br>
             <a href="logout.php" id="account-lbl">Logout</a>
             </div>

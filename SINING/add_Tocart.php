@@ -14,7 +14,11 @@ $product_image = $row['artImage'];
 
 $product_quantity = 1;
 
-$select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE id ='". $_GET['archiveid']."' ");
+$select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE artistId ='$user_id'");
 
-$insert_product = mysqli_query($conn, "INSERT INTO `cart`( artId, name, artistId, price, image, quantity) VALUES('$product_id','$product_name','$user_id' ,'$product_price', '$product_image', '$product_quantity')");
+$select_buyer = mysqli_query($conn, "SELECT artistName FROM sining_artworks1 WHERE artistId = '$user_id'");
+$row_buyer = mysqli_fetch_assoc($select_buyer);
+$buyer_name = $row_buyer['artistName'];
+
+$insert_product = mysqli_query($conn, "INSERT INTO `cart`( artId, name, artistId, price, image, quantity, buyer_name) VALUES('$product_id','$product_name','$user_id' ,'$product_price', '$product_image', '$product_quantity', '$buyer_name')");
 ?>

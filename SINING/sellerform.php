@@ -95,6 +95,10 @@ function test_input($data) {
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
   <title>SINING | SELLER FORM</title>
   <link rel="stylesheet" href="css/sellerform.css">
   <?php
@@ -102,6 +106,7 @@ function test_input($data) {
   ?>
 </head>
 <body>
+  
   <?php if (!empty($success)) {
     echo '<script>
     alert("Application Successful");
@@ -111,7 +116,9 @@ function test_input($data) {
   <div class="seller-con">
     <table>
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-    
+    <tr>
+      <td colspan="2"><div><hr></hr><h2>Seller Form</h2><hr></hr></div></td>
+    </tr>
   <tr>
     <td><label for="fullname">Fullname:</label></td>
     <td><input type="text" name="fullname" id="fullname" value="<?php echo $fullname; ?>" required></td>

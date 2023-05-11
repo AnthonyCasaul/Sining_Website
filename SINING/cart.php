@@ -67,7 +67,8 @@ if(isset($_GET['delete_all'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>shopping cart</title>
+   <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+   <title>Sining | Cart</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -105,11 +106,14 @@ if(isset($_GET['delete_all'])){
             <div class="col-sm-2"></div>
             <div class="col-sm-2"><p>Price</p></div>
             <div class="col-sm-2"><p>Quantity</p></div>
-            <div class="col-sm-1"><p>Total</p></div>
+            <div class="col-sm-1"><p>Seller</p></div>
 </div>
          <?php 
          
-         $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE artistId='$user_id'");
+         $select_cart = mysqli_query($conn, "SELECT a.*, c.seller_name, c.seller_email, c.seller_id FROM `cart` AS a
+                                   LEFT JOIN `sining_artworks1` AS b ON a.artId = b.artId
+                                   LEFT JOIN `sining_sellers` AS c ON b.seller_id = c.seller_id
+                                   WHERE a.artistId='$user_id'");
          $grand_total = 0;
 
          if(mysqli_num_rows($select_cart) < 1){
@@ -121,7 +125,7 @@ if(isset($_GET['delete_all'])){
          ?>
          <div class="row deets">
             <div class="col-sm-1 col-2"><input type="checkbox" name="myCheckbox[]" value="<?php echo $fetch_cart['id']; ?>" required></div>            
-            <div class="col-sm-2 col-10"><img src="<?php echo $fetch_cart['image']; ?>" height="100" alt="" class="img-fluid cartImg"></div>
+            <div class="col-sm-2 col-10"><img src="seller_file/artworks/seller_<?php echo $fetch_cart['seller_id']; ?>/<?php echo $fetch_cart['image']; ?>" height="100" alt="" class="img-fluid cartImg"></div>
             <div class="col-sm-2"><h2><?php echo $fetch_cart['name']; ?></h2></div>
             <div class="col-sm-2"><h2>₱<?php echo number_format($fetch_cart['price'],2); ?></h2></div>
             <div class="col-sm-2">
@@ -136,7 +140,8 @@ if(isset($_GET['delete_all'])){
                </form>
             </div>
 
-            <div class="col-sm-2"><h2>₱<?php echo $sub = number_format($fetch_cart['price'] * $fetch_cart['quantity'],2); ?></h2></div>
+            <div class="col-sm-2"><h2><?php echo $fetch_cart['seller_name']; ?></h2>
+            </div>
             <?php $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>
             <div class="col-sm-1"><a href="cart.php?remove=<?php echo $fetch_cart['id']; ?>" onclick="return confirm('Remove artwork(s) from cart?')" class="delete-btn"> <i class='fas'>&#xf2ed;</i></a></div>
             <?php $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); 

@@ -10,8 +10,8 @@ include('condb.php')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sining | Homepage</title>
     <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+    <title>Sining | Homepage</title>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -33,7 +33,7 @@ include('condb.php')
 ?>
     <h1 class="some-txt" style="z-index: 2;">
     <iframe src="header.php" frameborder="0" width="500" height="100%"></iframe>
-    <br><button><a href="home.php">Browse</a></button></h1>
+    <br><a href="seller.php"><button>Get Started</button></a></h1>
 
     <section class="bg-image" id="new-bg-image"></section>
     <!-- Page Content -->
@@ -207,6 +207,6 @@ function showPage() {
   document.getElementById("wrapper").style.display = "block";
 }
 </script>
-
+<iframe src="footer.php" frameborder="0" width="100%"></iframe>
 </body>
 </html>

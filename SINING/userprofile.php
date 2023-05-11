@@ -103,7 +103,7 @@ if(isset($_GET['logout'])){
             $fetch = mysqli_fetch_assoc($select);
          }
          if($fetch['artistCover'] == ''){
-            echo '<img src="images/default-avatar.jpg">';
+            echo '<img src="images/default-avatar.png">';
          }else{
             echo '<img src="cover/'.$fetch['artistCover'].'" height=400 width=100% style="max-height: 100%;">';
          }
@@ -117,7 +117,7 @@ if(isset($_GET['logout'])){
             $fetch = mysqli_fetch_assoc($select);
          }
          if($fetch['artistProfile'] == ''){
-            echo '<img src="images/default-avatar.png">';
+            echo '<img src="img/default-avatar.png">';
          }else{
             echo '<img src="img/'.$fetch['artistProfile'].'">';
          }

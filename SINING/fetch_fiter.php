@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <style>
 	.image-box img{
 		width: 100%;
@@ -43,15 +44,21 @@ if(isset($_POST["artistName"]) && !empty($_POST["artistName"]))
     $category_artist = implode("','", $_POST["artistName"]);
     $query .= " AND artistName IN ('$category_artist')";
 }
+$query .= " ORDER BY random ASC";
     
     $result = $conn->query($query);
     $total_row = mysqli_num_rows($result);
     $output = '';
     if($total_row > 0){
         while ($row = $result->fetch_object()) {
-            $sam = $row->artImage;
-			$url = $sam;
-     		$image = base64_encode(file_get_contents('assets/img/sample_image.png'));
+        //     $sam = $row->artImage;
+		// 	$url = $sam;
+     	// 	$image = base64_encode(file_get_contents('assets/img/sample_image.png'));
+             $id = $row->artId;
+             $seller = $row->seller_id;	
+             $img = $row->artImage;
+             $image = base64_encode(file_get_contents('seller_file/artworks/seller_'.$seller.'/'.$img));
+
             $output .= '
             <div class="img-con-inner col-sm-4 col-lg-3 col-md-3">
                 <div class=image-box style="
@@ -64,9 +71,9 @@ if(isset($_POST["artistName"]) && !empty($_POST["artistName"]))
                     left: 50%;
                     transform: translateX(-50%);
                 ">
-                
+                <button onclick="getId('.$id.')" class="img-btn">
                     <img src="data:image/jpeg;base64,'.$image.'" alt="" class="img-responsive">
-                <br><br>
+                </button><br><br>
 
                     <p class="text art-title" align="center">'. $row->artTitle .'</p>
                     <div class="text-box">
@@ -95,3 +102,17 @@ if(isset($_POST["artistName"]) && !empty($_POST["artistName"]))
 }
 ?>
 </div>
+<script>
+    function getId(id){
+        console.log(id);
+		    $.ajax({
+            type: "POST",
+            url: "getid.php",
+            data: {"id": id},
+            success: function(result){
+    	    window.location.href = "view_art.php";
+    }
+});	
+
+    }
+</script>

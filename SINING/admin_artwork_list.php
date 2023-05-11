@@ -16,6 +16,7 @@ if(mysqli_num_rows($viewart) > 0){
                 $artwork_genre = $row['artGenre'];
                 $artwork_tag = $row['artTags'];
                 $artwork_year = $row['artYear'];
+                $artwork_sellerId = $row['seller_id'];
             }
 }
 ?>
@@ -33,7 +34,7 @@ if(mysqli_num_rows($viewart) > 0){
     
     <table>
         <tr>
-            <td class="artwork-img" colspan="2" style="border-radius: 10px; padding-left: 20px;"><img src="<?php echo $artwork_image; ?>"/></td>
+            <td class="artwork-img" colspan="2" style="border-radius: 10px; padding-left: 20px;"><img src="seller_file/artworks/seller_<?php echo $artwork_sellerId; ?>/<?php echo $artwork_image; ?>"/></td>
         </tr>
         <tr>
             <td>Title</td>

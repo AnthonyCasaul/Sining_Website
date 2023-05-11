@@ -27,7 +27,6 @@ if(isset($_POST['submit'])){
                if($catecheck == 0 ){
                         $_SESSION['user_id'] = $row['artistId'];
                         echo '<script>
-                        alert('.$row['artistId'].')
                         window.location.href = "categ_select.php"
                         </script>';
                      }
@@ -54,6 +53,7 @@ if(isset($_POST['submit'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
    <title>SINING Login</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
    <link rel="stylesheet" href="CSS/loginregister.css">

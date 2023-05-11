@@ -3,7 +3,11 @@ include 'condb.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
-$Completed = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$user_id' AND product_status = 'Completed'");
+$getsellerId = mysqli_query($conn, "SELECT * FROM sining_sellers WHERE artistId = '$user_id'");
+$row = mysqli_fetch_assoc($getsellerId);
+$seller_id = $row['seller_id'];
+
+$Completed = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id = '$seller_id' AND product_status = 'Completed'");
 ?>
 
 <!DOCTYPE html>

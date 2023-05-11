@@ -11,22 +11,22 @@
 body{
     background-color: #191919;
 }
-div{
+#seller-profile-con{
     padding-top: 50px;
     text-align: center;
     justify-content: center;
 }
-
-div img{
+#seller-profile-con img{
     border-radius: 50%;
     width: 150px;
     height: 150px;
     border: 2px solid #fff;
 }
 
-div button{
+#seller-profile-con button{
     font-size: larger;
     margin-top: 20px;
+    margin-bottom: 20px;
     width: 200px;
     height: 50px;
     background: none;
@@ -36,55 +36,178 @@ div button{
     border-radius: 10px;
     background-color: #ffc800;
     transition: ease-in .2s;
+    padding: 0;
 }
-
+td button{
+    border: 1px solid red;
+}
 h4{
     display: inline-block;
 }
+.button, .cancel{
+    /* border: 1px solid red !important; */
+    font-size: smaller !important;
+}
 
-div button:hover{
+#seller-profile-con button:hover{
     transition: ease-out .2s;
     cursor: pointer;
     background-color: #2d2d2d;
     border: 1px solid #fff;
 }
 
-div button img{
+#seller-profile-con button img{
     width: 20px;
     height: 20px;
     border: 0;
     border-radius: 0;
     margin-right: 20px;
-    /* border: 1px solid red; */
 }
 
-div h3{
+#seller-profile-con h3{
     text-transform: capitalize;
 }
 h3, h1{
     display: block;
 }
-@media only screen and (max-width: 300px){
+dialog{
+    /* border: 1px solid red; */
+    background-color: #191919;
+    border: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid #fff;
+}
+dialog table{
+    
+    text-align: left;
+    padding: 20px;
+    font-size: 20px;
+}
+dialog table th{
+    margin-bottom: 40px;
+}
+dialog table td{
+    padding: 10px;
+}
+dialog input, dialog select, dialog option{
+    width: 100%;
+    color: #000 !important;
+    font-weight: bold;
+    font-size: 20px;
+}
+table td input[type="file"]{
+    color: #fff !important;
+}
+dialog #blog-post, td{
+    /* border: 1px solid red; */
+}
+dialog #blog-post td input[type="file"]{
+    cursor: pointer;
+}
+dialog #blog-post td #imagePreviewContainer, dialog table td #imagePreviewContainer2{
+    background-color: #fff;
+}
+dialog #blog-post td #imagePreview, dialog table td #imagePreview2{
+    /* border: 1px solid red; */
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 300px;
+}
+dialog #blog-post td textarea{
+    /* border: 1px solid red; */
+    width: 100%;
+}
+.file {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file > input[type='file'] {
+    display: none
+}
+  
+.file > label {
+    font-size: 1rem;
+    font-weight: bolder;
+    cursor: pointer;
+    outline: 0;
+    user-select: none;
+    border: none;
+    /* border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186); */
+    border: none;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    /* background-color: hsl(0, 0%, 100%); */
+    background-color: #fff;
+    /* color: hsl(0, 0%, 29%); */
+    color: #000;
+    padding: 16px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+}
+.file > label:active {
+    /* background-color: hsl(0, 0%, 96%); */
+    background-color: #ffc800;
+}
+  
+.file > label > i {
+    padding-right: 15px;
+}
+#upload-image{
+    width: 20px !important;
+    height: 20px !important;
+    z-index: 2;
+    border-radius: 0 !important;
+}
+@media only screen and (max-width: 700px){
     *{
         /* border: 1px solid red; */
     }
-    h1, h3, h4{
+    span,h1, h3, h4{
         display: none;
     }
-    div button{
+    #seller-profile-con button{
         width: fit-content;
         height: fit-content;
-        padding: 10px;
+        padding: 5px;
     }
-    div img{
+    #seller-profile-con img{
         position: relative;
         left: 50%;
         transform: translateX(-50%);
     }
-    .seller-profile{
+    #seller-profile-con .seller-profile{
         width: 60px;
         height: 60px;
         /* border: 1px solid red; */
         margin-left: -20px;
+    }
+    dialog{
+        border: 1px solid #ffc800;
+        width: 100%;
+        height: fit-content;
+    }
+    dialog table{
+        /* border: 1px solid #ffc800; */
+        font-size: smaller;
+    }
+    dialog table td{
+        padding: 10px;
+    }
+    dialog input, dialog select, dialog option{
+        width: 200px;
+        font-size: smaller;
     }
 }

@@ -118,7 +118,7 @@ def Similarity(artworkId1, artworkId2):
 
 new_id = list(range(0,artworks.shape[0]))
 artworks['new_id']=new_id
-artworks=artworks[['new_id','artTitle','artRate','artTags','artGenre','artistName','tags_bin','artist_bin','genre_bin','purchased','artImage','artId','artPrice']]
+artworks=artworks[['new_id','artTitle','artRate','artTags','artGenre','artistName','tags_bin','artist_bin','genre_bin','purchased','artImage','artId','artPrice','seller_id']]
 
 dist=0
 liked=[]
@@ -165,7 +165,7 @@ def predict_score(name):
         
         #output += "<img src="+artworks.iloc[neighbor[0]][10]+" width='200px' height='250px'/>"
         #output += "<p>"+artworks.iloc[neighbor[0]][1].replace("-"," ")+"<br> | Art Tags: "+str(artworks.iloc[neighbor[0]][3]).strip('[]').replace(' ','')+" | Rating: "+str(artworks.iloc[neighbor[0]][2])+str(dist)+"</p>"
-        output += "{\"image_url\":\""+artworks.iloc[neighbor[0]][10]+"\",\n\"name\":\""+artworks.iloc[neighbor[0]][1].replace("-"," ")+"\",\n\"tags\":\""+str(artworks.iloc[neighbor[0]][3]).strip('[]').replace(' ','').replace('\'',"")+"\",\n\"id\":\""+str(artworks.iloc[neighbor[0]][11])+"\",\n\"price\":\""+str(artworks.iloc[neighbor[0]][12])+"\"}\n"
+        output += "{\"image_url\":\""+artworks.iloc[neighbor[0]][10]+"\",\n\"name\":\""+artworks.iloc[neighbor[0]][1].replace("-"," ")+"\",\n\"tags\":\""+str(artworks.iloc[neighbor[0]][3]).strip('[]').replace(' ','').replace('\'',"")+"\",\n\"id\":\""+str(artworks.iloc[neighbor[0]][11])+"\",\n\"price\":\""+str(artworks.iloc[neighbor[0]][12])+"\",\n\"sellerId\":\""+str(artworks.iloc[neighbor[0]][13])+"\"}\n"
         if neighbor != last:
             output += ","
 

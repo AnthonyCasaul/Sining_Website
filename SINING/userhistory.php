@@ -49,27 +49,32 @@ if(isset($_POST['selectedOption'])) {
 
 
 <div class="container cont">
+  <div class="tablinks-wrapper">
 	<div class="opts">
-  	<button class="tablinks" onclick="openCity(event, 'tobeApproved')" id="defaultOpen">To be Approved</button>
+  <button class="tablinks" onclick="openCity(event, 'tobeApproved')" id="defaultOpen">To be Approved</button>
 	<button class="tablinks" onclick="openCity(event, 'toPay')">To Pay</button>
   	<button class="tablinks" onclick="openCity(event, 'toShip')">To Ship</button>
   	<button class="tablinks" onclick="openCity(event, 'toReceive')">To Receive</button>
     <button class="tablinks" onclick="openCity(event, 'completed')">Completed</button>
     <button class="tablinks" onclick="openCity(event, 'cancelled')">Cancelled</button>
+    <button class="tablinks" onclick="openCity(event, 'tobePickup')">For Pick-up</button>
 	</div>
+  </div>
 
 <input type="hidden" id="price" value="20000"/>
 <div id="tobeApproved" class="tabcontent">
   <h1>To be approved</h1>
   <?php
- 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id='$user_id' AND product_status = 'To be approved'");
+ 		$user_info = mysqli_query($conn, "SELECT a.*, c.seller_name, c.seller_email FROM `product_status` AS a 
+                                      LEFT JOIN `sining_sellers` AS c ON a.seller_id = c.seller_id
+                                      WHERE buyer_id='$user_id' AND product_status = 'To be approved'");
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
 
- 		echo '<img src="'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
+ 		echo '<img src="seller_file/artworks/seller_'.$fetch_artist['seller_id'].'/'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
- 		//echo '<h3>'.$fetch_artist['date'].'</h3>';
+ 		echo '<h3>'.$fetch_artist['seller_name'].'</h3>';
  		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';
     	echo '<a href="userhistory.php?remove='.$fetch_artist['product_id'].'" class="dlt" onclick="myFunction()">Cancel Order</a>';
  		echo '<hr>';   
@@ -82,31 +87,32 @@ if(isset($_POST['selectedOption'])) {
 <div id="toPay" class="tabcontent">
 <h1>To Pay</h1>
 <?php
- 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id = '$user_id' AND product_status = 'To pay'");
+ 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id = '$user_id' AND product_status = 'To pay' AND payment_method = 'Bank Transfer'");
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
 		echo '<div>';		
     echo '<input type="checkbox" name="myCheckbox[]" value="'.$fetch_artist['product_id'].'"/>';
- 		echo '<img src="'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
+ 		echo '<img src="seller_file/artworks/seller_'.$fetch_artist['seller_id'].'/'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
  		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';  
 		echo '</div>';
  		}
+    echo '<div id="container"></div>'; 
  	}
-echo '<div id="container"></div>'; 
+
 ?>
 </div>
 
 <div id="toShip" class="tabcontent">
 <h1>To be shipped</h1>
 <?php
- 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id = '$user_id' AND product_status = 'To be shipped'");
+ 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id = '$user_id' AND product_status = 'To ship' AND payment_method = 'Bank Transfer'");
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
+ 		echo '<img src="seller_file/artworks/seller_'.$fetch_artist['seller_id'].'/'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
@@ -119,32 +125,52 @@ echo '<div id="container"></div>';
 <div id="toReceive" class="tabcontent">
  <h1>Shipped</h1>
  <?php
- 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id='$user_id' AND product_status = 'Shipped'");
+ 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id='$user_id' AND product_status = 'To receive' AND payment_method = 'Bank Transfer'");
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
+ 	  echo '<img src="seller_file/artworks/seller_'.$fetch_artist['seller_id'].'/'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
  		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';
+    echo '<button type="button" class="dlt" onclick="orderReceive('.$fetch_artist['product_id'].')">ORDER RECEIVE</button>';
+
  		}
  	}
 ?>
 </div>
 
+
 <div id="completed" class="tabcontent">
   <h1>Completed Purchases</h1>
 <?php
- 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id='$user_id' AND product_status = 'Completed'");
+ 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id='$user_id' AND product_status = 'Completed' AND payment_method = 'Bank Transfer'");
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
+ 		echo '<img src="seller_file/artworks/seller_'.$fetch_artist['seller_id'].'/'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
  		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';   
+ 		}
+ 	}
+?>
+</div>
+
+<div id="tobePickup" class="tabcontent">
+ <h1>For Pick-up</h1>
+ <?php
+ 		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id='$user_id' AND product_status = 'To pay' AND payment_method = 'Pick-up'");
+ 		if(mysqli_num_rows($user_info) > 0){
+            while($fetch_artist = mysqli_fetch_assoc($user_info)){
+ 		
+ 	  echo '<img src="seller_file/artworks/seller_'.$fetch_artist['seller_id'].'/'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
+ 		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
+ 		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
+ 		//echo '<h3>'.$fetch_artist['date'].'</h3>';
+ 		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';
  		}
  	}
 ?>
@@ -157,7 +183,7 @@ echo '<div id="container"></div>';
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
  		
- 		echo '<img src="'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
+ 		echo '<img src="seller_file/artworks/seller_'.$fetch_artist['seller_id'].'/'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
  		echo '<h3>'.$fetch_artist['product_name'].'</h3>';
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
@@ -169,6 +195,20 @@ echo '<div id="container"></div>';
 </div>
 
 </div>
+<script>
+  function orderReceive(product_id){
+    alert("Are you sure you have received the right product?");
+    console.log(product_id);
+    $.ajax({
+            type: "POST",
+            url: "update_status.php",
+            data: {"orderReceive": product_id},
+            success: function(result){
+            window.location.reload();
+    }
+  });	
+}
+</script>
 <script>
   const myCheckboxes = document.querySelectorAll('input[name="myCheckbox[]"]');
   var checklist = [];
@@ -394,25 +434,25 @@ document.getElementById("defaultOpen").click();
     data: {"product_id": element},
     success: function(result){
     }
-}));
+})
+);
   }
-  function onPaymentAuthorized(paymentData) {
-    
+
+ function onPaymentAuthorized(paymentData) {
     return new Promise(function (resolve, reject) {
       // handle the response
       processPayment(paymentData)
         .then(function () {
           resolve({ transactionState: "SUCCESS" });
-		  
         })
         .catch(function () {
           changeStatus();
           resolve({
-            transactionState: "SUCCESS",
+            transactionState: "ERROR",
             error: {
               intent: "PAYMENT_AUTHORIZATION",
               message:
-                "PAYMENT SUCCESSFUL",
+                "PAYMENT SUCCESS",
               reason: "PAYMENT_DATA_INVALID",
             },
           });

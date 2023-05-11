@@ -4,13 +4,17 @@ error_reporting(E_ERROR | E_PARSE);
 session_start();
 $user_id = $_SESSION['user_id'];
 
+$sql = "SELECT seller_id FROM sining_sellers WHERE artistId = $user_id";
+$result = $conn->query($sql);
+while($row = $result->fetch_assoc()) {
+   $seller_id = $row["seller_id"];
+}
+
 if(isset($_POST["submit"])){
   $title= $_POST["title"];
   $genre= $_POST["genre"];
   $price= $_POST["price"];
   $tags= $_POST["tags"];
-
-
 
   #upload image#
   if($_FILES["image"]["error"] == 4){
@@ -19,6 +23,13 @@ if(isset($_POST["submit"])){
     ;
   }
   else{
+   //seller folder
+   $folder_name = "seller_" . $seller_id;
+   $folder_path = "seller_file/artworks/" . $folder_name;
+   if (!file_exists($folder_path)) {
+      mkdir($folder_path, 0777, true);
+   }
+
     $fileName = $_FILES["image"]["name"];
     $fileSize = $_FILES["image"]["size"];
     $tmpName = $_FILES["image"]["tmp_name"];
@@ -43,8 +54,8 @@ if(isset($_POST["submit"])){
       ";
     }
     else{
-      $newImageName = uniqid();
-      $newImageName .= '.' . $imageExtension;
+      $newImageName = uniqid() . '.' . $imageExtension;
+      $new_file_path = $folder_path . '/' . $newImageName;
       
       $select = mysqli_query($conn, "SELECT * FROM sining_sellers WHERE artistId = '$user_id'");
       $row = mysqli_fetch_assoc($select);
@@ -52,9 +63,9 @@ if(isset($_POST["submit"])){
       $seller_name = $row['seller_name'];
 
       
-      move_uploaded_file($tmpName, 'uploaded_img/' . $newImageName);
+      move_uploaded_file($tmpName, $new_file_path);
       #Insert data#
-      $query = "INSERT INTO sining_approval (artistId, artId, artistName, artTitle, artImage, artPrice, artGenre, artTags, artYear, artRate, purchased)    VALUES ('$seller_id', ' ', '$seller_name', '$title', '$newImageName','$price','$genre', '$tags', '2023', '10', '1')";
+      $query = "INSERT INTO sining_approval (seller_id, artistName, artTitle, artImage, artPrice, artGenre, artTags, artYear, artRate, purchased)    VALUES ('$seller_id', '$seller_name', '$title', '$newImageName','$price','$genre', '$tags', '2023', '10', '1')";
 
       mysqli_query($conn, $query);
       echo
@@ -66,7 +77,7 @@ if(isset($_POST["submit"])){
       ";
     }
   }
-  header('location: seller.php');
+  header('location: seller_upload.php');
 }
 #upload image#
 
@@ -98,7 +109,18 @@ if(isset($_POST["submit"])){
                <label for="genre">genre : </label>
             </td>
             <td>
-               <input type="text" name="genre" id = "genre" required value="">
+            <select id="genre" name="genre">
+               <?php
+                  $sql = "SELECT DISTINCT artGenre FROM sining_genre";
+                  $result = $conn->query($sql);
+                  if ($result->num_rows > 0) {
+                     while($row = $result->fetch_assoc()) {
+                        echo "<option value='".$row["artGenre"]."'>".$row["artGenre"]."</option>";
+                     }
+                   } else {
+                   }              
+               ?>
+            </select>  
             </td>
             </tr>
          <tr>

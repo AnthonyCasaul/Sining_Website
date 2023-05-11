@@ -42,6 +42,15 @@ h2 {
   color: #c1c1c1;
 }
 
+.tablinks-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.opts {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .tablinks {
   border: none;
   padding: 10px 10px;
@@ -110,41 +119,9 @@ h2 {
   }
 }
 
-@media screen and (max-width: 536px) {
-  .tablinks {
-    padding: 10px 5px;
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 426px) {
-  .tablinks {
-    font-size: 13px;
-  }
-}
-@media screen and (max-width: 475px) {
-  .opts {
-    overflow-x: scroll;
-  }
-
-  .tablinks {
-    font-size: 13px;
-  }
-}
-
-@media screen and (max-width: 376px) {
-  .tablinks {
-    font-size: 11px;
-  }
-}
-
 @media screen and (max-width: 321px) {
   .dlt {
     padding: 10px 10px;
     font-size: 11px;
-  }
-
-  .tablinks {
-    font-size: 9px;
   }
 }

@@ -27,6 +27,8 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
+   <title>Sining | Artwork</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Artwork</title>
    <!-- font awesome cdn link  -->
@@ -62,7 +64,7 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
                         currency: 'PHP',
                      }); 
 
-                         htmlstring+="<td class='recommended-art-inner-box' style='margin-left: 100px;'><img src=\""+ json_result.Recommended[i].image_url+"\" onclick='getReco("+json_result.Recommended[i].id+")'/><br><h5>"+json_result.Recommended[i].name+"</h5><p>"+PHpeso.format(json_result.Recommended[i].price)+"</p></td></tr>";
+                         htmlstring+="<td class='recommended-art-inner-box' style='margin-left: 100px;'><img src='seller_file/artworks/seller_"+ json_result.Recommended[i].sellerId+"/"+ json_result.Recommended[i].image_url+"' onclick='getReco("+json_result.Recommended[i].id+")'/><br><h5>"+json_result.Recommended[i].name+"</h5><p>"+PHpeso.format(json_result.Recommended[i].price)+"</p></td></tr>";
 
                     }
                     $("#recommended_arts").append(htmlstring);
@@ -86,22 +88,24 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
       <?php
       
       //$select_products = mysqli_query($conn, "SELECT * FROM `sining_artworks` WHERE artid ='". $_GET['archiveid']."'");
-      $select_products = mysqli_query($conn, "SELECT * FROM sining_artists INNER JOIN sining_artworks1 
-      ON sining_artists.artistId = sining_artworks1.artistId WHERE sining_artworks1.artId = '$artid'") or die('query failed');  
+      $select_products = mysqli_query($conn, "SELECT a.*, b.seller_name, b.seller_email FROM `sining_artworks1` AS a
+      LEFT JOIN `sining_sellers` AS b ON a.seller_id = b.seller_id
+      WHERE a.artId = '$artid'") or die('query failed');  
       
       
       if(mysqli_num_rows($select_products) > 0){
          while($fetch_product = mysqli_fetch_assoc($select_products)){
             $ID = $fetch_product['artId'];
             $Title = $fetch_product['artTitle'];
-            $artistid = $fetch_product['artistId'];
-            $follow = $fetch_product['artistFollow'];
+            $artistid = $fetch_product['seller_id'];
+            //$follow = $fetch_product['artistFollow'];
             $image = $fetch_product['artImage'];
-            $email = $fetch_product['artistEmail'];
-            $artist = $fetch_product['artistName'];
+            $email = $fetch_product['seller_email'];
+            $artist = $fetch_product['seller_name'];
             $price = $fetch_product['artPrice'];
             $genres = $fetch_product['artGenre'];
            $tags = $fetch_product['artTags'];
+           $artimage = base64_encode(file_get_contents('seller_file/artworks/seller_'.$artistid.'/'.$image));
          }
       }
       ?>
@@ -109,12 +113,13 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
          <div class="container prodview">
             <div class="row">
                <div class="col-md-7">
-               <img src="<?php echo $image; ?>" alt="" >
+               <img src="data:image/jpeg;base64,<?php echo $artimage; ?>" alt="" class="img-responsive"" alt="" >
                </div>
                <div class="col-md-5">
             <h3><?php echo $Title; ?></h3>
             <?php echo $email; ?>
-            <a href="artistProfile.php"><h2><?php echo $artist;?></h2></a>
+             <input type="hidden" id="seller_id" name="product_id" value="<?php echo $artistid; ?>">
+             <a onclick="selectUser()" href=""><h2><?php echo $artist;?></h2></a>
             <hr>
 
             <div class="price">PH₱ <?php echo number_format($price, 2);; ?></div>
@@ -138,9 +143,11 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
 
 <?php
       $i = 1; 
-      $rows = mysqli_query($conn, "SELECT * FROM sining_artists INNER JOIN sining_artworks1 
-      ON sining_artists.artistId = sining_artworks1.artistid WHERE sining_artworks1.artistid ='$artistid' 
-      AND sining_artworks1.artId <> '$artid' ");  
+      // $rows = mysqli_query($conn, "SELECT * FROM sining_artists INNER JOIN sining_artworks1 
+      // ON sining_artists.artistId = sining_artworks1.artistid WHERE sining_artworks1.artistid ='$artistid' 
+      // AND sining_artworks1.artId <> '$artid' ");  
+      $rows = mysqli_query($conn, "SELECT a.*, b.*FROM sining_artworks1 AS a LEFT JOIN sining_sellers AS b ON a.seller_id = b.seller_id WHERE b.seller_id ='$artistid' 
+      AND a.artId <> '$artid' "); 
 ?>
       <tr>
       <?php 
@@ -152,11 +159,14 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
       <?php 
       $match=$row["artId"];
       $prices = $row["artPrice"];
+      $sameSeller = $row["seller_id"];
+      $sameArt = $row["artImage"];
+      $artimage2 = base64_encode(file_get_contents('seller_file/artworks/seller_'.$sameSeller.'/'.$sameArt));
       ?>
       </div>
       </div>
 
-      <td class="other-art-inner-box" ><img src="<?php echo $row["artImage"];?>" onclick = "getArt(<?php echo $row['artId']; ?>)">
+      <td class="other-art-inner-box" ><img src="data:image/jpeg;base64, <?php echo $artimage2;?>" onclick = "getArt(<?php echo $row['artId']; ?>)">
       <h5>
          <?php echo $row["artTitle"]; ?>            
       </h5>
@@ -190,6 +200,18 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
 <!-- custom js file link  -->
 <script src="js/scripts.js"></script>
 <script>
+   function selectUser(){
+      const sellerId = $('#seller_id').val();
+      console.log(sellerId);
+      $.ajax({
+    type: "POST",
+    url: "getsellerid.php",
+    data: {"seller_id": sellerId},
+    success: function(result){
+      window.location.href = "seller_profiles.php";
+    }
+   });
+   }
    function addTocart() {
       confirm("Product added to cart!");
        const productId = $('#product_id').val();
@@ -210,11 +232,11 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
        console.log(productId);
        $.ajax({
     type: "POST",
-    url: "add_Tocart.php",
+    url: "add_Topayment.php",
     data: {"product_id": productId},
     success: function(result){
     console.log(result);
-    window.location.href = "view_art.php";
+    window.location.href = "payment_method.php";
     }
 });	
 
@@ -248,6 +270,6 @@ $query = mysqli_query($conn, "SELECT * FROM `cart` WHERE artId = '$artid'");
 
     }
 </script>
-
+<iframe src="footer.php" frameborder="0" width="100%"></iframe>
 </body>
 </html>

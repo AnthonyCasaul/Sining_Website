@@ -34,7 +34,7 @@ $approval = mysqli_query($conn, "SELECT a.product_id, a.seller_id, a.product_nam
     <title>Seller</title>
 </head>
 <body>
-<div>
+<div id="seller-profile-con">
   <img class="seller-profile" src="seller_file/profile/<?php echo $seller_profile; ?>" width=20% height=20%/>
   <h1><?php echo $seller_username;?></h1>
   <h3><?php echo $seller_name;?></h3>

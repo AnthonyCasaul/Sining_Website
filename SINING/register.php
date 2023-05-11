@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
             $message[] = 'registered successfully!';
             header('location:index.php');
          }else{
-            $message[] = 'registeration failed!';
+            $message[] = 'registration failed!';
          }
       }
    }

@@ -11,12 +11,15 @@ if ($select->num_rows > 0) {
     echo ("<div class=search-result><h2 class=search-head>Results for: </h2><h3 class=search-head>&nbsp".$search."</h3></div>");
     // output data of each row
     while($row = $select->fetch_assoc()) {
+        $seller = $row['seller_id'];	
+        $img = $row['artImage'];
+        $image = base64_encode(file_get_contents('seller_file/artworks/seller_'.$seller.'/'.$img));
         echo '
             <form action="view_art.php" method=post>
                 <table class="art-box">
                     <tr>
                         <td class="art-img">
-                            <img src="'.$row['artImage'].'" onclick="getId('.$row['artId'].')"><br>
+                            <img src="data:image/jpeg;base64,'.$image.'" onclick="getId('.$row['artId'].')"><br>
                         </td>
                     </tr>
                     <tr>

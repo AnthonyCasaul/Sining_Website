@@ -31,11 +31,11 @@
     align-items: center;
     width: 50%;
     height: 50%;
-    background-image: radial-gradient(
+    /* background-image: radial-gradient(
       ellipse 50% 35% at 50% 50%,
       var(--darkest-color),
       transparent
-    );
+    ); */
     transform: translate(-50%, -50%);
     letter-spacing: 2;
     left: 50%;

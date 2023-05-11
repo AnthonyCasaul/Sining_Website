@@ -35,7 +35,7 @@ $approval = mysqli_query($conn, "SELECT * FROM sining_approval");
     <?php
         if(mysqli_num_rows($approval) > 0){
 			while($row = mysqli_fetch_assoc($approval)){
-                $id = $row['artistId'];
+                $id = $row['id'];
                 $artTitle = ucfirst(strtolower($row['artTitle']));
                 $artPrice = $row['artPrice'];
                 $artGenre= $row['artGenre'];

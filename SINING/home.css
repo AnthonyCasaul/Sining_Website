@@ -175,6 +175,7 @@ h3 {
   height: 40px;
 }
 
+
 .search-txt1 {
   position: relative;
   top: 50%;
@@ -252,6 +253,9 @@ h3 {
   -moz-animation: fadeIn 5s;
   -o-animation: fadeIn 5s;
   -ms-animation: fadeIn 5s;
+}
+.img-con .img-con-inner .image-box img{
+  cursor: pointer;
 }
 .img-con .img-con-inner .image-box {
   background-color: #424242;
@@ -425,11 +429,16 @@ h3 {
   /* background: rgba(0, 0, 0, 0.2); */
   opacity: 0.1;
 }
-iframe {
+iframe[src="header.php"] {
   width: 100%;
   margin: 0;
   padding: 0;
   height: 300px;
+}
+iframe[src="footer.php"]{
+  height: 80px;
+  display: block;
+  line-height: 0px;
 }
 td,
 table,
@@ -453,7 +462,7 @@ tr {
     font-size: smaller;
   }
 }
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1000px) {
   .art-box {
     width: fit-content;
   }
@@ -462,6 +471,7 @@ tr {
     width: 100%;
     position: relative;
     left: 0;
+    margin-right: 0;
   }
   .ano-to {
     width: 100%;

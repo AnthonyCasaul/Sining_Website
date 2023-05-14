@@ -20,15 +20,14 @@ $artwork_list = mysqli_query($conn, "SELECT * FROM sining_artworks1");
         <table class="content-table">
           <thead>
             <tr>
-              <th class="head">Art ID</th>
-              <th class="head">Image</th>
+              <th class="head hide">Art ID</th>
+              <th class="head hide">Image</th>
               <th class="head">Title</th>
               <th class="head">Artist Name</th>
               <th class="head">Price</th>
-              <th class="head">Genre</th>
-              <th class="head">Year</th>
-              <th class="head"></th>
-              <th class="head"></th>
+              <th class="head hide">Genre</th>
+              <th class="head hide">Year</th>
+              <th class="head">Archive</th>
             </tr>
           </thead>    
     <?php
@@ -45,21 +44,19 @@ $artwork_list = mysqli_query($conn, "SELECT * FROM sining_artworks1");
                 echo '
         <thead>
             <tr>
-              <th>'.$artwork_id.'</th>
-              <th class=artwork-img-col><img src="seller_file/artworks/seller_'.$artwork_sellerId.'/'.$artwork_image.'" alt="" width=300 class="img-fluid"></th>
+              <th class="hide">'.$artwork_id.'</th>
+              <th class="artwork-img-col hide"><img src="seller_file/artworks/seller_'.$artwork_sellerId.'/'.$artwork_image.'" class="posted-art-img" onclick="showImage(this.src)"></th>
               <th>'.$artwork_title.'</th>
-              <th>'.$artwork_artist.'</th>
+              <th class="author">'.$artwork_artist.'</th>
               <th>'.$artwork_price.'</th>
-              <th>'.$artwork_genre.'</th>
-              <th>'.$artwork_year.'</th>
+              <th class="hide">'.$artwork_genre.'</th>
+              <th class="hide">'.$artwork_year.'</th>
               <th>
               <form method="post" action="admin_artwork_list.php">
                   <input type="hidden" name="artworkId" value="'.$artwork_id.'">
-                  <button type="submit" name="view" class="showact_button"><img src=assets/img/zoom-in.png /></button>
-                </th>
-                <th>
+                <input type="hidden" name="artworkId" value="'.$artwork_id.'">
                   <button type="submit" name="archive" class="showact_button"><img src=assets/img/download-file.png /></button>
-                  </form>
+                </form>
               </th>
             </tr>
           </thead>';
@@ -71,6 +68,40 @@ $artwork_list = mysqli_query($conn, "SELECT * FROM sining_artworks1");
        echo "<div class='no_data'>No Data Found</div>";
   }
   ?>
+  
   </table>
+  <script>
+  function showImage(src) {
+  var img = document.createElement("img");
+  img.src = src;
+  img.style.position = "fixed";
+  img.style.top = "50%";
+  img.style.left = "50%";
+  img.style.transform = "translate(-50%, -50%)";
+  img.style.maxWidth = "90%";
+  img.style.maxHeight = "90%";
+  img.style.borderRadius = "10px";
+  img.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.3)";
+  img.style.zIndex = "9999";
+  img.style.cursor = "pointer";
+  img.onclick = function() {
+    document.body.removeChild(this);
+  };
+  document.body.appendChild(img);
+}
+</script>
+  <script>
+    for (let i = 0; i < <?php echo mysqli_num_rows($artworks); ?>; i++) {
+    document.querySelector("#edit-btn-" + i).addEventListener("click",function(){
+        document.querySelector(".popup").classList.add("active");
+    });
+}
+
+
+document.querySelector(".popup .close-btn").addEventListener("click",function(){
+    document.querySelector(".popup").classList.remove("active");
+});
+</script>
+
 </body>
 </html>

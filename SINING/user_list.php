@@ -20,12 +20,12 @@ $user_list = mysqli_query($conn, "SELECT * FROM sining_artists");
         <table class="content-table">
           <thead>
             <tr>
-              <th class="head">USER ID</th>
-              <th class="head">FULLNAME</th>
+              <th class="head hide">USER ID</th>
+              <th class="head hide">FULLNAME</th>
               <th class="head">EMAIL</th>
-              <th class="head">LOCATION</th>
-              <th class="head"></th>
-              <th class="head"></th>
+              <th class="head hide">LOCATION</th>
+              <th class="head">APPROVE</th>
+              <th class="head">REJECT</th>
             </tr>
           </thead>    
     <?php
@@ -39,10 +39,10 @@ $user_list = mysqli_query($conn, "SELECT * FROM sining_artists");
                 echo '
         <thead>
             <tr>
-              <th>'.$user_id.'</th>
-              <th>'.$user_name.'</th>
+              <th class="hide">'.$user_id.'</th>
+              <th class="hide">'.$user_name.'</th>
               <th>'.$user_email.'</th>
-              <th>'.$user_location.'</th>
+              <th class="hide">'.$user_location.'</th>
               <th>
               <form method="post" action="useractivation.php">
                   <input type="hidden" name="id" value="'.$user_id.'">

@@ -32,9 +32,11 @@ if(isset($_POST["sub"])){
   $title= $_POST["title"];
   $genre= $_POST["genre"];
   $price= $_POST["price"];
-  $tags= $_POST["tags"];
+  $artID = $_POST["artid"];
+  //$tags= $_POST["tags"];
 
-$query = mysqli_query($conn, "UPDATE sining_artworks1 SET");
+$query = mysqli_query($conn, "UPDATE sining_artworks1 SET artTitle = '$title', artGenre = '$genre', artPrice = '$price WHERE artId = '$artID");
+$query1 = mysqli_query($conn, "UPDATE sining_artworks SET artTitle = '$title', artGenre = '$genre', artPrice = '$price WHERE artId = '$artID");
 }
 
 if(isset($_POST["arc"])){
@@ -80,15 +82,15 @@ header("location: seller_dashboard.php");
         </table>
     </div>
     <div class="header2">
-        <h3>POSTED ARTWORKS</h3>
+        <h3>POSTED ARTWORKS</h3><br>
         <div class="rcrdPage">
         <table class="content-table">
           <thead>
             <tr>
-              <th class="head">Image</th>
+              <th class="head hide">Image</th>
               <th class="head">Title</th>
               <th class="head">Price</th>
-              <th class="head">Year</th>
+              <th class="head hide">Year</th>
               <th class="head">Archive</th>
               <th class="head">Edit</th>
             </tr>
@@ -108,15 +110,16 @@ header("location: seller_dashboard.php");
          <form action="" method="POST">
          <table class="posted-art-table">
          <tr>
-         <td><img class="posted-art-img" src="seller_file/artworks/seller_'.$sellerID.'/'.$artimage.'" alt="My Image" onclick="showImage(this)"></td>
+         <td class="hide"><img class="posted-art-img" src="seller_file/artworks/seller_'.$sellerID.'/'.$artimage.'" alt="My Image" onclick="showImage(this)"></td>
          <td>'.$artworkname.'</td>
          <td>₱'.$artprice.'</td>
-         <td>'.$artyear.'</td>
-         <td><input type="submit" name="arc" class="btn1" value="Archive"></td>
+         <td class="hide">'.$artyear.'</td>
+         <td><input type="hidden" name="artid" value='.$artId.'>
+         <button type="submit" name="arc" class="btn1" value=""><img src="assets/img/download-file.png"></td>
          </form>
-         <td><a href="#divOne" id="edit-btn-'.$count.'"><img src="assets/img/edit-btn.png"></a></td>
+         <td class="merge"><a href="#divOne" id="edit-btn-'.$count.'"><button class="btn2"><img src="assets/img/edit-btn.png"></button></a></td>
          </tr>
-         </table>
+         </table><br>
          
          ';       
          $count++;    
@@ -133,7 +136,7 @@ header("location: seller_dashboard.php");
 <div class="popup">
     <div class="close-btn"><h2>&times;</h2></div>
             <h1>Artwork Edit</h1>
-            <form>
+            <form action="" method="POST">
                 <table>
                 <td><label>Art Title</label></td>
                 <td><input type="text" name="title"></td> 
@@ -155,9 +158,10 @@ header("location: seller_dashboard.php");
                 <tr>
                     <td><label for="price">Price: </label></td>
                     <td><input type="number" name="price" id = "price" required value=""></td>
+                    <td><input type="hidden" name="artid" value="<?php echo $artId;?>"></td>
                 </tr>                               
             </table>
-            <input type="submit" name="sub" value="Confirm">
+            <button type="submit" name="sub" class="btn3">Confirm</button>
             </form>
 </div>
 
@@ -200,7 +204,6 @@ document.getElementById("img-overlay").addEventListener("click", function() {
   modal.style.display = "none";
   modal.remove();
 });
-
 </script>
 <script src="js/tagsinput.js"></script>  
 <script>

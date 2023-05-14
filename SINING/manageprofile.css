@@ -70,5 +70,7 @@ td h1{
     table{
         width: 100%;
         box-shadow: none;
+        display: flex;
+        padding: 0 20px;
     }
 }

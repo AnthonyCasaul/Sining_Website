@@ -25,7 +25,7 @@ if(isset($_POST["arc"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/tagsInput.css" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/adminPage.css">
     <title></title>
 </head>
 <body>
@@ -37,11 +37,11 @@ if(isset($_POST["arc"])){
         <table class="content-table">
           <thead>
             <tr>
-              <th class="head">Image</th>
+              <th class="head hide">Image</th>
               <th class="head">Title</th>
               <th class="head">Price</th>
               <th class="head">Genre</th>
-              <th class="head">Year</th>
+              <th class="head hide">Year</th>
               <th class="head">Unarchive</th>
             </tr>
           </thead>    
@@ -60,11 +60,11 @@ if(isset($_POST["arc"])){
          <form action="" method="POST">
          <table class="posted-art-table">
          <tr>
-         <td><img class="posted-art-img" src="seller_file/artworks/seller_'.$sellerID.'/'.$artimage.'" onclick="showImage(this)"></td>
+         <td class="hide"><img class="posted-art-img" src="seller_file/artworks/seller_'.$sellerID.'/'.$artimage.'" onclick="showImage(this)"></td>
          <td>'.$artworkname.'</td>
          <td>₱'.$artprice.'</td>
          <td>'.$artgenre.'</td>
-         <td>'.$artyear.'</td>
+         <td class="hide">'.$artyear.'</td>
          <td><input type="hidden" name="artid" value='.$artId.'>
          <button type="submit" name="arc" class="btn1" value=""><img src="assets/img/download-file.png"></td>
          </tr>
@@ -76,7 +76,7 @@ if(isset($_POST["arc"])){
    }    
   }
   else{
-       echo "<div class='no_data'>No Data Found</div>";
+       echo "<div id='no_data'>No Data Found</div>";
   }
   ?>
   </table>

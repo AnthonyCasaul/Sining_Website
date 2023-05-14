@@ -3,8 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/admin.css">
+<!-- <title>SINING | ADMIN</title> -->
 <link rel="icon" type="image/x-icon" href="assets/logo.ico" />
-<title>SINING | ADMIN</title>
 </head>
 <body>
 
@@ -19,25 +19,27 @@
 </div>
 
 <div id="seller-approval-list" style="display:block;" class="tabcontent">
+<title>SINING | SELLER APPROVAL LIST</title>
     <iframe src="adminSellerApproval.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
 <div id="approval-list" class="tabcontent">
+<title>SINING | ART APPROVAL LIST</title>
     <iframe src="adminArtApproval.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 <div id="user-list" class="tabcontent">
+<title>SINING | USER LIST</title>
     <iframe src="user_list.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 <div id="artwork-list" class="tabcontent">
+<title>SINING | ARTWORK LIST</title>
     <iframe src="artwork_list.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 <div id="seller-list" class="tabcontent">
+<title>SINING | SELLER LIST</title>
     <iframe src="seller_list.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
-<div id="nav-links" class="tabcontent">
-    <h3>no content</h3>
-</div>
 
 <script>
 function openCity(evt, cityName) {

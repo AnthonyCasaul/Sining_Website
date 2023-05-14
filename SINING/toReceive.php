@@ -29,14 +29,13 @@ $ToReceive = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id =
         <table class="content-table">
           <thead>
             <tr>
-              <th class="head">ART ID</th>
+              <th class="head hide">ART ID</th>
               <th class="head">ART TITLE</th>
               <th class="head">ART PRICE</th>
               <th class="head">PAYMENT METHOD</th>
-              <th class="head">ART QUANTITY</th>
+              <th class="head hide">ART QUANTITY</th>
               <th class="head">BUYER NAME</th>
-              <th class="head">BUYER LOCATION</th>
-              <th class="head">ORDER STATUS</th>
+              <th class="head hide">BUYER LOCATION</th>
             </tr>
           </thead>
 <?php
@@ -54,14 +53,13 @@ $ToReceive = mysqli_query($conn, "SELECT * FROM product_status WHERE seller_id =
                 echo '
           <thead>
             <tr>
-              <th>'.$artid.'</th>
+              <th class="hide">'.$artid.'</th>
               <th>'.$artTitle.'</th>
               <th>'.$artPrice.'</th>
               <th>'.$paymentMethod.'</th>
-              <th>'.$qty.'</th>
+              <th class="hide">'.$qty.'</th>
               <th>'.$fullname.'</th>
-              <th>'.$location.'</th>
-              <th>'.$orderStat.'</th>
+              <th class="hide">'.$location.'</th>
             </tr>
           </thead>';
     ?>

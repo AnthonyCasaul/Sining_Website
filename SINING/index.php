@@ -24,12 +24,17 @@ if(isset($_POST['submit'])){
 
          if($_SESSION['isActivated']=="1"){
 
+            $_SESSION['user_id'] = $row['artistId'];
+
                if($catecheck == 0 ){
                         $_SESSION['user_id'] = $row['artistId'];
                         echo '<script>
                         window.location.href = "categ_select.php"
                         </script>';
                      }
+                  else if($_SESSION['user_id'] == 1){
+                     header('location:admin.php');
+                  }
 
                else{
                         header('location:home.php');

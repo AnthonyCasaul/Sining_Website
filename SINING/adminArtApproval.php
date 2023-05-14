@@ -22,14 +22,14 @@ $approval = mysqli_query($conn, "SELECT * FROM sining_approval");
         <table class="content-table">
           <thead>
             <tr>
-              <th class="head">ARTIST ID</th>
+              <th class="head hide">ARTIST ID</th>
               <th class="head">ART TITLE</th>
               <th class="head">ART PRICE</th>
-              <th class="head">ART GENRE</th>
-              <th class="head">ART TAGS</th>
-              <th class="head">ART IMAGE</th>
-              <th class="head"></th>
-              <th class="head"></th>
+              <th class="head hide">ART GENRE</th>
+              <th class="head hide">ART TAGS</th>
+              <th class="head hide">ART IMAGE</th>
+              <th class="head">APPROVE</th>
+              <th class="head">REJECT</th>
             </tr>
           </thead>    
     <?php
@@ -41,42 +41,71 @@ $approval = mysqli_query($conn, "SELECT * FROM sining_approval");
                 $artGenre= $row['artGenre'];
                 $artTags = $row['artTags'];
                 $artImage = $row['artImage'];
+                $seller_id = $row['seller_id'];
                 
                  
                 echo '
           <thead>
             <tr>
-              <th>'.$id.'</th>
+              <th class="hide">'.$id.'</th>
               <th>'.$artTitle.'</th>
               <th>'.$artPrice.'</th>
-              <th>'.$artGenre.'</th>
-              <th>'.$artTags.'</th>
-              <th>'.$artImage.'</th>
+              <th class="hide">'.$artGenre.'</th>
+              <th class="hide">'.$artTags.'</th>
+              <th class="hide">
+                <img src="seller_file/artworks/seller_'.$seller_id.'/'.$artImage.'" class="posted-art-img"  alt="My Image" onclick="showImage(this)">
+              </th>
               <th>
               <form method="post" action="insertNewArtwork.php">
-                  <input type="hidden" name="id" value="'.$id.'">
-                  <button type="submit" class="showact_button"><img class="buttons" src="assets/img/check.png"></button>
-                  </form>
-                </th>
-                <th>
-                  <form method="post" action="reject.php">
-                  <input type="hidden" name="id" value="'.$id.'">
-                  <button type="submit" class="showact_button"><img class="buttons" src="assets/img/remove.png"></button>
-                  </form>
+                <input type="hidden" name="id" value="'.$id.'">
+                <button type="submit" class="showact_button"><img class="buttons" src="assets/img/check.png"></button>
+                </form>
+              </th>
+              <th>
+                <form method="post" action="reject.php">
+                <input type="hidden" name="id" value="'.$id.'">
+                <button type="submit" class="showact_button"><img class="buttons" src="assets/img/remove.png"></button>
+                </form>
               </th>
             </tr>
           </thead>';
     ?>
-
-
     <?php
    }    
   }
   else{
       echo "<div class='no_data' id='no_data'>No Data Found</div>";
   }
-
   ?>
   </table>
+  <div id="img-overlay"></div>
+  <script>
+    function showImage(img) {
+  var overlay = document.getElementById("img-overlay");
+  var modal = document.createElement("div");
+  var modalImage = document.createElement("img");
+
+  modalImage.src = img.src;
+  modalImage.alt = img.alt;
+  modalImage.style.maxWidth = "80%";
+  modalImage.style.maxHeight = "80%";
+
+  modal.id = "image-modal";
+  modal.appendChild(modalImage);
+  document.body.appendChild(modal);
+
+  overlay.style.display = "block";
+  modal.style.display = "block";
+}
+
+document.getElementById("img-overlay").addEventListener("click", function() {
+  var overlay = document.getElementById("img-overlay");
+  var modal = document.getElementById("image-modal");
+
+  overlay.style.display = "none";
+  modal.style.display = "none";
+  modal.remove();
+});
+  </script>
 </body>
 </html>

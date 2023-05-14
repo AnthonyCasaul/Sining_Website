@@ -20,15 +20,15 @@ $seller_list = mysqli_query($conn, "SELECT * FROM sining_sellers");
         <table class="content-table">
           <thead>
             <tr>
-              <th class="head">PROFILE</th>
-              <th class="head">SELLER NAME</th>
-              <th class="head">USERNAME</th>
-              <th class="head">ADDRESS</th>
-              <th class="head">CONTACT</th>
+              <th class="head hide l-hide">PROFILE</th>
+              <th class="head hide sel-name">SELLER NAME</th>
+              <th class="head hide l-hide">USERNAME</th>
+              <th class="head hide">ADDRESS</th>
+              <th class="head hide">CONTACT</th>
               <th class="head">EMAIL</th>
-              <th class="head">QR CODE</th>
-              <th class="head"></th>
-              <th class="head"></th>
+              <th class="head hide l-hide">QR CODE</th>
+              <th class="head">APPROVE</th>
+              <th class="head">REJECT</th>
             </tr>
           </thead>    
     <?php
@@ -47,13 +47,13 @@ $seller_list = mysqli_query($conn, "SELECT * FROM sining_sellers");
                 echo '
         <thead>
             <tr>
-              <th><img class=seller-profile src="seller_file/profile/'.$seller_profile.'"/></th>
-              <th>'.$seller_name.'</th>
-              <th>'.$seller_username.'</th>
-              <th>'.$seller_address.'</th>
-              <th>'.$seller_contact.'</th>
+              <th class="hide l-hide"><img class=seller-profile src="seller_file/profile/'.$seller_profile.'"/></th>
+              <th class="hide sel-name">'.$seller_name.'</th>
+              <th class="hide l-hide">'.$seller_username.'</th>
+              <th class="hide">'.$seller_address.'</th>
+              <th class="hide">'.$seller_contact.'</th>
               <th>'.$seller_email.'</th>
-              <th><img id=seller-qr class=seller-qr src="seller_file/gcash_qr/'.$seller_gcash.'" onclick="openImg()"/></th>
+              <th class="hide l-hide"><img id=seller-qr class=seller-qr src="seller_file/gcash_qr/'.$seller_gcash.'" onclick="openImg()"/></th>
               <th>
               <form method="post" action="useractivation.php">
                   <input type="hidden" name="id" value="'.$seller_id.'">

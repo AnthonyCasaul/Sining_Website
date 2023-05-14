@@ -26,14 +26,14 @@ $approval = mysqli_query($conn, "SELECT * FROM sining_seller_approval");
         <table class="content-table">
           <thead>
             <tr>
-              <th class="head">ARTIST ID</th>
+              <th class="head hide">ARTIST ID</th>
               <th class="head">FULLNAME</th>
-              <th class="head">USERNAME</th>
-              <th class="head">ADDRESS</th>
-              <th class="head">CONTACT</th>
+              <th class="head hide">USERNAME</th>
+              <th class="head hide">ADDRESS</th>
+              <th class="head hide">CONTACT</th>
               <th class="head">EMAIL</th>
-              <th class="head"></th>
-              <th class="head"></th>
+              <th class="head">APPROVE</th>
+              <th class="head">REJECT</th>
             </tr>
           </thead>    
     <?php
@@ -51,11 +51,11 @@ $approval = mysqli_query($conn, "SELECT * FROM sining_seller_approval");
                 echo '
           <thead>
             <tr>
-              <th>'.$id.'</th>
+              <th class="hide">'.$id.'</th>
               <th>'.$fullname.'</th>
-              <th>'.$username.'</th>
-              <th>'.$address.'</th>
-              <th>'.$contact.'</th>
+              <th class="hide">'.$username.'</th>
+              <th class="hide">'.$address.'</th>
+              <th class="hide">'.$contact.'</th>
               <th>'.$email.'</th>
               <th>
               <form method="post" action="insertNewSeller.php">

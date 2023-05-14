@@ -39,7 +39,7 @@ body{
     padding: 0;
 }
 td button{
-    border: 1px solid red;
+     
 }
 h4{
     display: inline-block;
@@ -71,10 +71,10 @@ h3, h1{
     display: block;
 }
 dialog{
-    /* border: 1px solid red; */
+    /*   */
     background-color: #191919;
     border: none;
-    position: relative;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
     border: 1px solid #fff;
@@ -101,7 +101,7 @@ table td input[type="file"]{
     color: #fff !important;
 }
 dialog #blog-post, td{
-    /* border: 1px solid red; */
+    /*   */
 }
 dialog #blog-post td input[type="file"]{
     cursor: pointer;
@@ -110,17 +110,20 @@ dialog #blog-post td #imagePreviewContainer, dialog table td #imagePreviewContai
     background-color: #fff;
 }
 dialog #blog-post td #imagePreview, dialog table td #imagePreview2{
-    /* border: 1px solid red; */
+    /*   */
     border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     width: fit-content;
-    height: 300px;
+    height: 200px;
 }
 dialog #blog-post td textarea{
-    /* border: 1px solid red; */
+    /*   */
     width: 100%;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
 }
 .file {
     position: relative;
@@ -173,7 +176,7 @@ dialog #blog-post td textarea{
 }
 @media only screen and (max-width: 700px){
     *{
-        /* border: 1px solid red; */
+        /*   */
     }
     span,h1, h3, h4{
         display: none;
@@ -191,7 +194,7 @@ dialog #blog-post td textarea{
     #seller-profile-con .seller-profile{
         width: 60px;
         height: 60px;
-        /* border: 1px solid red; */
+        /*   */
         margin-left: -20px;
     }
     dialog{

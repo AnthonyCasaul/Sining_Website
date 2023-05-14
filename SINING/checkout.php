@@ -29,6 +29,12 @@ if(isset($_GET['logout'])){
 
 if(isset($_POST['con'])){
    $stat = "To be approved";
+   $getusername = mysqli_query($conn, "SELECT * FROM sining_artists WHERE artistId = '$user_id'");
+   $row2 = mysqli_fetch_assoc($getusername);
+   $user_name = $row2['artistName'];
+   $currentDate = date('Y-m-d');
+
+   $notificationSeller = "The Order of ".$user_name." needs your approval on its payment method";
 
       $selectNotification = mysqli_query($conn, "SELECT a.*, c.seller_name, c.seller_email, c.seller_id FROM `cart` AS a
                                    LEFT JOIN `sining_artworks1` AS b ON a.artId = b.artId
@@ -37,13 +43,16 @@ if(isset($_POST['con'])){
 
              while($fetch = mysqli_fetch_assoc($selectNotification)){
                   $sellerID = $fetch["seller_id"];
-
+                  $sellerName = $fetch["seller_name"];
+                  $notificationBuyer = "Your order needs approval from ".$sellerName.". Please be patient.";
+                  
+                  $insertInto = mysqli_query($conn, "INSERT INTO notifications(notification_id, buyer_id, seller_id, notificationSeller, notificationBuyer, date) VALUES ('', '$user_id', '$sellerID', '$notificationSeller', '$notificationBuyer', NOW())");
                
              }
 
-      $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image,product_quantity, payment_method, buyer_address, buyer_name, seller_id)
+      $art_move = mysqli_query($conn, "INSERT INTO `product_status`(product_id, product_name, product_price, product_image,product_quantity, payment_method, buyer_address, buyer_name, seller_id, product_status, buyer_id)
                                        SELECT a.artId, a.name, a.price, a.image, a.quantity, a.payment_method, a.buyer_address, 
-                                       a.buyer_name, b.seller_id                                       
+                                       a.buyer_name, b.seller_id, '$stat', '$user_id'                                     
                                        FROM `cart` AS a
                                        LEFT JOIN `sining_artworks1` AS b 
                                        ON a.artId = b.artId
@@ -182,7 +191,7 @@ if(isset($_POST['con'])){
         $ordersellertot = "";
 
          if(mysqli_num_rows($select_cart) < 1){
-            echo "<h4>There are no records at the moment!</h4>";
+            echo "<h4>There are no records at the moment!</h4>"; 
          }
                   
          else if(mysqli_num_rows($select_cart) > 0){

@@ -160,7 +160,8 @@ if($_FILES["image"]["error"] == 4){
       
       move_uploaded_file($tmpName, $new_file_path);
       #Insert data#
-      $query = "INSERT INTO blog_post (blog_id, author_id, author, Title, content, image) VALUES ('', '$author_id', '$author_name', '$title', '$content', '$newImageName')";
+      $date = time();
+      $query = "INSERT INTO blog_post (blog_id, author_id, author, Title, content, image, postAtime) VALUES ('', '$author_id', '$author_name', '$title', '$content', '$newImageName', '$date')";
 
       mysqli_query($conn, $query);
     //   echo
@@ -201,7 +202,7 @@ if($_FILES["image"]["error"] == 4){
 
 
     <button data-open-modal><img src="assets/img/upload.png"><span>Sell<span></button>
-    <button data-open-modals><img src="assets/img/upload.png"><span>Post Blog<span></button>
+    <button data-open-modals><img src="assets/img/more.png"><span>Post Blog<span></button>
     <dialog data-modal>
         <form action="" method="post" autocomplete="off" enctype="multipart/form-data">
             <table class="inner-tab">
@@ -319,19 +320,23 @@ if($_FILES["image"]["error"] == 4){
 </div>
 
   <button class="seller-btn tablinks active" onclick="openCity(event, 'dashboard')"><h4>Dashboard</h4><img src="assets/img/dashboard.png"></button>
+  <button class="seller-btn tablinks" onclick="openCity(event, 'notification')"><h4>Notification</h4><img src="assets/img/bell.png"></button>
   <button class="seller-btn tablinks" onclick="openCity(event, 'approval-list')"><h4>To Be Approve</h4><img src="assets/img/approved.png"></button>
-  <button class="seller-btn tablinks" onclick="openCity(event, 'pending-payment')"><h4>Pending Payment</h4><img src="assets/img/package-box.png"></button>
+  <button class="seller-btn tablinks" onclick="openCity(event, 'pending-payment')"><h4>Pending Payment</h4><img src="assets/img/credit-card.png"></button>
   <button class="seller-btn tablinks" onclick="openCity(event, 'to-ship')"><h4>To Ship</h4><img src="assets/img/package-box.png"></button>
   <button class="seller-btn tablinks" onclick="openCity(event, 'to-receive')"><h4>To Receive</h4><img src="assets/img/delivery-van.png"></button>
   <button class="seller-btn tablinks" onclick="openCity(event, 'completed')"><h4>Completed</h4><img src="assets/img/complete.png"></button>
   <button class="seller-btn tablinks" onclick="openCity(event, 'cancelled')"><h4>Cancelled</h4><img src="assets/img/cancelled.png"></button>
-  <button class="seller-btn tablinks" onclick="openCity(event, 'sold-artworks')"><h4>Sold Artworks</h4><img src="assets/img/sold.png"></button>
   <button class="seller-btn tablinks" onclick="openCity(event, 'archived-artworks')"><h4>Archived Artworks</h4><img src="assets/img/sold.png"></button>
 
 </div>
 
 <div id="dashboard" style="display:block;" class="tabcontent">
     <iframe src="seller_dashboard.php" frameborder="0" width="100%" height="100%"></iframe>
+</div>
+
+<div id="notification" class="tabcontent">
+    <iframe src="notificationSeller.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
 <div id="approval-list" class="tabcontent">
@@ -356,10 +361,6 @@ if($_FILES["image"]["error"] == 4){
 
 <div id="cancelled" class="tabcontent">
    <iframe src="cancelled.php" frameborder="0" width="100%" height="100%"></iframe>
-</div>
-
-<div id="sold-artworks" class="tabcontent">
-    <iframe src="sold_artwork.php" frameborder="0" width="100%" height="100%"></iframe>
 </div>
 
 <div id="archived-artworks" class="tabcontent">

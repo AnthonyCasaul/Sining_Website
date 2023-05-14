@@ -12,8 +12,11 @@
             <a href="newsfeed.php" class="nav-links">
                 <li class="nav-item">Newsfeed</li>
             </a>
-            <a href="#" class="nav-links">
-                <li class="nav-item">Artists</li>
+            <a href="notificationBuyer.php" class="nav-links">
+                <li class="nav-item">Notification</li>
+            </a>
+            <a href="about.php" class="nav-links">
+                <li class="nav-item">About</li>
             </a>
         </div>
     </ul>
@@ -36,6 +39,9 @@
                 </a>
                 <a href="newsfeed.php" class="nav-links">
                     <li class="nav-item">Newsfeed</li>
+                </a>
+                <a href="notificationBuyer.php" class="nav-links">
+                    <li class="nav-item">Notification</li>
                 </a>
                 <a href="about.php" class="nav-links">
                     <li class="nav-item">About</li>

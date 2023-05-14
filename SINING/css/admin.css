@@ -18,7 +18,7 @@ body {
   /* overflow: hidden; */
   /* border: 1px solid #ccc; */
   /* border: 1px solid red; */
-  background-color: #191919;
+  background-color: #212529;
   height: 100%;
   width: 20%;
   position: absolute;
@@ -42,7 +42,8 @@ body {
   /* padding-left: 30px; */
   font-weight: bold;
   color: #fff;
-  background-color: #191919;
+  background: none;
+  /* background-color: #191919; */
 }
 
 /* Change background color of buttons on hover */
@@ -60,7 +61,7 @@ body {
 }
 .tablinks{
   text-align: left;
-  padding: 20px 0 20px 100px;
+  padding: 10px 0px 10px 100px;
 }
 .tablinks:active .tabcontent {
   display: unset;
@@ -86,14 +87,6 @@ iframe {
   width: 83% !important;
   top: 0;
 }
-
-/* iframe:hover {
-	-webkit-mask-position: left top;
-  mask-image: linear-gradient(to top, transparent, #fcc800),
-  linear-gradient(to left, transparent 17px, #fcc800 17px);
-  -webkit-mask-image: linear-gradient(to top, transparent, #fcc800),
-		linear-gradient(to left, transparent 17px, #fcc800 17px);
-} */
 #logo {
   font-family: "Pacifico", cursive !important;
   text-decoration: none;
@@ -123,54 +116,86 @@ iframe[src="seller_profile.php"]{
 #logo > img{
   display: none;
 }
-@media only screen and (max-width: 700px){
-  .tablinks > h4{
-    display: none;
+@media (orientation: portrait){
+  @media only screen and (max-width: 1000px){
+    .tablinks > h4{
+      display: none;
+    }
+    .tablinks > img{
+      display: block;
+    }
+    .tablinks > .approve-img{
+      width: 25px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      padding: 5px;
+      position: absolute;
+      right: 5%;
+      margin-top: -10px;
+      background-color: #191919;
+    }
+    .tab button{
+      padding: 20px;
+    }
+    .tab button.active{
+      transition: ease-in .2s;
+      margin-left: 5px;
+    }
+    #logo > img{
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      /* border: 3px solid #ffc800; */
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+  
+    }
+    #logo > h1{
+      display: none;
+    }
+    #logo{
+      border: 1px solid #191919;
+      height: 70px;
+      width: fit-content;
+    }
+    iframe[src="seller_profile.php"]{
+      height: 300px;
+    }
+    #blog-post td button{
+        /* border: 1px solid red; */
+        width: 100px;
+        height: 50px;
+    }
+    #blog-post td #title{
+      /* border: 1px solid red; */
+      font-size: 20px;
+    }
+    .tabcontent{
+      width: 84%;
+    }
   }
-  .tablinks > img{
-    display: block;
-  }
-  .tablinks > .approve-img{
-    width: 25px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    padding: 5px;
-    position: absolute;
-    right: 5%;
-    margin-top: -10px;
-    background-color: #191919;
-  }
-  .tab button{
-    padding: 20px;
-  }
-  .tab button.active{
-    transition: ease-in .2s;
-    margin-left: 5px;
-  }
-  #logo > img{
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    /* border: 3px solid #ffc800; */
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-
-  }
-  #logo > h1{
-    display: none;
-  }
-  #logo{
-    border: 1px solid #191919;
-    height: 70px;
-    width: fit-content;
-  }
-  iframe{
-    /* border: 1px solid red; */
-  }
-  iframe[src="seller_profile.php"]{
-    height: 300px;
+}
+@media (orientation: landscape){
+  @media only screen and (max-width: 1000px){
+    *{
+      /* border: 1px solid red; */
+    }
+    .tablinks h4{
+      font-size: smaller;
+      padding-left: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100px;
+    }
+    .tablinks{
+      padding: 0 !important;
+    }
+    .tab button.active{
+      margin-left: 20px;
+    }
   }
 }
 @media only screen and (max-height: 850px){
@@ -179,6 +204,10 @@ iframe[src="seller_profile.php"]{
   }
   .tablinks{
     padding: 10px;
+  }
+  .tab button.active{
+    overflow-x: hidden;
+    width: 100%;
   }
   .tab{
     overflow-y: auto;

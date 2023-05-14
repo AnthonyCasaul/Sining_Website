@@ -1,0 +1,13 @@
+body{
+    background-color: #2d2d2d;
+    color: #fff;
+}
+
+h5, .text-success{
+    /* border: 1px solid red; */
+    color: #ffc800 !important;
+}
+.btn{
+    background-color: #ffc800 !important;
+    border: none;
+}

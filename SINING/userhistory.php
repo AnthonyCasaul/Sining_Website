@@ -26,6 +26,22 @@ if(isset($_POST['selectedOption'])) {
   if(isset($_GET['remove'])){
      $remove_id = $_GET['remove'];
      mysqli_query($conn, "UPDATE `product_status` SET `product_status`='Cancelled' WHERE product_id = '$remove_id'");
+
+    $getall = mysqli_query($conn, "SELECT * FROM `product_status` WHERE product_id = '$remove_id'");
+    $row1 = mysqli_fetch_assoc($getall);
+    $buyername = $row1['buyer_name'];
+    $sellerId = $row1['seller_id'];
+    $buyerId = $row1['buyer_id'];
+
+    $getSeller = mysqli_query($conn, "SELECT * FROM sining_sellers WHERE seller_id = '$sellerId'");
+    $row = mysqli_fetch_assoc($getSeller);
+    $seller_name = $row['seller_name'];
+
+    $notificationBuyer = "You have cancelled your order from ".$seller_name;
+    $notificationSeller = $buyername." has cancelled his/her order.";
+
+    mysqli_query($conn, "INSERT INTO `notifications`(notification_id, buyer_id, seller_id, notificationSeller, notificationBuyer, date) VALUES ('', '$buyerId', '$sellerId', '$notificationSeller', '$notificationBuyer', NOW())");
+ 
      header('location:userhistory.php');
   };
 ?>
@@ -61,7 +77,6 @@ if(isset($_POST['selectedOption'])) {
 	</div>
   </div>
 
-<input type="hidden" id="price" value="20000"/>
 <div id="tobeApproved" class="tabcontent">
   <h1>To be approved</h1>
   <?php
@@ -88,8 +103,10 @@ if(isset($_POST['selectedOption'])) {
 <h1>To Pay</h1>
 <?php
  		$user_info = mysqli_query($conn, "SELECT * FROM `product_status` WHERE buyer_id = '$user_id' AND product_status = 'To pay' AND payment_method = 'Bank Transfer'");
+    $count = 0;
  		if(mysqli_num_rows($user_info) > 0){
             while($fetch_artist = mysqli_fetch_assoc($user_info)){
+      $price[] = $fetch_artist['product_price'];
 		echo '<div>';		
     echo '<input type="checkbox" name="myCheckbox[]" value="'.$fetch_artist['product_id'].'"/>';
  		echo '<img src="seller_file/artworks/seller_'.$fetch_artist['seller_id'].'/'.$fetch_artist['product_image'].'" alt="" width=300 class="img-fluid">';
@@ -98,9 +115,26 @@ if(isset($_POST['selectedOption'])) {
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
  		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';  
 		echo '</div>';
+    $count++;
  		}
     echo '<div id="container"></div>'; 
- 	}
+    // Example array of numbers
+    $integerArray = [];
+
+    foreach ($price as $text) {
+    $integer = intval($text);
+    $integerArray[] = $integer;
+}
+    $sum = 0;  // Initialize sum variable
+    $length = $count;  // Get length of the array
+    $counter = 0;  // Initialize counter variable
+
+    while ($counter < $length) {
+        $sum += $integerArray[$counter];  // Add the current element to the sum
+        $counter++;  // Increment the counter
+    }
+    echo '<input type="hidden" name="Totalprice" id="Totalprice"  value="'.$sum.'"';
+  }
 
 ?>
 </div>
@@ -171,6 +205,7 @@ if(isset($_POST['selectedOption'])) {
  		echo '<h3>x'.$fetch_artist['product_quantity'].'</h3>';
  		//echo '<h3>'.$fetch_artist['date'].'</h3>';
  		echo '<h2>₱'.$fetch_artist['product_price'].'</h2>';
+    echo '<button type="button" class="dlt" onclick="orderReceive('.$fetch_artist['product_id'].')">ORDER RECEIVE</button>';
  		}
  	}
 ?>
@@ -503,7 +538,7 @@ document.getElementById("defaultOpen").click();
    * @returns {object} transaction info, suitable for use as transactionInfo property of PaymentDataRequest
    */
   function getGoogleTransactionInfo() {
-	const price = $('#price').val();
+	const price = $('#Totalprice').val();
     return {
       displayItems: [
         {
@@ -518,7 +553,7 @@ document.getElementById("defaultOpen").click();
         },
       ],
       countryCode: 'US',
-    currencyCode: "USD",
+    currencyCode: "PHP",
     totalPriceStatus: "FINAL",
     totalPrice: price,
     totalPriceLabel: "Total"

@@ -84,3 +84,16 @@ iframe[src="footer.php"]{
 	display: block;
 	line-height: 0px;
 }
+@media only screen and (width: 1799){
+    .column{
+        columns: 4;
+    }
+}
+@media only screen and (max-width: 1000px){
+    .wrapper{
+        margin-top: 15%;
+    }
+    .column{
+        columns: 1;
+    }
+}
